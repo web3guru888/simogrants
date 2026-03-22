@@ -85,7 +85,7 @@ simogrants/
 │   ├── python/
 │   │   ├── attester.py       # Python publisher (keccak256 + publish)
 │   │   └── filecoin.py       # web3.storage / Lighthouse uploader
-│   ├── scripts/deploy.js     # Hardhat deployment to Base / Base Sepolia
+│   ├── scripts/deploy.js     # Hardhat deployment to Base mainnet / Base Sepolia
 │   └── test/attestation.test.js
 └── docs/
     ├── API.md
@@ -233,7 +233,7 @@ This is not a "one prompt to rule them all" system — it's a genuine multi-agen
 | **Backend** | Python 3.11, FastAPI, httpx, aiosqlite, Pydantic |
 | **AI / Evaluation** | Anthropic Claude, structured JSON prompts, asyncio parallel execution |
 | **Math** | scipy (L-BFGS-B optimization), networkx (PageRank), numpy |
-| **Blockchain** | Solidity 0.8.20+, Hardhat, ethers.js, Base / Base Sepolia |
+| **Blockchain** | Solidity 0.8.20+, Hardhat, ethers.js, Base mainnet / Base Sepolia |
 | **Storage** | Filecoin via web3.storage + Lighthouse fallback |
 | **Orchestration** | Taurus multi-agent platform |
 
@@ -300,12 +300,11 @@ pytest src/tests/
 cd blockchain && npm install && npm test
 ```
 
-### 6. Deploy Contract (Base Sepolia)
+### 6. Deploy Contract (Base Mainnet)
 
 ```bash
-cd blockchain
 npm install
-npx hardhat run scripts/deploy.js --network base-sepolia
+npx hardhat run scripts/deploy.js --network base
 ```
 
 ---
@@ -415,7 +414,11 @@ This tension tells a story: the project is technically excellent but may have ca
 
 ## 🔐 Smart Contract
 
-**`SIMOGrantsAttestation.sol`** — Deployed on Base / Base Sepolia
+**`SIMOGrantsAttestation.sol`** — Live on Base mainnet
+
+- Contract: `0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee`
+- Deployment TX: `0x89a49559d131f9ab3287f7959ca68bd603db52a29b4e21a5055a77ee224faef1`
+- BaseScan: https://basescan.org/address/0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee
 
 ```solidity
 struct Attestation {

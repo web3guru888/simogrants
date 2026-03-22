@@ -139,11 +139,11 @@ Deadline: March 22, 11:59 PM PST (March 23, 06:59 UTC)
 
 ## Status
 **Current Phase:** ✅ SUBMITTED, PUBLISHED, AND FULLY OPERATIONAL
-**Last Updated:** 2026-03-22T05:42Z
+**Last Updated:** 2026-03-22T06:24Z
 **Deadline:** March 22, 11:59 PM PST (March 23, 06:59 UTC) — ~25 hours remain
 **Project UUID:** c43a4c6d68d34a72bfd4d07756c3dad8
 **Project Status:** publish ✅
-**Repo:** https://github.com/web3guru888/simogrants (public, 11 commits)
+**Repo:** https://github.com/web3guru888/simogrants (public, mainnet deployment updates pending push)
 **Self-Custody:** ✅ Wallet 0xEbE468965d3EAF662A6c0edcAf875b29Ac1d4C93
 **Tests:** 10/10 passing, server starts clean
 **Registration TX:** https://basescan.org/tx/0x34dccac02871dad70516a6a390a3c8f3ec13be210bf2e801b2f74178ee99225d
@@ -166,3 +166,9 @@ Deadline: March 22, 11:59 PM PST (March 23, 06:59 UTC)
 - [ ] Demo video (optional — no video track requirement)
 - [ ] 30-project run (5-project demo is sufficient for judging)
 - [ ] Storacha persistent pinning (requires email click — IPFS peers serve files meanwhile)
+
+
+## Mainnet Deployment Update
+- [x] Deploy SIMOGrantsAttestation to Base mainnet
+- [x] Publish 5 live attestations on Base mainnet
+- [ ] Verify Base mainnet contract on BaseScan (API key unavailable; command prepared)

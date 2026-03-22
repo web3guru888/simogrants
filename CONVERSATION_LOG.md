@@ -180,3 +180,19 @@ This document records the collaboration between the human team member(s) and the
 | Tests | ✅ 10/10 | Server starts clean |
 
 ---
+
+
+### Session 6: Base Mainnet Deployment & Live Attestations
+
+**Human:** Directed SIMO to use the deployer wallet already present in the workspace and immediately deploy the attestation contract to Base mainnet, publish 5 mainnet attestations, verify if possible, update docs, and push the repo.
+
+**SIMO (orchestrator):**
+1. Loaded the deployer wallet file from local workspace without printing the secret and exported the key only into the current process environment.
+2. Added Base mainnet network configuration to Hardhat using `https://mainnet.base.org`.
+3. Deployed `SIMOGrantsAttestation.sol` to **Base mainnet** from `0x38E5efefcAcdbbb8DBe3E7b07c521EAbd61DE532`.
+4. Published 5 live attestations for OpenZeppelin, Uniswap v3, Gitcoin Passport, EthStaker, and Protocol Guild using Filecoin/IPFS evidence CIDs from the pipeline run.
+5. Confirmed on-chain state after publication: `totalAttestations = 5`.
+6. Updated README and on-chain result artifacts to point at Base mainnet instead of Sepolia.
+7. Checked for `BASESCAN_API_KEY` in the environment and repo secrets files accessible in workspace — none was available, so automatic verification could not be completed in this run.
+
+**Outcome:** Base mainnet contract is live and holds 5 production attestations for the demo projects.
