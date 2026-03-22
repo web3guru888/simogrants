@@ -11,6 +11,11 @@ module.exports = {
     },
   },
   networks: {
+    base: {
+      url: process.env.BASE_RPC_URL || "https://mainnet.base.org",
+      chainId: 8453,
+      accounts: [DEPLOYER_KEY],
+    },
     hardhat: { chainId: 31337 },
     baseSepolia: {
       url: "https://sepolia.base.org",
