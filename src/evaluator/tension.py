@@ -93,9 +93,24 @@ def detect_tensions(
     # 4. Cross-category tension detection
     #    Map each agent's dimensions to a normalized "quality" bucket and
     #    compare across agents even though dimensions differ.
+    #    Use a lower threshold (30) for cross-category to catch cases like
+    #    Uniswap (Ecosystem 95, Funder 38).
     # -------------------------------------------------------------------
-    cross_tensions = _detect_cross_category_tensions(evaluations, threshold)
+    cross_threshold = min(threshold, 30)  # Lower threshold for cross-category
+    cross_tensions = _detect_cross_category_tensions(evaluations, cross_threshold)
     tensions.extend(cross_tensions)
+
+    # -------------------------------------------------------------------
+    # 5. Absolute divergence check: if ANY agent scores above 80 and
+    #    ANY other agent scores below 50, that's always a tension.
+    #    This catches cases where the threshold is just barely missed.
+    # -------------------------------------------------------------------
+    abs_tensions = _detect_absolute_divergence(evaluations)
+    # Only add if not already covered by cross-category tensions
+    existing_dims = {t.dimension for t in tensions}
+    for t in abs_tensions:
+        if t.dimension not in existing_dims:
+            tensions.append(t)
 
     # Sort by spread (highest first)
     tensions.sort(key=lambda t: t.spread, reverse=True)
@@ -213,6 +228,54 @@ def _detect_cross_category_tensions(
                         f"is {spread:.0f} points above {low} (mean {low_mean:.0f}). "
                         f"The project resonates much more strongly with {high} concerns "
                         f"than {low} priorities."
+                    ),
+                ))
+
+    return tensions
+
+
+def _detect_absolute_divergence(
+    evaluations: list[StakeholderEvaluation],
+) -> list[Tension]:
+    """
+    Detect tensions when any agent's mean is above 80 while another is below 50.
+
+    This catches important divergences even when the spread is below the
+    normal threshold. Example: Ecosystem agent scores Uniswap at 85 while
+    Funder scores it at 38 — a 47-point gap that signals genuine disagreement
+    about whether the project deserves public goods funding.
+    """
+    tensions: list[Tension] = []
+    agent_data: dict[str, tuple[float, StakeholderEvaluation]] = {}
+    for ev in evaluations:
+        agent_data[ev.agent_type] = (ev.mean_score, ev)
+
+    agents = sorted(agent_data.keys())
+    for i, a in enumerate(agents):
+        for b in agents[i + 1:]:
+            mean_a = agent_data[a][0]
+            mean_b = agent_data[b][0]
+
+            high_val = max(mean_a, mean_b)
+            low_val = min(mean_a, mean_b)
+
+            # Only flag if one is clearly positive and the other clearly negative
+            if high_val >= 75 and low_val <= 50:
+                spread = high_val - low_val
+                high = a if mean_a > mean_b else b
+                low = b if mean_a > mean_b else a
+
+                tensions.append(Tension(
+                    dimension=f"{high}_vs_{low}_divergence",
+                    agents={high: round(high_val), low: round(low_val)},
+                    spread=round(spread),
+                    high_agent=high,
+                    low_agent=low,
+                    narrative=(
+                        f"Absolute divergence: {high} (mean {high_val:.0f}) sees strong value "
+                        f"while {low} (mean {low_val:.0f}) is deeply skeptical. "
+                        f"This {spread:.0f}-point gap reveals fundamentally different assessments "
+                        f"of the project's public goods merit."
                     ),
                 ))
 
