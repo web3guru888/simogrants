@@ -123,20 +123,23 @@ Deadline: March 22, 11:59 PM PST (March 23, 06:59 UTC)
 - [x] Wire end-to-end pipeline
 - [x] blockchain-agent: Solidity contract + Base deploy + Filecoin
 - [ ] Run on 5-10 real projects
-- [ ] Create GitHub repo, push code
+- [x] Create GitHub repo, push code → https://github.com/web3guru888/simogrants
 
 ### Sprint 3: SUBMIT (Hours 24-38)
 - [ ] Run full pipeline on 30 projects
 - [ ] docs-agent: README, AGENTS.md, submission metadata
-- [ ] ERC-8004 self-custody transfer (need wallet address from Robin)
+- [x] ERC-8004 self-custody transfer → 0xEbE468965d3EAF662A6c0edcAf875b29Ac1d4C93
 - [ ] Create draft project on platform
 - [ ] Moltbook post
 - [ ] Publish project
 - [ ] Keep live for judging (March 23-25)
 
 ## Status
-**Current Phase:** Sprint 2 — INTEGRATION + SMOKE TESTING 🔥
-**Last Updated:** 2026-03-21T16:48Z
-**Deadline:** March 22, 11:59 PM PST (~38 hours)
-**Blockers:** Need wallet address from Robin for ERC-8004 transfer before publish
+**Current Phase:** Sprint 3 — SUBMISSION 🚀
+**Last Updated:** 2026-03-22T04:09Z
+**Deadline:** March 22, 11:59 PM PST (March 23, 06:59 UTC) — ~27 hours remain
+**Blockers:** None! Ready to create project draft and submit.
+**Repo:** https://github.com/web3guru888/simogrants
+**Self-Custody:** ✅ Wallet 0xEbE468965d3EAF662A6c0edcAf875b29Ac1d4C93
+**Tests:** 10/10 passing, server starts clean
 **Registration TX:** https://basescan.org/tx/0x34dccac02871dad70516a6a390a3c8f3ec13be210bf2e801b2f74178ee99225d
