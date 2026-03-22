@@ -438,6 +438,8 @@ struct Attestation {
 - `getLatestAttestation()` / `getAllAttestations()` — Query interface
 - Custom errors for gas-efficient reverts
 
+- Verification command: `npx hardhat verify --network base 0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee`
+
 ---
 
 ## 📄 License
