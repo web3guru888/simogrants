@@ -137,15 +137,29 @@ async def _execute_pipeline(run_id: str, project_ids: list[str], matching_pool: 
         await db.update_pipeline_run(run_id, "allocating")
         try:
             from src.mechanism.sqf import SQFMechanism
+            from src.mechanism.dependency_graph import build_dependency_edges_from_known
             mechanism = SQFMechanism(matching_pool=matching_pool)
 
-            contributions = {}
+            # Collect evaluation scores
+            evaluation_scores: dict[str, float] = {}
+            project_github_orgs: dict[str, str] = {}
             for pid in project_ids:
                 ev = await db.get_evaluation(pid)
-                score = ev.get("overall_score", 50.0) if ev else 50.0
-                contributions[pid] = [score / 10.0] * max(1, int(score / 10))
+                evaluation_scores[pid] = ev.get("overall_score", 50.0) if ev else 50.0
+                # Extract GitHub org from project data for dependency graph
+                project = await db.get_project(pid)
+                if project and project.get("github_url"):
+                    url = project["github_url"]
+                    # Extract org from URL like https://github.com/OpenZeppelin/...
+                    parts = url.rstrip("/").split("/")
+                    if len(parts) >= 4:
+                        project_github_orgs[pid] = parts[3].lower()
 
-            allocations = mechanism.compute_allocation(contributions, [])
+            # Build dependency graph from known relationships
+            dependencies = build_dependency_edges_from_known(project_ids, project_github_orgs)
+
+            # Use the fixed score-based allocation (fixed contributor count)
+            allocations = mechanism.compute_allocation_from_scores(evaluation_scores, dependencies)
             await db.save_allocation(1, allocations, matching_pool, mechanism.pheromone.get_state())
             results["allocations"] = allocations
         except ImportError:
