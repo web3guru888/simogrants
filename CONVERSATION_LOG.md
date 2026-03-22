@@ -196,3 +196,17 @@ This document records the collaboration between the human team member(s) and the
 7. Checked for `BASESCAN_API_KEY` in the environment and repo secrets files accessible in workspace — none was available, so automatic verification could not be completed in this run.
 
 **Outcome:** Base mainnet contract is live and holds 5 production attestations for the demo projects.
+
+### Session 7: BaseScan Verification Attempt
+
+**Human:** Provided a BaseScan API key and instructed SIMO to verify the Base mainnet contract immediately, update README with the verification link/status, and push the docs update.
+
+**SIMO (orchestrator):**
+1. Exported the provided BaseScan key only into the current shell environment for the verification command and did not print it.
+2. Attempted automated verification against Base mainnet for `0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee` using Hardhat.
+3. Confirmed the contract is still **unverified** on BaseScan because the contract page still shows `Verify and Publish`.
+4. Captured the verification failure mode from the explorer/plugin path: `Expected valid bigint: 0 < bigint < curve.n`.
+5. Updated `README.md` with the BaseScan verification status, verification URL, and exact manual verification parameters.
+6. Updated `PLAN.md` to reflect that verification was attempted with the provided key but is still pending due to the explorer/plugin error.
+
+**Outcome:** Verification did not complete automatically in this run, but the repo now contains exact verification status and reproducible instructions for completing verification on BaseScan.

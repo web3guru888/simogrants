@@ -419,6 +419,8 @@ This tension tells a story: the project is technically excellent but may have ca
 - Contract: `0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee`
 - Deployment TX: `0x89a49559d131f9ab3287f7959ca68bd603db52a29b4e21a5055a77ee224faef1`
 - BaseScan: https://basescan.org/address/0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee
+- Verification status: **Pending on BaseScan** at time of this update. The contract page still shows `Verify and Publish`, and automated verification from Hardhat failed with a BaseScan/Etherscan-side `Expected valid bigint: 0 < bigint < curve.n` error.
+- Verification URL: https://basescan.org/verifyContract?a=0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee
 
 ```solidity
 struct Attestation {
@@ -438,7 +440,13 @@ struct Attestation {
 - `getLatestAttestation()` / `getAllAttestations()` — Query interface
 - Custom errors for gas-efficient reverts
 
-- Verification command: `npx hardhat verify --network base 0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee`
+- Verification command: `BASESCAN_API_KEY=*** ETHERSCAN_API_KEY=*** npx hardhat verify --network base 0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee`
+- If Hardhat still returns `Expected valid bigint: 0 < bigint < curve.n`, verify manually on BaseScan with:
+  - Contract Address: `0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee`
+  - Contract Name: `contracts/SIMOGrantsAttestation.sol:SIMOGrantsAttestation`
+  - Compiler Type/Version: Solidity (Single file or Standard JSON Input), matching solc `0.8.24`
+  - Optimization: **Yes**, runs **10000**
+  - Constructor arguments: **none**
 
 ---
 
