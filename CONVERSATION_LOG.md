@@ -228,3 +228,16 @@ This document records the collaboration between the human team member(s) and the
 6. Updated `README.md` with the exact artifact/build-info paths, all 5 mainnet attestation transaction hashes, and an explicit statement that verification is pending despite exact bytecode match.
 
 **Outcome:** The deployed Base mainnet contract is definitively real and compiled from the current checked-in source/build artifact; verification remains pending due to external verification tooling/API submission failure rather than an artifact mismatch.
+
+### Session 9: Direct Etherscan V2 Verification Attempt
+
+**Human:** Provided Etherscan API keys and Etherscan documentation indicating Base data is accessed through Etherscan API V2.
+
+**SIMO:**
+1. Fetched the Etherscan docs index and verification endpoint docs, then switched from plugin-only assumptions to a direct Etherscan V2 verification path.
+2. Submitted the exact recovered Hardhat Standard JSON Input for Base Mainnet (`chainid=8453`) to `verifysourcecode` using the recovered build info and exact contract path/name.
+3. Confirmed both provided API keys were rejected immediately by Etherscan V2 with `Invalid API Key (#err2)` responses before verification processing began.
+4. Fetched the supported-chains docs and confirmed Etherscan documents **Base Mainnet as not available on the free tier**.
+5. Updated `README.md` to reflect that a direct Etherscan V2 Standard JSON verification attempt was made and that the remaining blocker appears to be API entitlement/access rather than source mismatch.
+
+**Outcome:** Verification is still pending, but the reason is now sharper: the deployment artifact and bytecode match exactly, while Base verification appears blocked by explorer/API access level or key validity rather than any contract/source discrepancy.

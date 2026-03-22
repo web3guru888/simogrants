@@ -419,7 +419,7 @@ This tension tells a story: the project is technically excellent but may have ca
 - Contract: `0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee`
 - Deployment TX: `0x89a49559d131f9ab3287f7959ca68bd603db52a29b4e21a5055a77ee224faef1`
 - BaseScan: https://basescan.org/address/0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee
-- Verification status: **Pending on BaseScan** at time of this update. In a final recovery pass, we found an exact Hardhat artifact/build-info match for the deployed bytecode in this repo (`artifacts/contracts/SIMOGrantsAttestation.sol/SIMOGrantsAttestation.json` and `artifacts/build-info/f49f8487356a52a2ebeeec5cbeb587fe.json`), confirming the live contract bytecode exactly matches the current compiled source. Automated verification still could not be retried in this run because no BaseScan/Etherscan API key was present in the current environment; a prior attempt from Hardhat failed with a BaseScan/Etherscan-side `Expected valid bigint: 0 < bigint < curve.n` error.
+- Verification status: **Pending on BaseScan** at time of this update. In a final recovery pass, we found an exact Hardhat artifact/build-info match for the deployed bytecode in this repo (`artifacts/contracts/SIMOGrantsAttestation.sol/SIMOGrantsAttestation.json` and `artifacts/build-info/f49f8487356a52a2ebeeec5cbeb587fe.json`), confirming the live contract bytecode exactly matches the current compiled source. We then attempted direct verification through the Etherscan V2 API using Standard JSON Input for Base (`chainid=8453`) and the exact recovered compiler input. Those requests were rejected at the API-auth layer, and Etherscan's supported-chains docs indicate Base Mainnet API access is **not available on the free tier**. Prior Hardhat/plugin verification had also failed with a BaseScan/Etherscan-side `Expected valid bigint: 0 < bigint < curve.n` error. The remaining blocker is explorer/API access/tooling, not source mismatch.
 - Verification URL: https://basescan.org/verifyContract?a=0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee
 
 ```solidity
@@ -457,7 +457,7 @@ struct Attestation {
   - Optimization: **Yes**, runs **10000**
   - EVM Version: `paris`
   - Constructor arguments: **none**
-  - Note: verification remains pending due to BaseScan submission/tooling failure, not because the deployed bytecode is fake or undeployed.
+  - Note: verification remains pending due to BaseScan/Etherscan submission access/tooling failure — including direct Etherscan V2 rejection while Base Mainnet is documented as not available on the free tier — not because the deployed bytecode is fake, wrong, or undeployed.
 
 ---
 

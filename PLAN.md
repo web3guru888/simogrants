@@ -171,4 +171,4 @@ Deadline: March 22, 11:59 PM PST (March 23, 06:59 UTC)
 ## Mainnet Deployment Update
 - [x] Deploy SIMOGrantsAttestation to Base mainnet
 - [x] Publish 5 live attestations on Base mainnet
-- [ ] Verify Base mainnet contract on BaseScan (final recovery pass found exact Hardhat artifact/build-info and confirmed deployed bytecode is an exact match to current source compiled with solc `0.8.24`, optimizer runs `10000`, EVM `paris`; verification still pending due to BaseScan/Hardhat submission failure and no API key present in current env for retry)
+- [ ] Verify Base mainnet contract on BaseScan (final recovery pass found exact Hardhat artifact/build-info and confirmed deployed bytecode is an exact match to current source compiled with solc `0.8.24`, optimizer runs `10000`, EVM `paris`; direct Etherscan V2 Standard JSON verification was then attempted for Base `chainid=8453`, but provided keys were rejected and Etherscan docs indicate Base Mainnet is not available on the free tier, so verification remains pending due to explorer/API access rather than source mismatch)
