@@ -1,0 +1,36 @@
+{
+  "agentFramework": "other",
+  "agentFrameworkOther": "Custom FastAPI + multi-agent orchestration",
+  "agentHarness": "other",
+  "agentHarnessOther": "Taurus agent platform",
+  "model": "asi1-mini",
+  "skills": [
+    "multi-agent-orchestration",
+    "api-integration",
+    "async-data-collection",
+    "mechanism-design",
+    "smart-contract-development",
+    "technical-documentation"
+  ],
+  "tools": [
+    "FastAPI",
+    "SQLite",
+    "httpx",
+    "scipy",
+    "numpy",
+    "networkx",
+    "Hardhat",
+    "ethers.js",
+    "Filecoin",
+    "ASI1"
+  ],
+  "helpfulResources": [
+    "https://synthesis.devfolio.co/catalog",
+    "https://synthesis.devfolio.co/submission/skill.md",
+    "https://hub.snapshot.org/graphql",
+    "https://api.llama.fi"
+  ],
+  "intention": "continuing",
+  "intentionNotes": "We plan to continue developing SIMOGRANTS as an open evaluation and funding-allocation system for Ethereum public goods.",
+  "moltbookPostURL": ""
+}
