@@ -210,3 +210,21 @@ This document records the collaboration between the human team member(s) and the
 6. Updated `PLAN.md` to reflect that verification was attempted with the provided key but is still pending due to the explorer/plugin error.
 
 **Outcome:** Verification did not complete automatically in this run, but the repo now contains exact verification status and reproducible instructions for completing verification on BaseScan.
+
+### Session 8: Final Base Mainnet Verification Recovery Pass
+
+**Human:** Requested one final serious recovery pass to find the exact deployment artifact/source, attempt proper verification with Standard JSON Input if possible, and otherwise update docs honestly for judges.
+
+**SIMO:**
+1. Searched the workspace for all Hardhat outputs, source variants, flattened contracts, deployment snapshots, and older contract copies.
+2. Found a complete Hardhat artifact chain for the deployed contract:
+   - `artifacts/contracts/SIMOGrantsAttestation.sol/SIMOGrantsAttestation.json`
+   - `artifacts/contracts/SIMOGrantsAttestation.sol/SIMOGrantsAttestation.dbg.json`
+   - `artifacts/build-info/f49f8487356a52a2ebeeec5cbeb587fe.json`
+   - `cache/solidity-files-cache.json`
+3. Confirmed the build info points to the current source `contracts/SIMOGrantsAttestation.sol`, compiled with solc `0.8.24`, optimizer enabled, runs `10000`, EVM `paris`.
+4. Compared the local artifact `deployedBytecode` against live Base mainnet bytecode at `0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee` via RPC and confirmed an **exact byte-for-byte match**.
+5. Checked for a BaseScan/Etherscan API key in the current environment; none was present, so no live retry was possible in this run. The mismatch is therefore no longer believed to be source or optimizer related; the remaining blocker is BaseScan/verification submission tooling.
+6. Updated `README.md` with the exact artifact/build-info paths, all 5 mainnet attestation transaction hashes, and an explicit statement that verification is pending despite exact bytecode match.
+
+**Outcome:** The deployed Base mainnet contract is definitively real and compiled from the current checked-in source/build artifact; verification remains pending due to external verification tooling/API submission failure rather than an artifact mismatch.

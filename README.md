@@ -419,7 +419,7 @@ This tension tells a story: the project is technically excellent but may have ca
 - Contract: `0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee`
 - Deployment TX: `0x89a49559d131f9ab3287f7959ca68bd603db52a29b4e21a5055a77ee224faef1`
 - BaseScan: https://basescan.org/address/0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee
-- Verification status: **Pending on BaseScan** at time of this update. The contract page still shows `Verify and Publish`, and automated verification from Hardhat failed with a BaseScan/Etherscan-side `Expected valid bigint: 0 < bigint < curve.n` error.
+- Verification status: **Pending on BaseScan** at time of this update. In a final recovery pass, we found an exact Hardhat artifact/build-info match for the deployed bytecode in this repo (`artifacts/contracts/SIMOGrantsAttestation.sol/SIMOGrantsAttestation.json` and `artifacts/build-info/f49f8487356a52a2ebeeec5cbeb587fe.json`), confirming the live contract bytecode exactly matches the current compiled source. Automated verification still could not be retried in this run because no BaseScan/Etherscan API key was present in the current environment; a prior attempt from Hardhat failed with a BaseScan/Etherscan-side `Expected valid bigint: 0 < bigint < curve.n` error.
 - Verification URL: https://basescan.org/verifyContract?a=0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee
 
 ```solidity
@@ -440,13 +440,24 @@ struct Attestation {
 - `getLatestAttestation()` / `getAllAttestations()` — Query interface
 - Custom errors for gas-efficient reverts
 
-- Verification command: `BASESCAN_API_KEY=*** ETHERSCAN_API_KEY=*** npx hardhat verify --network base 0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee`
-- If Hardhat still returns `Expected valid bigint: 0 < bigint < curve.n`, verify manually on BaseScan with:
+- 5 mainnet attestation TXs:
+  - OpenZeppelin: `0x79974ed682a7838d8afd606bd2e80813326f33b42118d5045a37fd1128e27575`
+  - Uniswap v3: `0x7380b20feafc763ce6ca89943bb58d0b936d842170990c4bdbff0c7329ebea62`
+  - Gitcoin Passport: `0xd8dcfa4a68da5234dbbbb3ba5fc178891edb7eee4345c364312d1f2873778992`
+  - ETHStaker: `0x3911e06cd47fce95f9e97aeef2f75c37727800de3412065747877554316a860e`
+  - Protocol Guild: `0x4a200f59ac02972694482a6e8a5b057f5236589ae19758067e47692281930254`
+- Recovery-pass finding: live deployed bytecode exactly matches the local Hardhat artifact and build-info produced from `contracts/SIMOGrantsAttestation.sol` with solc `0.8.24`, optimizer enabled, runs `10000`, EVM `paris`.
+- Verification command: `BASESCAN_API_KEY=*** ETHERSCAN_API_KEY=*** npx hardhat verify --network base --contract contracts/SIMOGrantsAttestation.sol:SIMOGrantsAttestation 0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee`
+- If Hardhat still returns `Expected valid bigint: 0 < bigint < curve.n`, verify manually on BaseScan with Standard JSON Input using the existing Hardhat build info:
   - Contract Address: `0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee`
   - Contract Name: `contracts/SIMOGrantsAttestation.sol:SIMOGrantsAttestation`
-  - Compiler Type/Version: Solidity (Single file or Standard JSON Input), matching solc `0.8.24`
+  - Exact build artifact: `artifacts/contracts/SIMOGrantsAttestation.sol/SIMOGrantsAttestation.json`
+  - Exact build info / compiler input: `artifacts/build-info/f49f8487356a52a2ebeeec5cbeb587fe.json`
+  - Compiler Type/Version: Standard JSON Input, solc `0.8.24`
   - Optimization: **Yes**, runs **10000**
+  - EVM Version: `paris`
   - Constructor arguments: **none**
+  - Note: verification remains pending due to BaseScan submission/tooling failure, not because the deployed bytecode is fake or undeployed.
 
 ---
 

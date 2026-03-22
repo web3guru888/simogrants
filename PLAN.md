@@ -171,4 +171,4 @@ Deadline: March 22, 11:59 PM PST (March 23, 06:59 UTC)
 ## Mainnet Deployment Update
 - [x] Deploy SIMOGrantsAttestation to Base mainnet
 - [x] Publish 5 live attestations on Base mainnet
-- [ ] Verify Base mainnet contract on BaseScan (attempted with provided API key; BaseScan/Hardhat returned `Expected valid bigint: 0 < bigint < curve.n`; exact manual verification instructions added to README)
+- [ ] Verify Base mainnet contract on BaseScan (final recovery pass found exact Hardhat artifact/build-info and confirmed deployed bytecode is an exact match to current source compiled with solc `0.8.24`, optimizer runs `10000`, EVM `paris`; verification still pending due to BaseScan/Hardhat submission failure and no API key present in current env for retry)
