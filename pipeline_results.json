@@ -1,8 +1,8 @@
 {
   "pipeline_version": "1.0.0",
-  "system": "SIMOGRANTS \u2014 Stigmergic Impact Oracle for Public Goods",
+  "system": "SIMOGRANTS — Stigmergic Impact Oracle for Public Goods",
   "run_timestamp": "2026-03-22T04:58:50.219047+00:00",
-  "elapsed_seconds": 39.0,
+  "elapsed_seconds": 39,
   "projects_targeted": 5,
   "projects_collected": 5,
   "projects_evaluated": 5,
@@ -112,7 +112,7 @@
           },
           "overall_narrative": "OpenZeppelin Contracts represents the pinnacle of Ethereum public goods infrastructure, setting the standard for secure smart contract development. The codebase demonstrates world-class engineering with exceptional architecture, comprehensive testing, and industry-leading security practices that have been battle-tested across thousands of production deployments. With nearly 500 contributors, active maintenance, and regular professional audits, this project exemplifies what a mature, sustainable public good should be.",
           "confidence": 0.95,
-          "mean_score": 95.0,
+          "mean_score": 95,
           "evaluated_at": "2026-03-22T04:58:31.753298+00:00"
         },
         {
@@ -156,7 +156,7 @@
           },
           "overall_narrative": "OpenZeppelin Contracts represents the gold standard for Ethereum public goods infrastructure, delivering exceptional security value with remarkable capital efficiency. Their decade-long track record of reliable, battle-tested code and massive ecosystem adoption justifies strong confidence in continued stewardship of public funds. While the commercial sustainability model could be more transparent, this is exactly the type of foundational infrastructure that deserves sustained support.",
           "confidence": 0.7,
-          "mean_score": 85.0,
+          "mean_score": 85,
           "evaluated_at": "2026-03-22T04:58:31.901955+00:00"
         },
         {
@@ -169,7 +169,7 @@
             },
             "network_effects": {
               "score": 95,
-              "justification": "With 27,000+ GitHub stars, 12,000+ forks, and 494 contributors, OpenZeppelin has achieved massive adoption that creates powerful positive-sum dynamics\u2014every project using it benefits from collective security improvements and battle-testing. The ecosystem would be significantly less secure and more fragmented without this shared foundation, as it dramatically reduces coordination costs around secure development practices."
+              "justification": "With 27,000+ GitHub stars, 12,000+ forks, and 494 contributors, OpenZeppelin has achieved massive adoption that creates powerful positive-sum dynamics—every project using it benefits from collective security improvements and battle-testing. The ecosystem would be significantly less secure and more fragmented without this shared foundation, as it dramatically reduces coordination costs around secure development practices."
             },
             "mission_alignment": {
               "score": 92,
@@ -178,23 +178,23 @@
           },
           "overall_narrative": "OpenZeppelin Contracts represents one of Ethereum's most critical public goods, serving as the foundational security layer that underpins thousands of protocols and applications. Its exceptional composability, massive network effects, and unwavering commitment to open-source principles make it a paradigmatic example of ecosystem-strengthening infrastructure. The project's continued evolution and adoption directly contribute to Ethereum's security, developer experience, and long-term viability.",
           "confidence": 0.95,
-          "mean_score": 95.0,
+          "mean_score": 95,
           "evaluated_at": "2026-03-22T04:58:32.527997+00:00"
         }
       ],
       "aggregated_scores": {
-        "code_quality": 95.0,
-        "maintenance_health": 92.0,
-        "security_posture": 98.0,
-        "adoption_metrics": 95.0,
-        "community_engagement": 88.0,
-        "user_experience": 85.0,
-        "capital_efficiency": 85.0,
-        "funding_sustainability": 75.0,
-        "track_record": 95.0,
-        "composability": 98.0,
-        "network_effects": 95.0,
-        "mission_alignment": 92.0
+        "code_quality": 95,
+        "maintenance_health": 92,
+        "security_posture": 98,
+        "adoption_metrics": 95,
+        "community_engagement": 88,
+        "user_experience": 85,
+        "capital_efficiency": 85,
+        "funding_sustainability": 75,
+        "track_record": 95,
+        "composability": 98,
+        "network_effects": 95,
+        "mission_alignment": 92
       },
       "overall_score": 91.08,
       "bradley_terry_rank": 2.406396,
@@ -269,7 +269,7 @@
           },
           "overall_narrative": "Protocol Guild presents a concerning picture from a capital stewardship perspective: minimal recent activity, zero transparency on financials or deliverables, and no evidence of sustainable funding beyond continued grants. The archived documentation repository and complete lack of commits in the past year suggest the project may be dormant or severely under-delivering relative to any funding received. Without concrete evidence of output, efficiency, or a sustainability plan, this project fails to meet basic due diligence standards for public fund allocation.",
           "confidence": 0.35,
-          "mean_score": 30.0,
+          "mean_score": 30,
           "evaluated_at": "2026-03-22T04:58:36.810749+00:00"
         },
         {
@@ -291,23 +291,23 @@
           },
           "overall_narrative": "Protocol Guild addresses a fundamental ecosystem need by providing collective funding for Ethereum core protocol contributors, representing strong mission alignment with Ethereum's public goods values. However, the archived documentation repository provides limited visibility into the project's technical composability and current network effects, making it difficult to fully assess integration potential and active ecosystem impact.",
           "confidence": 0.45,
-          "mean_score": 65.0,
+          "mean_score": 65,
           "evaluated_at": "2026-03-22T04:58:36.035972+00:00"
         }
       ],
       "aggregated_scores": {
-        "code_quality": 25.0,
-        "maintenance_health": 20.0,
-        "security_posture": 50.0,
-        "adoption_metrics": 62.0,
-        "community_engagement": 45.0,
-        "user_experience": 38.0,
-        "capital_efficiency": 25.0,
-        "funding_sustainability": 30.0,
-        "track_record": 35.0,
-        "composability": 45.0,
-        "network_effects": 72.0,
-        "mission_alignment": 78.0
+        "code_quality": 25,
+        "maintenance_health": 20,
+        "security_posture": 50,
+        "adoption_metrics": 62,
+        "community_engagement": 45,
+        "user_experience": 38,
+        "capital_efficiency": 25,
+        "funding_sustainability": 30,
+        "track_record": 35,
+        "composability": 45,
+        "network_effects": 72,
+        "mission_alignment": 78
       },
       "overall_score": 43.75,
       "bradley_terry_rank": -2.3266,
@@ -365,7 +365,7 @@
           },
           "overall_narrative": "EthStaker Deposit CLI is a fork of the official staking-deposit-cli focused on secure validator key generation, which is a critical security-sensitive function in the Ethereum ecosystem. While the project demonstrates some security awareness and active dependency maintenance, the lack of documentation, inconsistent activity metrics, and absence of formal security audits are significant concerns for a tool handling private keys. The fork status and missing basic repository governance documentation suggest this may be a derivative project without the rigorous engineering standards expected for security-critical infrastructure.",
           "confidence": 0.45,
-          "mean_score": 55.0,
+          "mean_score": 55,
           "evaluated_at": "2026-03-22T04:58:40.995867+00:00"
         },
         {
@@ -387,7 +387,7 @@
           },
           "overall_narrative": "EthStaker Deposit CLI is a fork of the official staking-deposit-cli that shows moderate historical engagement through forks and contributors, but currently suffers from poor documentation, declining development activity, and limited community resources. While it serves an important niche for secure validator key generation, the lack of README, contributing guidelines, and recent substantive commits raises concerns about long-term viability and user accessibility.",
           "confidence": 0.45,
-          "mean_score": 45.0,
+          "mean_score": 45,
           "evaluated_at": "2026-03-22T04:58:40.294109+00:00"
         },
         {
@@ -431,23 +431,23 @@
           },
           "overall_narrative": "EthStaker Deposit CLI is a community-maintained fork of the official Ethereum staking deposit tool, providing secure validator key generation infrastructure. While it doesn't offer significant composability beyond its core function, it serves as important public goods infrastructure for Ethereum's validator onboarding ecosystem. The project demonstrates strong mission alignment through its permissive licensing and focus on decentralization, though its value as a fork rather than novel development limits its network effects potential.",
           "confidence": 0.45,
-          "mean_score": 65.0,
+          "mean_score": 65,
           "evaluated_at": "2026-03-22T04:58:40.951872+00:00"
         }
       ],
       "aggregated_scores": {
-        "code_quality": 58.0,
-        "maintenance_health": 45.0,
-        "security_posture": 62.0,
-        "adoption_metrics": 52.0,
-        "community_engagement": 38.0,
-        "user_experience": 45.0,
-        "capital_efficiency": 42.0,
-        "funding_sustainability": 35.0,
-        "track_record": 38.0,
-        "composability": 55.0,
-        "network_effects": 65.0,
-        "mission_alignment": 75.0
+        "code_quality": 58,
+        "maintenance_health": 45,
+        "security_posture": 62,
+        "adoption_metrics": 52,
+        "community_engagement": 38,
+        "user_experience": 45,
+        "capital_efficiency": 42,
+        "funding_sustainability": 35,
+        "track_record": 38,
+        "composability": 55,
+        "network_effects": 65,
+        "mission_alignment": 75
       },
       "overall_score": 50.83,
       "bradley_terry_rank": -1.618596,
@@ -522,7 +522,7 @@
           },
           "overall_narrative": "No narrative provided.",
           "confidence": 0.5,
-          "mean_score": 55.0,
+          "mean_score": 55,
           "evaluated_at": "2026-03-22T04:58:45.103143+00:00"
         },
         {
@@ -549,18 +549,18 @@
         }
       ],
       "aggregated_scores": {
-        "code_quality": 72.0,
-        "maintenance_health": 55.0,
-        "security_posture": 58.0,
-        "adoption_metrics": 78.0,
-        "community_engagement": 72.0,
-        "user_experience": 68.0,
-        "capital_efficiency": 58.0,
-        "funding_sustainability": 45.0,
-        "track_record": 62.0,
-        "composability": 78.0,
-        "network_effects": 82.0,
-        "mission_alignment": 75.0
+        "code_quality": 72,
+        "maintenance_health": 55,
+        "security_posture": 58,
+        "adoption_metrics": 78,
+        "community_engagement": 72,
+        "user_experience": 68,
+        "capital_efficiency": 58,
+        "funding_sustainability": 45,
+        "track_record": 62,
+        "composability": 78,
+        "network_effects": 82,
+        "mission_alignment": 75
       },
       "overall_score": 66.92,
       "bradley_terry_rank": -0.0096,
@@ -582,7 +582,7 @@
             },
             "maintenance_health": {
               "score": 45,
-              "justification": "While the core contracts are mature and stable, the repository shows minimal recent activity with zero commits in the last year and only 16 total contributors. This reflects the project's maturity\u2014core v3 contracts are intentionally frozen for security\u2014but raises concerns about responsiveness to issues and long-term maintenance capability given the low bus factor and stalled development velocity."
+              "justification": "While the core contracts are mature and stable, the repository shows minimal recent activity with zero commits in the last year and only 16 total contributors. This reflects the project's maturity—core v3 contracts are intentionally frozen for security—but raises concerns about responsiveness to issues and long-term maintenance capability given the low bus factor and stalled development velocity."
             },
             "security_posture": {
               "score": 88,
@@ -591,7 +591,7 @@
           },
           "overall_narrative": "Uniswap v3 Core exemplifies world-class smart contract engineering with sophisticated architecture and battle-tested security, evidenced by its $1.6B+ TVL and widespread adoption across 45+ chains. The code quality is exceptional, setting industry standards for AMM design, though the repository's maintenance has slowed significantly as the core contracts reach maturity and stability. While the security posture is outstanding given the protocol's track record, the low contributor count and lack of recent commits raise questions about long-term maintainability and responsiveness to emerging threats.",
           "confidence": 0.85,
-          "mean_score": 75.0,
+          "mean_score": 75,
           "evaluated_at": "2026-03-22T04:58:49.727859+00:00"
         },
         {
@@ -613,7 +613,7 @@
           },
           "overall_narrative": "Uniswap v3 is an exceptionally adopted public good that serves as critical DeFi infrastructure across the Ethereum ecosystem. While the core smart contracts are mature and stable with minimal recent development activity, the protocol's massive TVL, volume, and multi-chain presence demonstrate unparalleled real-world impact. The user experience is polished and widely adopted, though the concentrated liquidity model requires more user education than simpler AMM designs.",
           "confidence": 0.85,
-          "mean_score": 85.0,
+          "mean_score": 85,
           "evaluated_at": "2026-03-22T04:58:49.196825+00:00"
         },
         {
@@ -662,18 +662,18 @@
         }
       ],
       "aggregated_scores": {
-        "code_quality": 92.0,
-        "maintenance_health": 45.0,
-        "security_posture": 88.0,
-        "adoption_metrics": 98.0,
-        "community_engagement": 75.0,
-        "user_experience": 82.0,
-        "capital_efficiency": 88.0,
-        "funding_sustainability": 95.0,
-        "track_record": 92.0,
-        "composability": 88.0,
-        "network_effects": 92.0,
-        "mission_alignment": 55.0
+        "code_quality": 92,
+        "maintenance_health": 45,
+        "security_posture": 88,
+        "adoption_metrics": 98,
+        "community_engagement": 75,
+        "user_experience": 82,
+        "capital_efficiency": 88,
+        "funding_sustainability": 95,
+        "track_record": 92,
+        "composability": 88,
+        "network_effects": 92,
+        "mission_alignment": 55
       },
       "overall_score": 82.5,
       "bradley_terry_rank": 1.5484,
@@ -762,10 +762,10 @@
     },
     "standard_qf_allocations": {
       "openzeppelin": 24325.376271798126,
-      "protocol-guild": 25000.0,
+      "protocol-guild": 25000,
       "ethstaker": 7052.985751431336,
       "gitcoin-passport": 18621.63797677055,
-      "uniswap-v3": 25000.0
+      "uniswap-v3": 25000
     },
     "pheromone_state": {
       "openzeppelin": 5.4554,
@@ -930,5 +930,69 @@
       "ethstaker",
       "openzeppelin"
     ]
-  ]
+  ],
+  "onchain": {
+    "status": "published",
+    "network": "hardhat",
+    "chain_id": 31337,
+    "contract_address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "deploy_tx": "0x8f5aa1598e281015adcb9bd2a8fcc340526804ec0890ffda4b17061b30168a52",
+    "timestamp": "2026-03-22T05:04:07.324Z",
+    "total_attestations": 5,
+    "current_epoch": 0,
+    "attestation_transactions": [
+      {
+        "project_id": "openzeppelin",
+        "tx_hash": "0x1ac545d6691f24c0b64762291d664312de7f04522311e12864215ca5e165f782",
+        "block_number": 2,
+        "gas_used": 212911,
+        "project_hash": "0x1989d8d778c24b9b308d28781952931036afa3bc8a399cb5de152ddb3fc55422",
+        "evaluation_hash": "0x61132ecad3bd35ef45263d9db0baa867264633f5ea0965e72af993b1df88ec8f",
+        "filecoin_cid": "bafyreide0762fe93f2d318646a7e300c1b0d90785beb6a8fc33f172cf904b04c",
+        "overall_score": 91.08
+      },
+      {
+        "project_id": "protocol-guild",
+        "tx_hash": "0x0db7ebee56626788b8c66633a4bc42ff8ea72f339d3781e69fd4728ff9d2cc93",
+        "block_number": 3,
+        "gas_used": 195811,
+        "project_hash": "0xdcb8b7a4cd94a1eac6f8f084672efb961c9fccfabb57fc61fe2ca9458b90f185",
+        "evaluation_hash": "0x184fb271eb1c96970fde375168b2846b6f4a96bc85b190f9421107bb26dc5b79",
+        "filecoin_cid": "bafyrei58075c3f6680876d689464863ed340bc0d0fdffa7a592b874d641b2ca3",
+        "overall_score": 43.75
+      },
+      {
+        "project_id": "ethstaker",
+        "tx_hash": "0x019e50b773fe3931db28464c39241c1a695cf3084353667fc5f7f189e3977c32",
+        "block_number": 4,
+        "gas_used": 195799,
+        "project_hash": "0x2c2e34acd6043086576ba2f8e4948895ec6200b2d4c7b47e4ea98e9b2a3bb0fb",
+        "evaluation_hash": "0xe1d34c62cd14574e0ee57e5099a336416f0842eaff3789d025f0b308808105d3",
+        "filecoin_cid": "bafyreic4c59f673178bae42d3a11eaa1a7fb054c565c4ea61e8ed2790ee8f0cd",
+        "overall_score": 50.83
+      },
+      {
+        "project_id": "gitcoin-passport",
+        "tx_hash": "0x597e528079272b82b93efee57125a527e720d84d2a05e8a0222caafb4ec86974",
+        "block_number": 5,
+        "gas_used": 195811,
+        "project_hash": "0x905f941fb51dd93ba80f38ad0de7c24dd880585ce688634872763defb463867a",
+        "evaluation_hash": "0x94e34f4e569ebfeb694f51a4f919cff129f08dff6262c4f7941ed34af19bc5f2",
+        "filecoin_cid": "bafyrei4e866975c6480da97781bdb8e3e36941c17ad77ca39dbe6779d3e8ef59",
+        "overall_score": 66.92
+      },
+      {
+        "project_id": "uniswap-v3",
+        "tx_hash": "0xa9f94894d3f0cdfc77db56c2b9dcf2248c53ca9f5e1fe97c6b393f2cbe834bdf",
+        "block_number": 6,
+        "gas_used": 195811,
+        "project_hash": "0x52829c187e5156727843717a4f1fd6556202c3edd8ba93b66c9b03434473e63a",
+        "evaluation_hash": "0x1886f7d2a02a61aee0c96aaa0cad103a9f3b076e9d7ac84683b3c4ebf5ad4402",
+        "filecoin_cid": "bafyrei9ce00e0a7211cea3cb2f32b5389c9eff8b07f6edc29ada50254b2297b2",
+        "overall_score": 82.5
+      }
+    ],
+    "total_gas_used": 996143
+  }
 }

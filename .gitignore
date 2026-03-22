@@ -68,3 +68,4 @@ Thumbs.db
 
 # Taurus platform
 /taurus/
+.deployer_wallet.json
