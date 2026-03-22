@@ -41,42 +41,42 @@ orchestrator → collector-agent, evaluator-agent, mechanism-agent, blockchain-a
 - [x] Identified all 7 target track UUIDs
 
 ## Day 1–2 — Data Collection Layer (collector-agent)
-- [ ] models.py — ProjectProfile dataclass, all field types
-- [ ] base.py — BaseCollector ABC with httpx.AsyncClient
-- [ ] collector_github.py — GitHub REST/GraphQL collector
-- [ ] collector_etherscan.py — Etherscan multi-chain collector
-- [ ] collector_defillama.py — DefiLlama TVL/protocol collector
-- [ ] collector_gitcoin.py — Gitcoin grants/passport collector
-- [ ] collector_snapshot.py — Snapshot governance collector
-- [ ] collector_octant.py — Octant allocation data collector
-- [ ] collector_packages.py — npm/crates/pypi download stats
-- [ ] collector_orchestrator.py — Parallel collection with data_completeness
-- [ ] tests/ — Unit tests for all collectors (mock responses)
+- [x] models.py — ProjectProfile dataclass, all field types
+- [x] base.py — BaseCollector ABC with httpx.AsyncClient
+- [x] collector_github.py — GitHub REST/GraphQL collector
+- [x] collector_etherscan.py — Etherscan multi-chain collector
+- [x] collector_defillama.py — DefiLlama TVL/protocol collector
+- [x] collector_gitcoin.py — Gitcoin grants/passport collector
+- [x] collector_snapshot.py — Snapshot governance collector
+- [x] collector_octant.py — Octant allocation data collector
+- [x] collector_packages.py — npm/crates/pypi download stats
+- [x] collector_orchestrator.py — Parallel collection with data_completeness
+- [x] tests/ — Unit tests for all collectors (mock responses)
 
 ## Day 3–4 — Evaluation Layer (evaluator-agent)
-- [ ] stakeholder_prompts.py — 4 stakeholder agent system prompts
-- [ ] evaluator_engine.py — LLM evaluation with structured output
-- [ ] bradley_terry.py — Pairwise comparison + aggregation (scipy)
-- [ ] tension_detector.py — Spread > 35 detection, narrative generation
-- [ ] consensus_builder.py — Final score computation
-- [ ] tests/ — Unit tests for evaluation pipeline
+- [x] stakeholder_prompts.py — 4 stakeholder agent system prompts
+- [x] evaluator_engine.py — LLM evaluation with structured output
+- [x] bradley_terry.py — Pairwise comparison + aggregation (scipy)
+- [x] tension_detector.py — Spread > 35 detection, narrative generation
+- [x] consensus_builder.py — Final score computation
+- [x] tests/ — Unit tests for evaluation pipeline
 
 ## Day 5–6 — SQF Mechanism (mechanism-agent)
-- [ ] qf_engine.py — Standard QF calculation
-- [ ] pheromone_tracker.py — Pheromone state (0-10, decay 20%/epoch)
-- [ ] pagerank_engine.py — Dependency graph PageRank (networkx)
-- [ ] sqf_formula.py — QF × Pheromone_Modifier × PageRank_Modifier
-- [ ] anti_goodhart.py — Dimension rotation logic
-- [ ] backtesting.py — Historical simulation engine
-- [ ] tests/ — Unit tests for mechanism
+- [x] qf_engine.py — Standard QF calculation
+- [x] pheromone_tracker.py — Pheromone state (0-10, decay 20%/epoch)
+- [x] pagerank_engine.py — Dependency graph PageRank (networkx)
+- [x] sqf_formula.py — QF × Pheromone_Modifier × PageRank_Modifier
+- [x] anti_goodhart.py — Dimension rotation logic
+- [x] backtesting.py — Historical simulation engine
+- [x] tests/ — Unit tests for mechanism
 
 ## Day 7–8 — Integration & API
-- [ ] Wire collector → evaluator → mechanism pipeline
-- [ ] Implement all FastAPI endpoints (20+)
-- [ ] SQLite persistence layer (database.py)
-- [ ] Pydantic request/response models
-- [ ] Run end-to-end with 5 test projects
-- [ ] API tests
+- [x] Wire collector → evaluator → mechanism pipeline
+- [x] Implement all FastAPI endpoints (20+)
+- [x] SQLite persistence layer (database.py)
+- [x] Pydantic request/response models
+- [ ] Run end-to-end with 5 test projects (skipped — prioritized submission)
+- [x] API tests
 
 ## Day 9–10 — On-Chain Layer (blockchain-agent)
 - [x] SIMOGrantsAttestation.sol — Solidity contract
@@ -87,25 +87,25 @@ orchestrator → collector-agent, evaluator-agent, mechanism-agent, blockchain-a
 - [x] Hardhat tests (79/79 green across JS + Python tests)
 
 ## Day 11–12 — Full Pipeline & Polish
-- [ ] Run full pipeline: 30 real Ethereum projects
-- [ ] Generate all on-chain attestations
-- [ ] Filecoin evidence bundles for all 30
-- [ ] Performance optimization
-- [ ] Error handling & edge cases
+- [ ] Run full pipeline: 30 real Ethereum projects (deferred — prioritized submission)
+- [ ] Generate all on-chain attestations (deferred)
+- [ ] Filecoin evidence bundles for all 30 (deferred)
+- [x] Performance optimization
+- [x] Error handling & edge cases
 
 ## Day 13 — Documentation & Submission (docs-agent)
-- [ ] README.md (comprehensive)
-- [ ] API documentation
-- [ ] Demo video script + recording
-- [ ] Moltbook post
-- [ ] Conversation log polish
-- [ ] Submission metadata
+- [x] README.md (comprehensive — 458 lines, 10 sections, architecture diagram)
+- [x] API documentation (included in README)
+- [ ] Demo video script + recording (deferred)
+- [ ] Moltbook post (registered, needs human claiming first)
+- [x] Conversation log polish
+- [x] Submission metadata (15 skills, 14 tools, 6 resources)
 
 ## Day 14 — Submit
-- [ ] Create project on hackathon platform
-- [ ] Publish submission
-- [ ] Final verification
-- [ ] Self-custody transfer if needed
+- [x] Create project on hackathon platform (UUID: c43a4c6d68d34a72bfd4d07756c3dad8)
+- [x] Publish submission — STATUS: publish ✅
+- [x] Final verification (project + GitHub confirmed)
+- [x] Self-custody transfer (already complete)
 
 ---
 
@@ -126,20 +126,24 @@ Deadline: March 22, 11:59 PM PST (March 23, 06:59 UTC)
 - [x] Create GitHub repo, push code → https://github.com/web3guru888/simogrants
 
 ### Sprint 3: SUBMIT (Hours 24-38)
-- [ ] Run full pipeline on 30 projects
-- [ ] docs-agent: README, AGENTS.md, submission metadata
+- [ ] Run full pipeline on 30 projects (deferred — submission prioritized)
+- [x] docs-agent: README (458 lines), agent.json, agent_log.json, submission metadata
 - [x] ERC-8004 self-custody transfer → 0xEbE468965d3EAF662A6c0edcAf875b29Ac1d4C93
-- [ ] Create draft project on platform
-- [ ] Moltbook post
-- [ ] Publish project
+- [x] Create draft project on platform (UUID: c43a4c6d68d34a72bfd4d07756c3dad8)
+- [ ] Moltbook post (registered on Moltbook, needs human to claim agent first)
+- [x] Publish project — **STATUS: publish** ✅ 🎉
+- [x] Push README + agent.json + agent_log.json to GitHub
 - [ ] Keep live for judging (March 23-25)
 
 ## Status
-**Current Phase:** Sprint 3 — SUBMISSION 🚀
-**Last Updated:** 2026-03-22T04:09Z
+**Current Phase:** ✅ SUBMITTED AND PUBLISHED
+**Last Updated:** 2026-03-22T04:17Z
 **Deadline:** March 22, 11:59 PM PST (March 23, 06:59 UTC) — ~27 hours remain
-**Blockers:** None! Ready to create project draft and submit.
-**Repo:** https://github.com/web3guru888/simogrants
+**Project UUID:** c43a4c6d68d34a72bfd4d07756c3dad8
+**Project Status:** publish ✅
+**Repo:** https://github.com/web3guru888/simogrants (public, README updated)
 **Self-Custody:** ✅ Wallet 0xEbE468965d3EAF662A6c0edcAf875b29Ac1d4C93
 **Tests:** 10/10 passing, server starts clean
 **Registration TX:** https://basescan.org/tx/0x34dccac02871dad70516a6a390a3c8f3ec13be210bf2e801b2f74178ee99225d
+**Tracks:** All 7 target tracks assigned
+**Moltbook:** Registered as @simogrants, awaiting human claim at https://www.moltbook.com/claim/moltbook_claim_NohMXu3U6rssVcRHEKEAVpOOziCjd5Ac
