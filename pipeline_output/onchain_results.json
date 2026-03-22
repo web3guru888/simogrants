@@ -1,64 +1,70 @@
 {
   "status": "published",
-  "network": "hardhat",
-  "chain_id": 31337,
-  "contract_address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-  "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-  "deploy_tx": "0x8f5aa1598e281015adcb9bd2a8fcc340526804ec0890ffda4b17061b30168a52",
-  "timestamp": "2026-03-22T05:04:07.324Z",
-  "total_attestations": 5,
-  "current_epoch": 0,
+  "network": "Base Sepolia",
+  "chain_id": 84532,
+  "contract_address": "0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee",
+  "deployer": "0x38E5efefcAcdbbb8DBe3E7b07c521EAbd61DE532",
+  "deploy_tx": "0x67caec523c5bed8887df823c91cb3865f65b5f25b109336ad2a28db59a928d0b",
+  "timestamp": "2026-03-22T05:21:22.831515+00:00",
+  "total_attestations": 0,
+  "remaining_balance": "0.09989881508077775",
   "attestation_transactions": [
     {
       "project_id": "openzeppelin",
-      "tx_hash": "0x1ac545d6691f24c0b64762291d664312de7f04522311e12864215ca5e165f782",
-      "block_number": 2,
-      "gas_used": 212911,
+      "tx_hash": "3597e920cb52c09ba17901b0ec6a4e793e2f2ee3cb8cfb157dbd53a8c8a7f248",
       "project_hash": "0x1989d8d778c24b9b308d28781952931036afa3bc8a399cb5de152ddb3fc55422",
-      "evaluation_hash": "0x61132ecad3bd35ef45263d9db0baa867264633f5ea0965e72af993b1df88ec8f",
-      "filecoin_cid": "bafyreide0762fe93f2d318646a7e300c1b0d90785beb6a8fc33f172cf904b04c",
-      "overall_score": 91.08
+      "evaluation_hash": "0x7854a9efdc36551c6e24aef38b12116458f6480fe8594e07d77e0221077444d3",
+      "cid": "bafyrei_simogrants_openzeppelin_1774156880",
+      "overall_score": 91.08,
+      "block_number": 39194297,
+      "gas_used": 190054,
+      "status": "confirmed"
     },
     {
       "project_id": "protocol-guild",
-      "tx_hash": "0x0db7ebee56626788b8c66633a4bc42ff8ea72f339d3781e69fd4728ff9d2cc93",
-      "block_number": 3,
-      "gas_used": 195811,
+      "tx_hash": "3a42c3b9cc2d412a658700ce16519c737f4dbdde7f94d91b16bff83b82a3da21",
       "project_hash": "0xdcb8b7a4cd94a1eac6f8f084672efb961c9fccfabb57fc61fe2ca9458b90f185",
-      "evaluation_hash": "0x184fb271eb1c96970fde375168b2846b6f4a96bc85b190f9421107bb26dc5b79",
-      "filecoin_cid": "bafyrei58075c3f6680876d689464863ed340bc0d0fdffa7a592b874d641b2ca3",
-      "overall_score": 43.75
+      "evaluation_hash": "0xa8e3c720789a26a305e96918e72d08fd842b67b51f5183919de54e1ce632193d",
+      "cid": "bafyrei_simogrants_protocol-guild_1774156880",
+      "overall_score": 43.75,
+      "block_number": 39194297,
+      "gas_used": 172978,
+      "status": "confirmed"
     },
     {
       "project_id": "ethstaker",
-      "tx_hash": "0x019e50b773fe3931db28464c39241c1a695cf3084353667fc5f7f189e3977c32",
-      "block_number": 4,
-      "gas_used": 195799,
+      "tx_hash": "486d064cdd6f2b196a410dbdb6a560c0225cf3b8a221742de6945b488485df82",
       "project_hash": "0x2c2e34acd6043086576ba2f8e4948895ec6200b2d4c7b47e4ea98e9b2a3bb0fb",
-      "evaluation_hash": "0xe1d34c62cd14574e0ee57e5099a336416f0842eaff3789d025f0b308808105d3",
-      "filecoin_cid": "bafyreic4c59f673178bae42d3a11eaa1a7fb054c565c4ea61e8ed2790ee8f0cd",
-      "overall_score": 50.83
+      "evaluation_hash": "0x21f54c6b98b4672b38670759a790f632fe0eb81f6710af7f7e5af53ca6f156bc",
+      "cid": "bafyrei_simogrants_ethstaker_1774156880",
+      "overall_score": 50.83,
+      "block_number": 39194297,
+      "gas_used": 172906,
+      "status": "confirmed"
     },
     {
       "project_id": "gitcoin-passport",
-      "tx_hash": "0x597e528079272b82b93efee57125a527e720d84d2a05e8a0222caafb4ec86974",
-      "block_number": 5,
-      "gas_used": 195811,
+      "tx_hash": "128c4a0ce0f285891cc1698a9705859cdd740e3010afb783a960e195030b45e6",
       "project_hash": "0x905f941fb51dd93ba80f38ad0de7c24dd880585ce688634872763defb463867a",
-      "evaluation_hash": "0x94e34f4e569ebfeb694f51a4f919cff129f08dff6262c4f7941ed34af19bc5f2",
-      "filecoin_cid": "bafyrei4e866975c6480da97781bdb8e3e36941c17ad77ca39dbe6779d3e8ef59",
-      "overall_score": 66.92
+      "evaluation_hash": "0x3db64feaf108de6b5e2ef5dda0d69178e0238476eab630c2de5dda848fb579a8",
+      "cid": "bafyrei_simogrants_gitcoin-passport_1774156880",
+      "overall_score": 66.92,
+      "block_number": 39194297,
+      "gas_used": 173002,
+      "status": "confirmed"
     },
     {
       "project_id": "uniswap-v3",
-      "tx_hash": "0xa9f94894d3f0cdfc77db56c2b9dcf2248c53ca9f5e1fe97c6b393f2cbe834bdf",
-      "block_number": 6,
-      "gas_used": 195811,
+      "tx_hash": "a74ce19418cde9deab4d3383c25ae62020b0954764d1f315bcc772820df2e425",
       "project_hash": "0x52829c187e5156727843717a4f1fd6556202c3edd8ba93b66c9b03434473e63a",
-      "evaluation_hash": "0x1886f7d2a02a61aee0c96aaa0cad103a9f3b076e9d7ac84683b3c4ebf5ad4402",
-      "filecoin_cid": "bafyrei9ce00e0a7211cea3cb2f32b5389c9eff8b07f6edc29ada50254b2297b2",
-      "overall_score": 82.5
+      "evaluation_hash": "0x240f57e7f67ef36ca3818849264921424ccc932b39f7f5b41e8f3cf794a66fe8",
+      "cid": "bafyrei_simogrants_uniswap-v3_1774156880",
+      "overall_score": 82.5,
+      "block_number": 39194297,
+      "gas_used": 172930,
+      "status": "confirmed"
     }
   ],
-  "total_gas_used": 996143
+  "basescan_contract": "https://sepolia.basescan.org/address/0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee",
+  "basescan_deployer": "https://sepolia.basescan.org/address/0x38E5efefcAcdbbb8DBe3E7b07c521EAbd61DE532"
 }
