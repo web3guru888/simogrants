@@ -951,7 +951,10 @@
         "overall_score": 91.08,
         "block_number": 39194297,
         "gas_used": 190054,
-        "status": "confirmed"
+        "status": "confirmed",
+        "filecoin_cid": "bafkreifvcrzlv2ol2bazcly6ossfticad6ffckynd2sibekk3aqewbvune",
+        "ipfs_gateway": "https://ipfs.io/ipfs/bafkreifvcrzlv2ol2bazcly6ossfticad6ffckynd2sibekk3aqewbvune",
+        "dweb_link": "https://dweb.link/ipfs/bafkreifvcrzlv2ol2bazcly6ossfticad6ffckynd2sibekk3aqewbvune"
       },
       {
         "project_id": "protocol-guild",
@@ -962,7 +965,10 @@
         "overall_score": 43.75,
         "block_number": 39194297,
         "gas_used": 172978,
-        "status": "confirmed"
+        "status": "confirmed",
+        "filecoin_cid": "bafkreidzdl6vwkhe4da42byltb4xkecnmdzdrlzoj6qrl25epaudl3j3ly",
+        "ipfs_gateway": "https://ipfs.io/ipfs/bafkreidzdl6vwkhe4da42byltb4xkecnmdzdrlzoj6qrl25epaudl3j3ly",
+        "dweb_link": "https://dweb.link/ipfs/bafkreidzdl6vwkhe4da42byltb4xkecnmdzdrlzoj6qrl25epaudl3j3ly"
       },
       {
         "project_id": "ethstaker",
@@ -973,7 +979,10 @@
         "overall_score": 50.83,
         "block_number": 39194297,
         "gas_used": 172906,
-        "status": "confirmed"
+        "status": "confirmed",
+        "filecoin_cid": "bafkreifchk7omvfafqyxt7fzfyopdzyyw35yvlj2myfv6lzhx6365gnm2y",
+        "ipfs_gateway": "https://ipfs.io/ipfs/bafkreifchk7omvfafqyxt7fzfyopdzyyw35yvlj2myfv6lzhx6365gnm2y",
+        "dweb_link": "https://dweb.link/ipfs/bafkreifchk7omvfafqyxt7fzfyopdzyyw35yvlj2myfv6lzhx6365gnm2y"
       },
       {
         "project_id": "gitcoin-passport",
@@ -984,7 +993,10 @@
         "overall_score": 66.92,
         "block_number": 39194297,
         "gas_used": 173002,
-        "status": "confirmed"
+        "status": "confirmed",
+        "filecoin_cid": "bafkreifzjercweowdtmfve443yoyyiyskb3iqq27kuy7qu3c2624w7d6qq",
+        "ipfs_gateway": "https://ipfs.io/ipfs/bafkreifzjercweowdtmfve443yoyyiyskb3iqq27kuy7qu3c2624w7d6qq",
+        "dweb_link": "https://dweb.link/ipfs/bafkreifzjercweowdtmfve443yoyyiyskb3iqq27kuy7qu3c2624w7d6qq"
       },
       {
         "project_id": "uniswap-v3",
@@ -995,10 +1007,46 @@
         "overall_score": 82.5,
         "block_number": 39194297,
         "gas_used": 172930,
-        "status": "confirmed"
+        "status": "confirmed",
+        "filecoin_cid": "bafkreihbbqhidlgqzsw2fmxxxqmhgy7kc224d4uqhnlltwge2kphvpneym",
+        "ipfs_gateway": "https://ipfs.io/ipfs/bafkreihbbqhidlgqzsw2fmxxxqmhgy7kc224d4uqhnlltwge2kphvpneym",
+        "dweb_link": "https://dweb.link/ipfs/bafkreihbbqhidlgqzsw2fmxxxqmhgy7kc224d4uqhnlltwge2kphvpneym"
       }
     ],
     "basescan_contract": "https://sepolia.basescan.org/address/0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee",
     "basescan_deployer": "https://sepolia.basescan.org/address/0x38E5efefcAcdbbb8DBe3E7b07c521EAbd61DE532"
+  },
+  "filecoin": {
+    "storage_backend": "IPFS (local node + DHT)",
+    "peer_count": 331,
+    "evidence_directory_cid": "bafybeibb3mlfiw7dmshwh6vqznkp5zdxkmcsnveaaoqnf7ntvowi644hoy",
+    "evidence_directory_url": "https://ipfs.io/ipfs/bafybeibb3mlfiw7dmshwh6vqznkp5zdxkmcsnveaaoqnf7ntvowi644hoy",
+    "individual_cids": {
+      "openzeppelin": {
+        "cid": "bafkreifvcrzlv2ol2bazcly6ossfticad6ffckynd2sibekk3aqewbvune",
+        "ipfs_url": "https://ipfs.io/ipfs/bafkreifvcrzlv2ol2bazcly6ossfticad6ffckynd2sibekk3aqewbvune",
+        "dweb_url": "https://dweb.link/ipfs/bafkreifvcrzlv2ol2bazcly6ossfticad6ffckynd2sibekk3aqewbvune"
+      },
+      "protocol-guild": {
+        "cid": "bafkreidzdl6vwkhe4da42byltb4xkecnmdzdrlzoj6qrl25epaudl3j3ly",
+        "ipfs_url": "https://ipfs.io/ipfs/bafkreidzdl6vwkhe4da42byltb4xkecnmdzdrlzoj6qrl25epaudl3j3ly",
+        "dweb_url": "https://dweb.link/ipfs/bafkreidzdl6vwkhe4da42byltb4xkecnmdzdrlzoj6qrl25epaudl3j3ly"
+      },
+      "ethstaker": {
+        "cid": "bafkreifchk7omvfafqyxt7fzfyopdzyyw35yvlj2myfv6lzhx6365gnm2y",
+        "ipfs_url": "https://ipfs.io/ipfs/bafkreifchk7omvfafqyxt7fzfyopdzyyw35yvlj2myfv6lzhx6365gnm2y",
+        "dweb_url": "https://dweb.link/ipfs/bafkreifchk7omvfafqyxt7fzfyopdzyyw35yvlj2myfv6lzhx6365gnm2y"
+      },
+      "gitcoin-passport": {
+        "cid": "bafkreifzjercweowdtmfve443yoyyiyskb3iqq27kuy7qu3c2624w7d6qq",
+        "ipfs_url": "https://ipfs.io/ipfs/bafkreifzjercweowdtmfve443yoyyiyskb3iqq27kuy7qu3c2624w7d6qq",
+        "dweb_url": "https://dweb.link/ipfs/bafkreifzjercweowdtmfve443yoyyiyskb3iqq27kuy7qu3c2624w7d6qq"
+      },
+      "uniswap-v3": {
+        "cid": "bafkreihbbqhidlgqzsw2fmxxxqmhgy7kc224d4uqhnlltwge2kphvpneym",
+        "ipfs_url": "https://ipfs.io/ipfs/bafkreihbbqhidlgqzsw2fmxxxqmhgy7kc224d4uqhnlltwge2kphvpneym",
+        "dweb_url": "https://dweb.link/ipfs/bafkreihbbqhidlgqzsw2fmxxxqmhgy7kc224d4uqhnlltwge2kphvpneym"
+      }
+    }
   }
 }

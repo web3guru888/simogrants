@@ -1,0 +1,40 @@
+{
+  "uploads": [
+    {
+      "project_id": "openzeppelin",
+      "cid": "bafkreifvcrzlv2ol2bazcly6ossfticad6ffckynd2sibekk3aqewbvune",
+      "gateway_url": "https://ipfs.io/ipfs/bafkreifvcrzlv2ol2bazcly6ossfticad6ffckynd2sibekk3aqewbvune",
+      "dweb_url": "https://dweb.link/ipfs/bafkreifvcrzlv2ol2bazcly6ossfticad6ffckynd2sibekk3aqewbvune",
+      "size_bytes": 8443
+    },
+    {
+      "project_id": "protocol-guild",
+      "cid": "bafkreidzdl6vwkhe4da42byltb4xkecnmdzdrlzoj6qrl25epaudl3j3ly",
+      "gateway_url": "https://ipfs.io/ipfs/bafkreidzdl6vwkhe4da42byltb4xkecnmdzdrlzoj6qrl25epaudl3j3ly",
+      "dweb_url": "https://dweb.link/ipfs/bafkreidzdl6vwkhe4da42byltb4xkecnmdzdrlzoj6qrl25epaudl3j3ly",
+      "size_bytes": 8175
+    },
+    {
+      "project_id": "ethstaker",
+      "cid": "bafkreifchk7omvfafqyxt7fzfyopdzyyw35yvlj2myfv6lzhx6365gnm2y",
+      "gateway_url": "https://ipfs.io/ipfs/bafkreifchk7omvfafqyxt7fzfyopdzyyw35yvlj2myfv6lzhx6365gnm2y",
+      "dweb_url": "https://dweb.link/ipfs/bafkreifchk7omvfafqyxt7fzfyopdzyyw35yvlj2myfv6lzhx6365gnm2y",
+      "size_bytes": 8329
+    },
+    {
+      "project_id": "gitcoin-passport",
+      "cid": "bafkreifzjercweowdtmfve443yoyyiyskb3iqq27kuy7qu3c2624w7d6qq",
+      "gateway_url": "https://ipfs.io/ipfs/bafkreifzjercweowdtmfve443yoyyiyskb3iqq27kuy7qu3c2624w7d6qq",
+      "dweb_url": "https://dweb.link/ipfs/bafkreifzjercweowdtmfve443yoyyiyskb3iqq27kuy7qu3c2624w7d6qq",
+      "size_bytes": 7840
+    },
+    {
+      "project_id": "uniswap-v3",
+      "cid": "bafkreihbbqhidlgqzsw2fmxxxqmhgy7kc224d4uqhnlltwge2kphvpneym",
+      "gateway_url": "https://ipfs.io/ipfs/bafkreihbbqhidlgqzsw2fmxxxqmhgy7kc224d4uqhnlltwge2kphvpneym",
+      "dweb_url": "https://dweb.link/ipfs/bafkreihbbqhidlgqzsw2fmxxxqmhgy7kc224d4uqhnlltwge2kphvpneym",
+      "size_bytes": 8399
+    }
+  ],
+  "total": 5
+}
