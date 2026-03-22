@@ -1,0 +1,76 @@
+{
+  "name": "SIMOGRANTS",
+  "description": "Autonomous multi-agent system for evaluating Ethereum public goods using Simocratic stakeholder evaluation and Stigmergic Quadratic Funding",
+  "version": "1.0.0",
+  "operator_wallet": "0xEbE468965d3EAF662A6c0edcAf875b29Ac1d4C93",
+  "erc8004_identity": {
+    "registration_tx": "0x34dccac02871dad70516a6a390a3c8f3ec13be210bf2e801b2f74178ee99225d",
+    "chain": "base",
+    "chain_id": 8453
+  },
+  "supported_tools": [
+    "github_api",
+    "etherscan_api",
+    "defillama_api",
+    "gitcoin_api",
+    "snapshot_api",
+    "octant_api",
+    "npm_registry",
+    "llm_evaluation",
+    "bradley_terry_aggregation",
+    "quadratic_funding",
+    "pheromone_tracking",
+    "pagerank_computation",
+    "solidity_deployment",
+    "filecoin_storage",
+    "sqlite_persistence"
+  ],
+  "tech_stack": {
+    "languages": ["Python 3.11", "Solidity 0.8.20+", "JavaScript"],
+    "frameworks": ["FastAPI", "Hardhat"],
+    "libraries": ["httpx", "scipy", "networkx", "numpy", "aiosqlite", "ethers.js", "Pydantic"],
+    "infrastructure": ["Taurus Agent Platform", "Base L2", "Filecoin", "SQLite"]
+  },
+  "compute_constraints": {
+    "max_concurrent_collectors": 7,
+    "max_evaluations_per_batch": 50,
+    "api_rate_limits_respected": true,
+    "estimated_pipeline_time_per_project_seconds": 30
+  },
+  "task_categories": [
+    "public_goods_evaluation",
+    "data_collection",
+    "multi_stakeholder_analysis",
+    "quadratic_funding_allocation",
+    "on_chain_attestation",
+    "evidence_anchoring"
+  ],
+  "agents": [
+    {"name": "SIMO", "role": "orchestrator", "description": "Lead agent — sprint planning, delegation, integration, submission"},
+    {"name": "collector-agent", "role": "data_collector", "description": "7 async collectors for Web3 data sources"},
+    {"name": "evaluator-agent", "role": "evaluator", "description": "4-stakeholder LLM evaluation with Bradley-Terry aggregation"},
+    {"name": "mechanism-agent", "role": "mechanism_designer", "description": "SQF formula, pheromone tracker, PageRank, anti-Goodhart"},
+    {"name": "blockchain-agent", "role": "blockchain_engineer", "description": "Solidity contracts, Base deployment, Filecoin storage"},
+    {"name": "docs-agent", "role": "documentation", "description": "README, API docs, submission materials"}
+  ],
+  "safety_guardrails": [
+    "Never log or print API keys",
+    "Never request or handle private keys",
+    "Validate all transaction parameters before execution",
+    "Rate limit all external API calls",
+    "Retry with backoff on API failures",
+    "Anti-Goodhart dimension rotation prevents metric gaming",
+    "All evaluations produce verifiable on-chain receipts"
+  ],
+  "repo_url": "https://github.com/web3guru888/simogrants",
+  "hackathon": "The Synthesis (March 2026)",
+  "tracks": [
+    "Mechanism Design for Public Goods Evaluation (Octant)",
+    "Agents for Public Goods Data Collection (Octant)",
+    "Agents for Public Goods Data Analysis (Octant)",
+    "Let the Agent Cook — No Humans Required (Protocol Labs)",
+    "Agents With Receipts — ERC-8004 (Protocol Labs)",
+    "Best Use Case with Agentic Storage (Filecoin Foundation)",
+    "Synthesis Open Track (Community)"
+  ]
+}
