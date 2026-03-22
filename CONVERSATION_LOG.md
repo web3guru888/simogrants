@@ -97,3 +97,37 @@ This document records the collaboration between the human team member(s) and the
 **Decision:** Core stack is now assembled. Next step is a real 1-project end-to-end smoke test.
 
 ---
+
+## 2026-03-22 — Day 1: Self-Custody + GitHub + Submission Prep
+
+### Session 4: Critical Pre-Submission Tasks
+
+**Human input:** Robin provided wallet address `0xEbE468965d3EAF662A6c0edcAf875b29Ac1d4C93` for self-custody transfer, plus a GitHub PAT for repo creation.
+
+**Actions taken:**
+
+1. **Self-Custody Transfer:**
+   - Attempted `POST /participants/me/transfer/init` → Got `409: Already self-custody`
+   - Verified via participant endpoint: `ownerAddress` = `0xEbE468965d3EAF662A6c0edcAf875b29Ac1d4C93` ✅
+   - Self-custody was already configured from a prior session. No action needed.
+
+2. **GitHub Repo Creation:**
+   - Created public repo `web3guru888/simogrants` via GitHub API
+   - Created comprehensive `.gitignore` (excludes `.env`, `__pycache__`, `node_modules`, `*.db`, etc.)
+   - Scanned all staged files for hardcoded secrets — none found
+   - Config reads API keys from environment variables only ✅
+   - Initial commit: 63 files, 10,230 lines of code
+   - Pushed to `main` branch successfully
+
+3. **Smoke Test:**
+   - `pytest src/tests/` — **10/10 tests passed**
+   - FastAPI server starts cleanly on port 8000
+   - `/health` and `/version` endpoints respond correctly
+   - All components report ready
+
+**Decisions:**
+- Self-custody: ✅ Complete
+- GitHub: ✅ https://github.com/web3guru888/simogrants
+- Ready to create hackathon project draft and submit
+
+---
