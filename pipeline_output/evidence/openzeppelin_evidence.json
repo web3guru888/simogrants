@@ -1,0 +1,250 @@
+{
+  "project_id": "openzeppelin",
+  "evaluation": {
+    "project_id": "openzeppelin",
+    "stakeholder_evaluations": [
+      {
+        "agent_type": "developer",
+        "project_id": "openzeppelin",
+        "scores": {
+          "code_quality": {
+            "score": 95,
+            "justification": "OpenZeppelin Contracts is the gold standard for Solidity development with exceptional architecture, comprehensive documentation, and extensive test coverage. The codebase demonstrates industry-leading practices with clear separation of concerns, thorough NatSpec documentation, and a mature testing infrastructure that has been battle-tested across thousands of production deployments."
+          },
+          "maintenance_health": {
+            "score": 92,
+            "justification": "The project shows outstanding maintenance with 494 contributors, regular commits (256 in the last year), and active dependency management via Dependabot and Renovate. Recent commits show continuous security improvements and feature additions, while the high closed-to-open PR ratio (4049 closed vs 98 open) indicates excellent responsiveness to community contributions."
+          },
+          "security_posture": {
+            "score": 98,
+            "justification": "As the de facto standard for secure smart contract development, OpenZeppelin undergoes regular professional audits with recent v5.6 audit reports committed directly to the repository. Recent commits demonstrate proactive security fixes for edge cases and potential vulnerabilities, while the library's design philosophy prioritizes security patterns and access control best practices."
+          }
+        },
+        "overall_narrative": "OpenZeppelin Contracts represents the pinnacle of Ethereum public goods infrastructure, setting the standard for secure smart contract development. The codebase demonstrates world-class engineering with exceptional architecture, comprehensive testing, and industry-leading security practices that have been battle-tested across thousands of production deployments. With nearly 500 contributors, active maintenance, and regular professional audits, this project exemplifies what a mature, sustainable public good should be.",
+        "confidence": 0.95,
+        "mean_score": 95.0,
+        "evaluated_at": "2026-03-22T04:58:31.753298+00:00"
+      },
+      {
+        "agent_type": "user",
+        "project_id": "openzeppelin",
+        "scores": {
+          "adoption_metrics": {
+            "score": 95,
+            "justification": "OpenZeppelin Contracts is ubiquitous in Ethereum development with 27,000+ GitHub stars, 12,000+ forks, and 494 contributors. It's the de facto standard library used by virtually every serious smart contract project, making it one of the most adopted public goods in the ecosystem."
+          },
+          "community_engagement": {
+            "score": 88,
+            "justification": "The project maintains excellent community health with 98 open PRs, 4,049 closed PRs, and active contributions from hundreds of developers. Strong governance practices are evidenced by comprehensive documentation including contributing guidelines and code of conduct."
+          },
+          "user_experience": {
+            "score": 85,
+            "justification": "The library offers exceptional developer experience with well-documented, modular, and battle-tested smart contract patterns. Security-focused design and extensive test coverage provide confidence to users, though the breadth of features can be overwhelming for beginners."
+          }
+        },
+        "overall_narrative": "OpenZeppelin Contracts represents the gold standard for Ethereum public goods, serving as the foundational security library that underpins the vast majority of smart contract development. Its near-universal adoption, active maintenance with 256 commits in the past year, and strong community engagement demonstrate exceptional public goods impact. The project delivers outstanding user experience through battle-tested, well-documented code that has prevented countless security vulnerabilities across the ecosystem.",
+        "confidence": 0.85,
+        "mean_score": 89.33,
+        "evaluated_at": "2026-03-22T04:58:31.212921+00:00"
+      },
+      {
+        "agent_type": "funder",
+        "project_id": "openzeppelin",
+        "scores": {
+          "capital_efficiency": {
+            "score": 85,
+            "justification": "OpenZeppelin delivers exceptional output per dollar with a lean, volunteer-driven model producing battle-tested security infrastructure used across the entire ecosystem. The library's massive adoption (27k+ stars, 12k+ forks) demonstrates extraordinary leverage from minimal resources, with 494 contributors and sustained development activity indicating efficient resource utilization."
+          },
+          "funding_sustainability": {
+            "score": 75,
+            "justification": "The project benefits from OpenZeppelin's commercial services model providing diversified revenue, though the specific contracts library remains grant-dependent for maintenance. Strong institutional backing and ecosystem-critical position create sustainability, but the lack of explicit revenue models for the open-source component itself warrants some caution."
+          },
+          "track_record": {
+            "score": 95,
+            "justification": "World-class track record spanning nearly a decade with consistent delivery of secure, audited smart contract patterns that have become the industry standard. Recent commits show active security maintenance and feature development, while the project's universal adoption and reputation for reliability demonstrate exceptional execution and credibility."
+          }
+        },
+        "overall_narrative": "OpenZeppelin Contracts represents the gold standard for Ethereum public goods infrastructure, delivering exceptional security value with remarkable capital efficiency. Their decade-long track record of reliable, battle-tested code and massive ecosystem adoption justifies strong confidence in continued stewardship of public funds. While the commercial sustainability model could be more transparent, this is exactly the type of foundational infrastructure that deserves sustained support.",
+        "confidence": 0.7,
+        "mean_score": 85.0,
+        "evaluated_at": "2026-03-22T04:58:31.901955+00:00"
+      },
+      {
+        "agent_type": "ecosystem",
+        "project_id": "openzeppelin",
+        "scores": {
+          "composability": {
+            "score": 98,
+            "justification": "OpenZeppelin Contracts is the gold standard for composable smart contract infrastructure, providing modular, audited implementations of ERC standards and security patterns that thousands of projects build upon. The library's design philosophy emphasizes inheritable components and clear interfaces, making it exceptionally easy for developers to remix and integrate across the entire Ethereum ecosystem."
+          },
+          "network_effects": {
+            "score": 95,
+            "justification": "With 27,000+ GitHub stars, 12,000+ forks, and 494 contributors, OpenZeppelin has achieved massive adoption that creates powerful positive-sum dynamics\u2014every project using it benefits from collective security improvements and battle-testing. The ecosystem would be significantly less secure and more fragmented without this shared foundation, as it dramatically reduces coordination costs around secure development practices."
+          },
+          "mission_alignment": {
+            "score": 92,
+            "justification": "OpenZeppelin exemplifies Ethereum's public goods ethos through its MIT-licensed, open-source library that prioritizes security and accessibility over profit. The project actively contributes to Ethereum's roadmap by implementing emerging standards (ERC-4337, ERC-7579) and maintaining credible neutrality through community-driven governance and rigorous auditing processes."
+          }
+        },
+        "overall_narrative": "OpenZeppelin Contracts represents one of Ethereum's most critical public goods, serving as the foundational security layer that underpins thousands of protocols and applications. Its exceptional composability, massive network effects, and unwavering commitment to open-source principles make it a paradigmatic example of ecosystem-strengthening infrastructure. The project's continued evolution and adoption directly contribute to Ethereum's security, developer experience, and long-term viability.",
+        "confidence": 0.95,
+        "mean_score": 95.0,
+        "evaluated_at": "2026-03-22T04:58:32.527997+00:00"
+      }
+    ],
+    "aggregated_scores": {
+      "code_quality": 95.0,
+      "maintenance_health": 92.0,
+      "security_posture": 98.0,
+      "adoption_metrics": 95.0,
+      "community_engagement": 88.0,
+      "user_experience": 85.0,
+      "capital_efficiency": 85.0,
+      "funding_sustainability": 75.0,
+      "track_record": 95.0,
+      "composability": 98.0,
+      "network_effects": 95.0,
+      "mission_alignment": 92.0
+    },
+    "overall_score": 91.08,
+    "bradley_terry_rank": 2.406396,
+    "tensions": [],
+    "data_completeness": 0.718,
+    "evaluated_at": "2026-03-22T04:58:32.528542+00:00",
+    "bt_percentile": 90.92
+  },
+  "profile": {
+    "project_id": "openzeppelin",
+    "name": "OpenZeppelin Contracts",
+    "github": {
+      "repo_owner": "OpenZeppelin",
+      "repo_name": "openzeppelin-contracts",
+      "full_name": "OpenZeppelin/openzeppelin-contracts",
+      "description": "OpenZeppelin Contracts is a library for secure smart contract development.",
+      "language": "Solidity",
+      "languages": {
+        "Solidity": 2085876,
+        "JavaScript": 1674609,
+        "Shell": 10161,
+        "Python": 9912,
+        "JSON5": 4119,
+        "Makefile": 1714,
+        "Ruby": 211
+      },
+      "stars": 27037,
+      "forks": 12418,
+      "open_issues": 341,
+      "watchers": 639,
+      "created_at": "2016-08-01T20:54:54Z",
+      "updated_at": "2026-03-21T13:18:49Z",
+      "pushed_at": "2026-03-22T04:41:43Z",
+      "default_branch": "master",
+      "license_name": "MIT",
+      "topics": [
+        "ethereum",
+        "evm",
+        "security",
+        "smart-contracts",
+        "solidity"
+      ],
+      "is_fork": false,
+      "is_archived": false,
+      "homepage": "https://openzeppelin.com/contracts",
+      "contributors_count": 494,
+      "commits_count_last_year": 256,
+      "recent_commits": [
+        {
+          "sha": "45f032d1",
+          "message": "AccountERC7579Hooked: prevent bugged or malicious hook module from reverting its own uninstallation (#6390)",
+          "author": "Hadrien Croubois",
+          "date": "2026-03-06T10:46:23Z"
+        },
+        {
+          "sha": "77e5684a",
+          "message": "Revert if a call fails in an ERC2771Forwarder atomic batch (#6391)",
+          "author": "Hadrien Croubois",
+          "date": "2026-03-05T20:57:55Z"
+        },
+        {
+          "sha": "0bd6f02a",
+          "message": "Bump immutable from 4.3.7 to 4.3.8 in the npm_and_yarn group across 1 directory (#6394)",
+          "author": "dependabot[bot]",
+          "date": "2026-03-05T13:48:54Z"
+        },
+        {
+          "sha": "3daafbfa",
+          "message": "Add CrosschainRemoteExecutor and GovernorCrosschain (#6272)",
+          "author": "Hadrien Croubois",
+          "date": "2026-03-04T21:38:16Z"
+        },
+        {
+          "sha": "4681c1c8",
+          "message": "Fix: Enforce proposal status when calling Governor.execute depending on `proposalNeedsQueuing` (#6386)",
+          "author": "Hadrien Croubois",
+          "date": "2026-03-04T20:29:13Z"
+        },
+        {
+          "sha": "95a983ad",
+          "message": "Update dependency @changesets/changelog-github to ^0.6.0 (#6387)",
+          "author": "renovate[bot]",
+          "date": "2026-03-03T17:40:22Z"
+        },
+        {
+          "sha": "fb30adac",
+          "message": "Fix bypassing target admin delay using execute (#6388)",
+          "author": "Hadrien Croubois",
+          "date": "2026-03-03T17:37:57Z"
+        },
+        {
+          "sha": "ca6f5fab",
+          "message": "v5.6 audit report (#6371)",
+          "author": "Hadrien Croubois",
+          "date": "2026-02-27T23:52:33Z"
+        },
+        {
+          "sha": "843ede2d",
+          "message": "Add more tests of optional proof elements for inlined nodes (#6379)",
+          "author": "Hadrien Croubois",
+          "date": "2026-02-27T20:17:51Z"
+        },
+        {
+          "sha": "bebe85f1",
+          "message": "Merge release-v5.6 branch (#6378)",
+          "author": "github-actions[bot]",
+          "date": "2026-02-27T15:16:52Z"
+        }
+      ],
+      "open_prs": 98,
+      "closed_prs": 4049,
+      "has_readme": true,
+      "has_contributing": true,
+      "has_license": true,
+      "has_code_of_conduct": true,
+      "collected_at": "2026-03-22T04:58:12.934095+00:00"
+    },
+    "etherscan": null,
+    "defillama": null,
+    "gitcoin": null,
+    "snapshot": null,
+    "octant": null,
+    "packages": [],
+    "collection_metadata": [
+      {
+        "source": "github",
+        "status": "success",
+        "started_at": "2026-03-22T04:58:11.170458+00:00",
+        "finished_at": "2026-03-22T04:58:12.934152+00:00",
+        "duration_seconds": 1.764,
+        "error_message": "",
+        "retries": 0
+      }
+    ],
+    "data_completeness": 0.1429,
+    "collected_at": "2026-03-22T04:58:12.934311+00:00",
+    "description": "Battle-tested library of smart contract security patterns and ERC implementations",
+    "github_url": "https://github.com/OpenZeppelin/openzeppelin-contracts"
+  },
+  "sqf_allocation": 29660.175499174875,
+  "timestamp": "2026-03-22T04:58:50.214649+00:00",
+  "system": "SIMOGRANTS v1.0.0"
+}

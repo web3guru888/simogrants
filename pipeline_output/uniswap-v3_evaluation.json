@@ -1,0 +1,113 @@
+{
+  "project_id": "uniswap-v3",
+  "stakeholder_evaluations": [
+    {
+      "agent_type": "developer",
+      "project_id": "uniswap-v3",
+      "scores": {
+        "code_quality": {
+          "score": 92,
+          "justification": "Uniswap v3 represents world-class smart contract engineering with sophisticated concentrated liquidity mechanics, gas optimization techniques like FullMath, and battle-tested architecture. The codebase demonstrates exceptional design patterns, comprehensive documentation, and has been extensively audited and forked across the ecosystem, setting the gold standard for DeFi protocol development."
+        },
+        "maintenance_health": {
+          "score": 45,
+          "justification": "While the core contracts are mature and stable, the repository shows minimal recent activity with zero commits in the last year and only 16 total contributors. This reflects the project's maturity\u2014core v3 contracts are intentionally frozen for security\u2014but raises concerns about responsiveness to issues and long-term maintenance capability given the low bus factor and stalled development velocity."
+        },
+        "security_posture": {
+          "score": 88,
+          "justification": "The protocol has undergone multiple professional security audits and manages billions in TVL across 45+ chains without major exploits, demonstrating exceptional security practices. The dual licensing (GPL/BUSL) shows careful consideration of IP protection, and the team follows responsible disclosure practices, though the lack of recent security-focused commits and dependency updates is a minor concern."
+        }
+      },
+      "overall_narrative": "Uniswap v3 Core exemplifies world-class smart contract engineering with sophisticated architecture and battle-tested security, evidenced by its $1.6B+ TVL and widespread adoption across 45+ chains. The code quality is exceptional, setting industry standards for AMM design, though the repository's maintenance has slowed significantly as the core contracts reach maturity and stability. While the security posture is outstanding given the protocol's track record, the low contributor count and lack of recent commits raise questions about long-term maintainability and responsiveness to emerging threats.",
+      "confidence": 0.85,
+      "mean_score": 75.0,
+      "evaluated_at": "2026-03-22T04:58:49.727859+00:00"
+    },
+    {
+      "agent_type": "user",
+      "project_id": "uniswap-v3",
+      "scores": {
+        "adoption_metrics": {
+          "score": 98,
+          "justification": "Uniswap v3 is the most adopted DEX protocol in DeFi with $1.68B TVL across 47 chains, $247M daily volume, and 4,969 GitHub stars. The protocol's massive real-world usage is evidenced by its deployment on virtually every major L2 and sidechain, making it a foundational infrastructure layer for Ethereum DeFi."
+        },
+        "community_engagement": {
+          "score": 75,
+          "justification": "The project has strong community engagement with 3,013 forks and 379 closed PRs, indicating significant developer interest and ecosystem building. However, the core repository shows minimal recent activity (0 commits in the last year) and lacks contributing guidelines or code of conduct, suggesting a mature but less actively maintained core codebase."
+        },
+        "user_experience": {
+          "score": 82,
+          "justification": "Uniswap v3 offers excellent UX through its widely-used interface at app.uniswap.org, with concentrated liquidity providing capital efficiency benefits for users. The protocol's extensive multi-chain deployment and integration across the DeFi ecosystem demonstrate strong accessibility, though the complexity of concentrated liquidity concepts presents a steeper learning curve for new users compared to v2."
+        }
+      },
+      "overall_narrative": "Uniswap v3 is an exceptionally adopted public good that serves as critical DeFi infrastructure across the Ethereum ecosystem. While the core smart contracts are mature and stable with minimal recent development activity, the protocol's massive TVL, volume, and multi-chain presence demonstrate unparalleled real-world impact. The user experience is polished and widely adopted, though the concentrated liquidity model requires more user education than simpler AMM designs.",
+      "confidence": 0.85,
+      "mean_score": 85.0,
+      "evaluated_at": "2026-03-22T04:58:49.196825+00:00"
+    },
+    {
+      "agent_type": "funder",
+      "project_id": "uniswap-v3",
+      "scores": {
+        "capital_efficiency": {
+          "score": 88,
+          "justification": "Uniswap v3 delivers exceptional output per dollar with $1.68B TVL across 45+ chains from a lean 16-person core team. The protocol generates $5.1M in weekly fees with minimal overhead, demonstrating world-class capital efficiency that few public goods projects can match."
+        },
+        "funding_sustainability": {
+          "score": 95,
+          "justification": "The protocol is completely self-sustaining through fee generation and has zero dependency on grants or public funding. With $229K daily fees and a proven business model, Uniswap represents the ideal of sustainable public goods infrastructure that doesn't require ongoing capital allocation."
+        },
+        "track_record": {
+          "score": 92,
+          "justification": "Uniswap has an unparalleled track record as the most forked and adopted DEX protocol in DeFi, with 4,969 GitHub stars and 3,013 forks demonstrating widespread trust. The core contracts have been battle-tested across multiple chains since 2020 with no major security incidents, establishing them as foundational Ethereum infrastructure."
+        }
+      },
+      "overall_narrative": "Uniswap v3 represents the gold standard for sustainable public goods infrastructure, requiring zero ongoing public funding while delivering massive value to the Ethereum ecosystem. The project demonstrates exceptional capital efficiency with a small team maintaining $1.68B TVL across 45+ chains, and its proven track record as the most forked DEX protocol speaks for itself. This is exactly the type of self-sustaining infrastructure that public goods funding should aim to replicate, not subsidize.",
+      "confidence": 0.85,
+      "mean_score": 91.67,
+      "evaluated_at": "2026-03-22T04:58:49.539897+00:00"
+    },
+    {
+      "agent_type": "ecosystem",
+      "project_id": "uniswap-v3",
+      "scores": {
+        "composability": {
+          "score": 88,
+          "justification": "Uniswap v3 is the most composably integrated DEX protocol in DeFi, with thousands of projects building on its concentrated liquidity infrastructure. The protocol's standard interfaces and widespread deployment across 50+ chains make it a foundational layer for lending protocols, aggregators, yield strategies, and on-chain derivatives."
+        },
+        "network_effects": {
+          "score": 92,
+          "justification": "With $1.68B TVL and $247M daily volume, Uniswap v3 demonstrates powerful network effects where liquidity begets more liquidity and usage. The protocol serves as critical price discovery infrastructure that the entire ecosystem relies on, and its multi-chain deployment creates positive-sum value across L2 ecosystems."
+        },
+        "mission_alignment": {
+          "score": 55,
+          "justification": "While Uniswap v3 is open source and permissionless, the 2022 dual-licensing shift to BUSL/GPL creates significant friction for public goods reuse and limits true composability. The protocol is credibly neutral in operation but the licensing model and governance token economics introduce extractive elements that conflict with pure public goods ideals."
+        }
+      },
+      "overall_narrative": "Uniswap v3 is undeniably one of Ethereum's most important infrastructure projects, providing essential liquidity and price discovery that the entire ecosystem depends on. Its composability and network effects are world-class, but the BUSL licensing model and governance token structure create meaningful misalignment with pure public goods principles. The project is critical infrastructure that makes the ecosystem stronger, yet its licensing choices limit its potential as a fully open public good.",
+      "confidence": 0.85,
+      "mean_score": 78.33,
+      "evaluated_at": "2026-03-22T04:58:49.555164+00:00"
+    }
+  ],
+  "aggregated_scores": {
+    "code_quality": 92.0,
+    "maintenance_health": 45.0,
+    "security_posture": 88.0,
+    "adoption_metrics": 98.0,
+    "community_engagement": 75.0,
+    "user_experience": 82.0,
+    "capital_efficiency": 88.0,
+    "funding_sustainability": 95.0,
+    "track_record": 92.0,
+    "composability": 88.0,
+    "network_effects": 92.0,
+    "mission_alignment": 55.0
+  },
+  "overall_score": 82.5,
+  "bradley_terry_rank": 1.5484,
+  "tensions": [],
+  "data_completeness": 0.71,
+  "evaluated_at": "2026-03-22T04:58:49.728522+00:00",
+  "bt_percentile": 80.5
+}

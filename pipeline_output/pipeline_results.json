@@ -1,0 +1,934 @@
+{
+  "pipeline_version": "1.0.0",
+  "system": "SIMOGRANTS \u2014 Stigmergic Impact Oracle for Public Goods",
+  "run_timestamp": "2026-03-22T04:58:50.219047+00:00",
+  "elapsed_seconds": 39.0,
+  "projects_targeted": 5,
+  "projects_collected": 5,
+  "projects_evaluated": 5,
+  "summary": {
+    "overall_rankings": [
+      {
+        "project_id": "openzeppelin",
+        "overall_score": 91.08,
+        "bt_rank": 2.406396,
+        "bt_percentile": 90.92,
+        "sqf_allocation": 29660.175499174875,
+        "tension_count": 0
+      },
+      {
+        "project_id": "uniswap-v3",
+        "overall_score": 82.5,
+        "bt_rank": 1.5484,
+        "bt_percentile": 80.5,
+        "sqf_allocation": 23320.23507780157,
+        "tension_count": 0
+      },
+      {
+        "project_id": "gitcoin-passport",
+        "overall_score": 66.92,
+        "bt_rank": -0.0096,
+        "bt_percentile": 49.79,
+        "sqf_allocation": 16438.36738620336,
+        "tension_count": 0
+      },
+      {
+        "project_id": "ethstaker",
+        "overall_score": 50.83,
+        "bt_rank": -1.618596,
+        "bt_percentile": 18.44,
+        "sqf_allocation": 6177.600277100362,
+        "tension_count": 0
+      },
+      {
+        "project_id": "protocol-guild",
+        "overall_score": 43.75,
+        "bt_rank": -2.3266,
+        "bt_percentile": 9.82,
+        "sqf_allocation": 24403.62175971983,
+        "tension_count": 2
+      }
+    ],
+    "total_tensions": 2,
+    "matching_pool": 100000
+  },
+  "collection_profiles": {
+    "openzeppelin": {
+      "name": "OpenZeppelin Contracts",
+      "data_completeness": 0.1429,
+      "github_stars": 27037,
+      "github_forks": 12418,
+      "contributors": 494
+    },
+    "protocol-guild": {
+      "name": "Protocol Guild",
+      "data_completeness": 0.1429,
+      "github_stars": 19,
+      "github_forks": 16,
+      "contributors": 14
+    },
+    "ethstaker": {
+      "name": "EthStaker Deposit CLI",
+      "data_completeness": 0.1429,
+      "github_stars": 38,
+      "github_forks": 35,
+      "contributors": 35
+    },
+    "gitcoin-passport": {
+      "name": "Gitcoin Passport",
+      "data_completeness": 0.1429,
+      "github_stars": 1213,
+      "github_forks": 507,
+      "contributors": 38
+    },
+    "uniswap-v3": {
+      "name": "Uniswap v3 Core",
+      "data_completeness": 0.2857,
+      "github_stars": 4969,
+      "github_forks": 3013,
+      "contributors": 16
+    }
+  },
+  "evaluations": [
+    {
+      "project_id": "openzeppelin",
+      "stakeholder_evaluations": [
+        {
+          "agent_type": "developer",
+          "project_id": "openzeppelin",
+          "scores": {
+            "code_quality": {
+              "score": 95,
+              "justification": "OpenZeppelin Contracts is the gold standard for Solidity development with exceptional architecture, comprehensive documentation, and extensive test coverage. The codebase demonstrates industry-leading practices with clear separation of concerns, thorough NatSpec documentation, and a mature testing infrastructure that has been battle-tested across thousands of production deployments."
+            },
+            "maintenance_health": {
+              "score": 92,
+              "justification": "The project shows outstanding maintenance with 494 contributors, regular commits (256 in the last year), and active dependency management via Dependabot and Renovate. Recent commits show continuous security improvements and feature additions, while the high closed-to-open PR ratio (4049 closed vs 98 open) indicates excellent responsiveness to community contributions."
+            },
+            "security_posture": {
+              "score": 98,
+              "justification": "As the de facto standard for secure smart contract development, OpenZeppelin undergoes regular professional audits with recent v5.6 audit reports committed directly to the repository. Recent commits demonstrate proactive security fixes for edge cases and potential vulnerabilities, while the library's design philosophy prioritizes security patterns and access control best practices."
+            }
+          },
+          "overall_narrative": "OpenZeppelin Contracts represents the pinnacle of Ethereum public goods infrastructure, setting the standard for secure smart contract development. The codebase demonstrates world-class engineering with exceptional architecture, comprehensive testing, and industry-leading security practices that have been battle-tested across thousands of production deployments. With nearly 500 contributors, active maintenance, and regular professional audits, this project exemplifies what a mature, sustainable public good should be.",
+          "confidence": 0.95,
+          "mean_score": 95.0,
+          "evaluated_at": "2026-03-22T04:58:31.753298+00:00"
+        },
+        {
+          "agent_type": "user",
+          "project_id": "openzeppelin",
+          "scores": {
+            "adoption_metrics": {
+              "score": 95,
+              "justification": "OpenZeppelin Contracts is ubiquitous in Ethereum development with 27,000+ GitHub stars, 12,000+ forks, and 494 contributors. It's the de facto standard library used by virtually every serious smart contract project, making it one of the most adopted public goods in the ecosystem."
+            },
+            "community_engagement": {
+              "score": 88,
+              "justification": "The project maintains excellent community health with 98 open PRs, 4,049 closed PRs, and active contributions from hundreds of developers. Strong governance practices are evidenced by comprehensive documentation including contributing guidelines and code of conduct."
+            },
+            "user_experience": {
+              "score": 85,
+              "justification": "The library offers exceptional developer experience with well-documented, modular, and battle-tested smart contract patterns. Security-focused design and extensive test coverage provide confidence to users, though the breadth of features can be overwhelming for beginners."
+            }
+          },
+          "overall_narrative": "OpenZeppelin Contracts represents the gold standard for Ethereum public goods, serving as the foundational security library that underpins the vast majority of smart contract development. Its near-universal adoption, active maintenance with 256 commits in the past year, and strong community engagement demonstrate exceptional public goods impact. The project delivers outstanding user experience through battle-tested, well-documented code that has prevented countless security vulnerabilities across the ecosystem.",
+          "confidence": 0.85,
+          "mean_score": 89.33,
+          "evaluated_at": "2026-03-22T04:58:31.212921+00:00"
+        },
+        {
+          "agent_type": "funder",
+          "project_id": "openzeppelin",
+          "scores": {
+            "capital_efficiency": {
+              "score": 85,
+              "justification": "OpenZeppelin delivers exceptional output per dollar with a lean, volunteer-driven model producing battle-tested security infrastructure used across the entire ecosystem. The library's massive adoption (27k+ stars, 12k+ forks) demonstrates extraordinary leverage from minimal resources, with 494 contributors and sustained development activity indicating efficient resource utilization."
+            },
+            "funding_sustainability": {
+              "score": 75,
+              "justification": "The project benefits from OpenZeppelin's commercial services model providing diversified revenue, though the specific contracts library remains grant-dependent for maintenance. Strong institutional backing and ecosystem-critical position create sustainability, but the lack of explicit revenue models for the open-source component itself warrants some caution."
+            },
+            "track_record": {
+              "score": 95,
+              "justification": "World-class track record spanning nearly a decade with consistent delivery of secure, audited smart contract patterns that have become the industry standard. Recent commits show active security maintenance and feature development, while the project's universal adoption and reputation for reliability demonstrate exceptional execution and credibility."
+            }
+          },
+          "overall_narrative": "OpenZeppelin Contracts represents the gold standard for Ethereum public goods infrastructure, delivering exceptional security value with remarkable capital efficiency. Their decade-long track record of reliable, battle-tested code and massive ecosystem adoption justifies strong confidence in continued stewardship of public funds. While the commercial sustainability model could be more transparent, this is exactly the type of foundational infrastructure that deserves sustained support.",
+          "confidence": 0.7,
+          "mean_score": 85.0,
+          "evaluated_at": "2026-03-22T04:58:31.901955+00:00"
+        },
+        {
+          "agent_type": "ecosystem",
+          "project_id": "openzeppelin",
+          "scores": {
+            "composability": {
+              "score": 98,
+              "justification": "OpenZeppelin Contracts is the gold standard for composable smart contract infrastructure, providing modular, audited implementations of ERC standards and security patterns that thousands of projects build upon. The library's design philosophy emphasizes inheritable components and clear interfaces, making it exceptionally easy for developers to remix and integrate across the entire Ethereum ecosystem."
+            },
+            "network_effects": {
+              "score": 95,
+              "justification": "With 27,000+ GitHub stars, 12,000+ forks, and 494 contributors, OpenZeppelin has achieved massive adoption that creates powerful positive-sum dynamics\u2014every project using it benefits from collective security improvements and battle-testing. The ecosystem would be significantly less secure and more fragmented without this shared foundation, as it dramatically reduces coordination costs around secure development practices."
+            },
+            "mission_alignment": {
+              "score": 92,
+              "justification": "OpenZeppelin exemplifies Ethereum's public goods ethos through its MIT-licensed, open-source library that prioritizes security and accessibility over profit. The project actively contributes to Ethereum's roadmap by implementing emerging standards (ERC-4337, ERC-7579) and maintaining credible neutrality through community-driven governance and rigorous auditing processes."
+            }
+          },
+          "overall_narrative": "OpenZeppelin Contracts represents one of Ethereum's most critical public goods, serving as the foundational security layer that underpins thousands of protocols and applications. Its exceptional composability, massive network effects, and unwavering commitment to open-source principles make it a paradigmatic example of ecosystem-strengthening infrastructure. The project's continued evolution and adoption directly contribute to Ethereum's security, developer experience, and long-term viability.",
+          "confidence": 0.95,
+          "mean_score": 95.0,
+          "evaluated_at": "2026-03-22T04:58:32.527997+00:00"
+        }
+      ],
+      "aggregated_scores": {
+        "code_quality": 95.0,
+        "maintenance_health": 92.0,
+        "security_posture": 98.0,
+        "adoption_metrics": 95.0,
+        "community_engagement": 88.0,
+        "user_experience": 85.0,
+        "capital_efficiency": 85.0,
+        "funding_sustainability": 75.0,
+        "track_record": 95.0,
+        "composability": 98.0,
+        "network_effects": 95.0,
+        "mission_alignment": 92.0
+      },
+      "overall_score": 91.08,
+      "bradley_terry_rank": 2.406396,
+      "tensions": [],
+      "data_completeness": 0.718,
+      "evaluated_at": "2026-03-22T04:58:32.528542+00:00",
+      "bt_percentile": 90.92
+    },
+    {
+      "project_id": "protocol-guild",
+      "stakeholder_evaluations": [
+        {
+          "agent_type": "developer",
+          "project_id": "protocol-guild",
+          "scores": {
+            "code_quality": {
+              "score": 25,
+              "justification": "This is a documentation repository with no actual codebase, no detected programming language, no license, and missing standard governance files like CONTRIBUTING.md or code of conduct. The repository appears to be archived with zero commits in the last year, indicating minimal engineering infrastructure."
+            },
+            "maintenance_health": {
+              "score": 20,
+              "justification": "Zero commits in the last year and the last push was in January 2024, indicating the project is effectively abandoned. While there were 14 historical contributors, recent activity is nonexistent with 0 open issues and 0 open PRs, suggesting the repository is in maintenance mode or deprecated."
+            },
+            "security_posture": {
+              "score": 50,
+              "justification": "No smart contracts or security-critical code are present in this documentation-only repository, so traditional security concerns are minimal. However, the lack of a license file and absence of security policies or audit documentation represents poor security governance practices."
+            }
+          },
+          "overall_narrative": "Protocol Guild's docs repository is a documentation-only project with no actual codebase, making traditional engineering evaluation challenging. The repository shows clear signs of abandonment with zero commits in the past year and appears to be archived, despite not being marked as such in GitHub. Without access to the actual Protocol Guild smart contracts or operational infrastructure, this repository provides insufficient evidence to evaluate the technical quality of the Protocol Guild funding mechanism itself.",
+          "confidence": 0.3,
+          "mean_score": 31.67,
+          "evaluated_at": "2026-03-22T04:58:36.144523+00:00"
+        },
+        {
+          "agent_type": "user",
+          "project_id": "protocol-guild",
+          "scores": {
+            "adoption_metrics": {
+              "score": 62,
+              "justification": "Protocol Guild serves a critical niche with 14 contributors and 58 closed PRs, indicating meaningful engagement from Ethereum core protocol contributors. However, zero commits in the last year and an archived status suggest declining activity, limiting confidence in current adoption trajectory."
+            },
+            "community_engagement": {
+              "score": 45,
+              "justification": "The project lacks basic community infrastructure including no contributing guidelines, code of conduct, or license, which hinders broader community participation. While there's evidence of collaborative work through pull requests, the absence of active governance channels and recent updates signals waning community health."
+            },
+            "user_experience": {
+              "score": 38,
+              "justification": "With only 19 stars and minimal documentation infrastructure, the project appears difficult for new contributors to discover and engage with. The lack of clear onboarding materials, contributing guidelines, and recent maintenance creates significant friction for potential users."
+            }
+          },
+          "overall_narrative": "No narrative provided.",
+          "confidence": 0.5,
+          "mean_score": 48.33,
+          "evaluated_at": "2026-03-22T04:58:36.173667+00:00"
+        },
+        {
+          "agent_type": "funder",
+          "project_id": "protocol-guild",
+          "scores": {
+            "capital_efficiency": {
+              "score": 25,
+              "justification": "Zero commits in the last year and an archived documentation repository suggest minimal active output despite likely receiving significant funding. The complete absence of financial transparency, spending breakdowns, or measurable deliverables makes it impossible to assess whether capital is being used efficiently."
+            },
+            "funding_sustainability": {
+              "score": 30,
+              "justification": "No evidence of diversified funding sources, revenue models, or any sustainability planning beyond grant dependency. The project appears entirely reliant on continued public funding with no visible path to financial independence or risk mitigation."
+            },
+            "track_record": {
+              "score": 35,
+              "justification": "While the project has existed since 2021 with 14 contributors, the complete lack of recent activity (zero commits in the past year) and an archived documentation repository raise serious concerns about current delivery capability. No milestone completion data or transparent progress reporting is available to verify past performance."
+            }
+          },
+          "overall_narrative": "Protocol Guild presents a concerning picture from a capital stewardship perspective: minimal recent activity, zero transparency on financials or deliverables, and no evidence of sustainable funding beyond continued grants. The archived documentation repository and complete lack of commits in the past year suggest the project may be dormant or severely under-delivering relative to any funding received. Without concrete evidence of output, efficiency, or a sustainability plan, this project fails to meet basic due diligence standards for public fund allocation.",
+          "confidence": 0.35,
+          "mean_score": 30.0,
+          "evaluated_at": "2026-03-22T04:58:36.810749+00:00"
+        },
+        {
+          "agent_type": "ecosystem",
+          "project_id": "protocol-guild",
+          "scores": {
+            "composability": {
+              "score": 45,
+              "justification": "The archived docs repository provides limited evidence of open APIs, SDKs, or modular architecture that other projects can build upon. While the funding mechanism concept could be composable, the repository itself is documentation-focused with no code artifacts or integration points visible."
+            },
+            "network_effects": {
+              "score": 72,
+              "justification": "Protocol Guild addresses a critical infrastructure gap by providing collective funding for Ethereum core protocol contributors, creating positive-sum value as more contributors join and are sustained. The ecosystem would be meaningfully worse without mechanisms to support core development talent, though the archived repository limits visibility into current network effects."
+            },
+            "mission_alignment": {
+              "score": 78,
+              "justification": "The project strongly aligns with Ethereum's public goods mission by funding core protocol contributors who maintain the network's decentralization and security. The collective, non-extractive approach to supporting developers demonstrates credible neutrality and commitment to the broader ecosystem's success."
+            }
+          },
+          "overall_narrative": "Protocol Guild addresses a fundamental ecosystem need by providing collective funding for Ethereum core protocol contributors, representing strong mission alignment with Ethereum's public goods values. However, the archived documentation repository provides limited visibility into the project's technical composability and current network effects, making it difficult to fully assess integration potential and active ecosystem impact.",
+          "confidence": 0.45,
+          "mean_score": 65.0,
+          "evaluated_at": "2026-03-22T04:58:36.035972+00:00"
+        }
+      ],
+      "aggregated_scores": {
+        "code_quality": 25.0,
+        "maintenance_health": 20.0,
+        "security_posture": 50.0,
+        "adoption_metrics": 62.0,
+        "community_engagement": 45.0,
+        "user_experience": 38.0,
+        "capital_efficiency": 25.0,
+        "funding_sustainability": 30.0,
+        "track_record": 35.0,
+        "composability": 45.0,
+        "network_effects": 72.0,
+        "mission_alignment": 78.0
+      },
+      "overall_score": 43.75,
+      "bradley_terry_rank": -2.3266,
+      "tensions": [
+        {
+          "dimension": "overall_mean",
+          "agents": {
+            "developer": 32,
+            "user": 48,
+            "funder": 30,
+            "ecosystem": 65
+          },
+          "spread": 35,
+          "high_agent": "ecosystem",
+          "low_agent": "funder",
+          "narrative": "The ecosystem agent is significantly more positive (mean: 65) (strongest: Mission Alignment at 78) than the funder agent (mean: 30) (weakest: Capital Efficiency at 25). This 35-point gap suggests the project's strengths are unevenly distributed across stakeholder concerns.",
+          "project_id": "protocol-guild"
+        },
+        {
+          "dimension": "ecosystem_vs_funder",
+          "agents": {
+            "ecosystem": 65,
+            "funder": 30
+          },
+          "spread": 35,
+          "high_agent": "ecosystem",
+          "low_agent": "funder",
+          "narrative": "Cross-stakeholder tension: ecosystem (mean 65) is 35 points above funder (mean 30). The project resonates much more strongly with ecosystem concerns than funder priorities.",
+          "project_id": "protocol-guild"
+        }
+      ],
+      "data_completeness": 0.44,
+      "evaluated_at": "2026-03-22T04:58:36.811390+00:00",
+      "bt_percentile": 9.82
+    },
+    {
+      "project_id": "ethstaker",
+      "stakeholder_evaluations": [
+        {
+          "agent_type": "developer",
+          "project_id": "ethstaker",
+          "scores": {
+            "code_quality": {
+              "score": 58,
+              "justification": "The project is a Python CLI tool with reasonable language distribution and uses modern tooling like ruff for linting, but lacks basic documentation (no README, contributing guidelines, or code of conduct) which significantly hampers maintainability and onboarding. The absence of visible test coverage information and the fork status raise questions about architectural independence and code quality standards."
+            },
+            "maintenance_health": {
+              "score": 45,
+              "justification": "While recent commits show active dependency management via Dependabot, the commits_count_last_year is zero which contradicts the recent activity data, suggesting data inconsistency. With 35 contributors but only 2 watchers and 23 open issues, the project appears to have a wide but potentially shallow contributor base, and the fork status raises concerns about long-term sustainability and bus factor."
+            },
+            "security_posture": {
+              "score": 62,
+              "justification": "The project handles sensitive validator key generation operations and shows security awareness through recent commits adding security report links and implementing scrypt salt reuse improvements. However, there's no evidence of formal security audits despite the critical nature of key generation, and the lack of documented security practices or responsible disclosure policies is concerning for a security-critical tool."
+            }
+          },
+          "overall_narrative": "EthStaker Deposit CLI is a fork of the official staking-deposit-cli focused on secure validator key generation, which is a critical security-sensitive function in the Ethereum ecosystem. While the project demonstrates some security awareness and active dependency maintenance, the lack of documentation, inconsistent activity metrics, and absence of formal security audits are significant concerns for a tool handling private keys. The fork status and missing basic repository governance documentation suggest this may be a derivative project without the rigorous engineering standards expected for security-critical infrastructure.",
+          "confidence": 0.45,
+          "mean_score": 55.0,
+          "evaluated_at": "2026-03-22T04:58:40.995867+00:00"
+        },
+        {
+          "agent_type": "user",
+          "project_id": "ethstaker",
+          "scores": {
+            "adoption_metrics": {
+              "score": 52,
+              "justification": "With 38 stars, 35 forks, and 35 contributors, this project shows moderate adoption for a specialized staking tool. However, it's a fork of the official staking-deposit-cli, suggesting it serves a niche rather than mainstream users, and commits_count_last_year of 0 indicates declining development activity."
+            },
+            "community_engagement": {
+              "score": 38,
+              "justification": "The lack of README, contributing guidelines, code of conduct, and license files severely limits community accessibility and contribution potential. While 395 closed PRs show historical engagement, 23 open issues and only 1 open PR suggest current community involvement is minimal."
+            },
+            "user_experience": {
+              "score": 45,
+              "justification": "As a CLI tool for validator deposits, it serves a technical audience but the absence of documentation (no README) makes onboarding extremely difficult for new users. The homepage link suggests some UX consideration, but without proper documentation or guides, the user experience is significantly hampered."
+            }
+          },
+          "overall_narrative": "EthStaker Deposit CLI is a fork of the official staking-deposit-cli that shows moderate historical engagement through forks and contributors, but currently suffers from poor documentation, declining development activity, and limited community resources. While it serves an important niche for secure validator key generation, the lack of README, contributing guidelines, and recent substantive commits raises concerns about long-term viability and user accessibility.",
+          "confidence": 0.45,
+          "mean_score": 45.0,
+          "evaluated_at": "2026-03-22T04:58:40.294109+00:00"
+        },
+        {
+          "agent_type": "funder",
+          "project_id": "ethstaker",
+          "scores": {
+            "capital_efficiency": {
+              "score": 42,
+              "justification": "This is a fork of the official staking-deposit-cli with minimal apparent differentiation, raising questions about capital efficiency. The repository lacks public financial data, spending transparency, or clear deliverables per dollar metrics. Recent activity consists almost entirely of dependency updates rather than substantive feature development."
+            },
+            "funding_sustainability": {
+              "score": 35,
+              "justification": "No evidence of diversified funding sources, revenue models, or sustainability planning is present. The project appears entirely grant-dependent with no visible path to financial independence beyond continued public funding. Zero grant history data suggests either no prior funding or complete lack of transparency."
+            },
+            "track_record": {
+              "score": 38,
+              "justification": "The repository is a fork created in March 2024 with no documented grant milestone completion history or delivery track record. While 35 contributors exist, commits in the last year are overwhelmingly automated dependency updates rather than substantive development. Missing basic documentation (README, contributing guidelines) signals poor operational maturity."
+            }
+          },
+          "overall_narrative": "This project appears to be a redundant fork of the official Ethereum staking deposit CLI with minimal demonstrated value-add. The lack of financial transparency, absence of any sustainability planning, and recent development activity limited to dependency updates raise serious concerns about effective capital use. Without clear differentiation from the upstream project or evidence of successful delivery, this represents a high-risk allocation of public funds.",
+          "confidence": 0.35,
+          "mean_score": 38.33,
+          "evaluated_at": "2026-03-22T04:58:40.771047+00:00"
+        },
+        {
+          "agent_type": "ecosystem",
+          "project_id": "ethstaker",
+          "scores": {
+            "composability": {
+              "score": 55,
+              "justification": "The project is a CLI tool for validator key generation, which serves a specific function rather than providing APIs or protocols for others to build upon. While it integrates with Ethereum's staking infrastructure, it doesn't expose modular interfaces or enable composability beyond its core purpose."
+            },
+            "network_effects": {
+              "score": 65,
+              "justification": "Secure validator onboarding is critical infrastructure for Ethereum's proof-of-stake security, and this tool fills an important gap by providing a community-maintained alternative to the official deposit CLI. The 35 contributors and active maintenance suggest ecosystem value, though it's a fork rather than novel infrastructure."
+            },
+            "mission_alignment": {
+              "score": 75,
+              "justification": "The CC0-1.0 license and focus on secure validator key generation demonstrate strong public goods orientation and alignment with Ethereum's decentralization goals. As a community-maintained fork of the official tool, it represents credible neutrality and permissionless access to staking infrastructure."
+            }
+          },
+          "overall_narrative": "EthStaker Deposit CLI is a community-maintained fork of the official Ethereum staking deposit tool, providing secure validator key generation infrastructure. While it doesn't offer significant composability beyond its core function, it serves as important public goods infrastructure for Ethereum's validator onboarding ecosystem. The project demonstrates strong mission alignment through its permissive licensing and focus on decentralization, though its value as a fork rather than novel development limits its network effects potential.",
+          "confidence": 0.45,
+          "mean_score": 65.0,
+          "evaluated_at": "2026-03-22T04:58:40.951872+00:00"
+        }
+      ],
+      "aggregated_scores": {
+        "code_quality": 58.0,
+        "maintenance_health": 45.0,
+        "security_posture": 62.0,
+        "adoption_metrics": 52.0,
+        "community_engagement": 38.0,
+        "user_experience": 45.0,
+        "capital_efficiency": 42.0,
+        "funding_sustainability": 35.0,
+        "track_record": 38.0,
+        "composability": 55.0,
+        "network_effects": 65.0,
+        "mission_alignment": 75.0
+      },
+      "overall_score": 50.83,
+      "bradley_terry_rank": -1.618596,
+      "tensions": [],
+      "data_completeness": 0.455,
+      "evaluated_at": "2026-03-22T04:58:40.996337+00:00",
+      "bt_percentile": 18.44
+    },
+    {
+      "project_id": "gitcoin-passport",
+      "stakeholder_evaluations": [
+        {
+          "agent_type": "developer",
+          "project_id": "gitcoin-passport",
+          "scores": {
+            "code_quality": {
+              "score": 72,
+              "justification": "Large TypeScript codebase (2.1M lines) with a mature architecture and proper separation of concerns across frontend and infrastructure components. However, the absence of a CONTRIBUTING guide and Code of Conduct suggests documentation gaps that could hinder onboarding and long-term maintainability."
+            },
+            "maintenance_health": {
+              "score": 55,
+              "justification": "Concerning maintenance signals with 0 commits in the last year despite recent activity in early 2026, and a staggering 917 open issues that may indicate backlog management challenges. While 38 contributors and 1,258 closed PRs show historical activity, the recent commit drought raises questions about current development momentum."
+            },
+            "security_posture": {
+              "score": 58,
+              "justification": "Identity verification system handling sensitive user data, but no evidence of security audits in the provided data and license status is unclear (NOASSERTION). The recent commits show SIWE (Sign-In with Ethereum) improvements and auth changes, suggesting active security work, but without audit documentation or clear licensing, the security posture cannot be rated higher."
+            }
+          },
+          "overall_narrative": "Gitcoin Passport is a mature TypeScript project with substantial code volume and historical contributor activity, but recent maintenance patterns are concerning. The zero commits in the past year combined with a large open issue backlog suggests potential development stagnation, though the recent early 2026 activity may indicate renewed momentum. As a security-sensitive identity verification system, the lack of audit documentation and unclear licensing are notable gaps that need addressing before this could be considered exceptional.",
+          "confidence": 0.45,
+          "mean_score": 61.67,
+          "evaluated_at": "2026-03-22T04:58:44.866852+00:00"
+        },
+        {
+          "agent_type": "user",
+          "project_id": "gitcoin-passport",
+          "scores": {
+            "adoption_metrics": {
+              "score": 78,
+              "justification": "Gitcoin Passport has strong adoption with 1,213 GitHub stars, 507 forks, and 38 contributors, indicating significant developer interest and usage. The project is actively integrated across Gitcoin's grant rounds and numerous other protocols for Sybil resistance, though recent commit activity (0 commits in the last year per the data) raises questions about current development velocity."
+            },
+            "community_engagement": {
+              "score": 72,
+              "justification": "The community shows solid engagement with 38 contributors and 1,258 closed PRs, though the high number of open issues (917) suggests maintenance challenges. The lack of a contributing guide or code of conduct may hinder broader community participation, but the project's integration into Gitcoin's ecosystem ensures ongoing relevance."
+            },
+            "user_experience": {
+              "score": 68,
+              "justification": "Passport provides a user-friendly decentralized identity interface with TypeScript-based code quality, but the high open issue count (917) and missing documentation standards (no contributing guide) indicate potential friction points. The project's focus on aggregating stamps across web2 and web3 sources offers good accessibility, though onboarding complexity remains a consideration."
+            }
+          },
+          "overall_narrative": "Gitcoin Passport demonstrates strong adoption and community engagement as a key Sybil resistance tool in the Ethereum ecosystem, with solid GitHub metrics and widespread protocol integration. However, concerning signals around recent development activity and maintenance backlog (917 open issues, 0 commits in the last year) suggest potential sustainability challenges. The user experience is functional but could benefit from improved documentation and issue resolution to maintain its position as a leading identity verification solution.",
+          "confidence": 0.55,
+          "mean_score": 72.67,
+          "evaluated_at": "2026-03-22T04:58:45.093715+00:00"
+        },
+        {
+          "agent_type": "funder",
+          "project_id": "gitcoin-passport",
+          "scores": {
+            "capital_efficiency": {
+              "score": 58,
+              "justification": "The project shows substantial technical output with 2.1M lines of TypeScript and 38 contributors, but the alarming 917 open issues and zero commits in the last year suggest bloated maintenance overhead. Without financial data or clear deliverable metrics, I cannot confirm efficient capital deployment relative to outcomes."
+            },
+            "funding_sustainability": {
+              "score": 45,
+              "justification": "No revenue models, fee structures, or diversified funding sources are documented in the provided data. The project appears entirely grant-dependent with no visible path to financial independence, creating significant risk if public funding streams dry up."
+            },
+            "track_record": {
+              "score": 62,
+              "justification": "Gitcoin Passport has established credibility with 1,213 GitHub stars, 507 forks, and 1,258 closed PRs demonstrating historical delivery capability. However, zero commits in the last year and a concerning open-to-closed PR ratio raise red flags about recent execution and momentum."
+            }
+          },
+          "overall_narrative": "No narrative provided.",
+          "confidence": 0.5,
+          "mean_score": 55.0,
+          "evaluated_at": "2026-03-22T04:58:45.103143+00:00"
+        },
+        {
+          "agent_type": "ecosystem",
+          "project_id": "gitcoin-passport",
+          "scores": {
+            "composability": {
+              "score": 78,
+              "justification": "Gitcoin Passport provides open APIs and a modular stamp architecture that numerous projects integrate for Sybil resistance, evidenced by 507 forks and widespread adoption across Gitcoin Grants and other protocols. The TypeScript codebase and extensible stamp system enable easy integration, though some components could be more modular."
+            },
+            "network_effects": {
+              "score": 82,
+              "justification": "Passport creates strong positive-sum dynamics by reducing Sybil attack coordination costs across the entire Ethereum public goods ecosystem, with value increasing as more users and projects adopt it. It fills a critical infrastructure gap for decentralized identity verification and enables new categories of quadratic funding applications."
+            },
+            "mission_alignment": {
+              "score": 75,
+              "justification": "The project strongly aligns with Ethereum's public goods mission through its focus on credible neutrality and permissionless access to identity verification, though the NOASSERTION license and centralized verification providers raise some concerns about full decentralization. It actively supports the broader Web3 public goods ecosystem by enabling fairer resource distribution."
+            }
+          },
+          "overall_narrative": "Gitcoin Passport is a foundational public good that addresses the critical Sybil resistance problem through decentralized identity aggregation, creating strong network effects as more projects adopt its stamp system. While it demonstrates excellent composability and ecosystem alignment, concerns about license clarity and some centralized verification components prevent it from reaching the highest tier. The project is clearly above average for Ethereum public goods and provides essential infrastructure for the ecosystem.",
+          "confidence": 0.65,
+          "mean_score": 78.33,
+          "evaluated_at": "2026-03-22T04:58:44.886906+00:00"
+        }
+      ],
+      "aggregated_scores": {
+        "code_quality": 72.0,
+        "maintenance_health": 55.0,
+        "security_posture": 58.0,
+        "adoption_metrics": 78.0,
+        "community_engagement": 72.0,
+        "user_experience": 68.0,
+        "capital_efficiency": 58.0,
+        "funding_sustainability": 45.0,
+        "track_record": 62.0,
+        "composability": 78.0,
+        "network_effects": 82.0,
+        "mission_alignment": 75.0
+      },
+      "overall_score": 66.92,
+      "bradley_terry_rank": -0.0096,
+      "tensions": [],
+      "data_completeness": 0.522,
+      "evaluated_at": "2026-03-22T04:58:45.103519+00:00",
+      "bt_percentile": 49.79
+    },
+    {
+      "project_id": "uniswap-v3",
+      "stakeholder_evaluations": [
+        {
+          "agent_type": "developer",
+          "project_id": "uniswap-v3",
+          "scores": {
+            "code_quality": {
+              "score": 92,
+              "justification": "Uniswap v3 represents world-class smart contract engineering with sophisticated concentrated liquidity mechanics, gas optimization techniques like FullMath, and battle-tested architecture. The codebase demonstrates exceptional design patterns, comprehensive documentation, and has been extensively audited and forked across the ecosystem, setting the gold standard for DeFi protocol development."
+            },
+            "maintenance_health": {
+              "score": 45,
+              "justification": "While the core contracts are mature and stable, the repository shows minimal recent activity with zero commits in the last year and only 16 total contributors. This reflects the project's maturity\u2014core v3 contracts are intentionally frozen for security\u2014but raises concerns about responsiveness to issues and long-term maintenance capability given the low bus factor and stalled development velocity."
+            },
+            "security_posture": {
+              "score": 88,
+              "justification": "The protocol has undergone multiple professional security audits and manages billions in TVL across 45+ chains without major exploits, demonstrating exceptional security practices. The dual licensing (GPL/BUSL) shows careful consideration of IP protection, and the team follows responsible disclosure practices, though the lack of recent security-focused commits and dependency updates is a minor concern."
+            }
+          },
+          "overall_narrative": "Uniswap v3 Core exemplifies world-class smart contract engineering with sophisticated architecture and battle-tested security, evidenced by its $1.6B+ TVL and widespread adoption across 45+ chains. The code quality is exceptional, setting industry standards for AMM design, though the repository's maintenance has slowed significantly as the core contracts reach maturity and stability. While the security posture is outstanding given the protocol's track record, the low contributor count and lack of recent commits raise questions about long-term maintainability and responsiveness to emerging threats.",
+          "confidence": 0.85,
+          "mean_score": 75.0,
+          "evaluated_at": "2026-03-22T04:58:49.727859+00:00"
+        },
+        {
+          "agent_type": "user",
+          "project_id": "uniswap-v3",
+          "scores": {
+            "adoption_metrics": {
+              "score": 98,
+              "justification": "Uniswap v3 is the most adopted DEX protocol in DeFi with $1.68B TVL across 47 chains, $247M daily volume, and 4,969 GitHub stars. The protocol's massive real-world usage is evidenced by its deployment on virtually every major L2 and sidechain, making it a foundational infrastructure layer for Ethereum DeFi."
+            },
+            "community_engagement": {
+              "score": 75,
+              "justification": "The project has strong community engagement with 3,013 forks and 379 closed PRs, indicating significant developer interest and ecosystem building. However, the core repository shows minimal recent activity (0 commits in the last year) and lacks contributing guidelines or code of conduct, suggesting a mature but less actively maintained core codebase."
+            },
+            "user_experience": {
+              "score": 82,
+              "justification": "Uniswap v3 offers excellent UX through its widely-used interface at app.uniswap.org, with concentrated liquidity providing capital efficiency benefits for users. The protocol's extensive multi-chain deployment and integration across the DeFi ecosystem demonstrate strong accessibility, though the complexity of concentrated liquidity concepts presents a steeper learning curve for new users compared to v2."
+            }
+          },
+          "overall_narrative": "Uniswap v3 is an exceptionally adopted public good that serves as critical DeFi infrastructure across the Ethereum ecosystem. While the core smart contracts are mature and stable with minimal recent development activity, the protocol's massive TVL, volume, and multi-chain presence demonstrate unparalleled real-world impact. The user experience is polished and widely adopted, though the concentrated liquidity model requires more user education than simpler AMM designs.",
+          "confidence": 0.85,
+          "mean_score": 85.0,
+          "evaluated_at": "2026-03-22T04:58:49.196825+00:00"
+        },
+        {
+          "agent_type": "funder",
+          "project_id": "uniswap-v3",
+          "scores": {
+            "capital_efficiency": {
+              "score": 88,
+              "justification": "Uniswap v3 delivers exceptional output per dollar with $1.68B TVL across 45+ chains from a lean 16-person core team. The protocol generates $5.1M in weekly fees with minimal overhead, demonstrating world-class capital efficiency that few public goods projects can match."
+            },
+            "funding_sustainability": {
+              "score": 95,
+              "justification": "The protocol is completely self-sustaining through fee generation and has zero dependency on grants or public funding. With $229K daily fees and a proven business model, Uniswap represents the ideal of sustainable public goods infrastructure that doesn't require ongoing capital allocation."
+            },
+            "track_record": {
+              "score": 92,
+              "justification": "Uniswap has an unparalleled track record as the most forked and adopted DEX protocol in DeFi, with 4,969 GitHub stars and 3,013 forks demonstrating widespread trust. The core contracts have been battle-tested across multiple chains since 2020 with no major security incidents, establishing them as foundational Ethereum infrastructure."
+            }
+          },
+          "overall_narrative": "Uniswap v3 represents the gold standard for sustainable public goods infrastructure, requiring zero ongoing public funding while delivering massive value to the Ethereum ecosystem. The project demonstrates exceptional capital efficiency with a small team maintaining $1.68B TVL across 45+ chains, and its proven track record as the most forked DEX protocol speaks for itself. This is exactly the type of self-sustaining infrastructure that public goods funding should aim to replicate, not subsidize.",
+          "confidence": 0.85,
+          "mean_score": 91.67,
+          "evaluated_at": "2026-03-22T04:58:49.539897+00:00"
+        },
+        {
+          "agent_type": "ecosystem",
+          "project_id": "uniswap-v3",
+          "scores": {
+            "composability": {
+              "score": 88,
+              "justification": "Uniswap v3 is the most composably integrated DEX protocol in DeFi, with thousands of projects building on its concentrated liquidity infrastructure. The protocol's standard interfaces and widespread deployment across 50+ chains make it a foundational layer for lending protocols, aggregators, yield strategies, and on-chain derivatives."
+            },
+            "network_effects": {
+              "score": 92,
+              "justification": "With $1.68B TVL and $247M daily volume, Uniswap v3 demonstrates powerful network effects where liquidity begets more liquidity and usage. The protocol serves as critical price discovery infrastructure that the entire ecosystem relies on, and its multi-chain deployment creates positive-sum value across L2 ecosystems."
+            },
+            "mission_alignment": {
+              "score": 55,
+              "justification": "While Uniswap v3 is open source and permissionless, the 2022 dual-licensing shift to BUSL/GPL creates significant friction for public goods reuse and limits true composability. The protocol is credibly neutral in operation but the licensing model and governance token economics introduce extractive elements that conflict with pure public goods ideals."
+            }
+          },
+          "overall_narrative": "Uniswap v3 is undeniably one of Ethereum's most important infrastructure projects, providing essential liquidity and price discovery that the entire ecosystem depends on. Its composability and network effects are world-class, but the BUSL licensing model and governance token structure create meaningful misalignment with pure public goods principles. The project is critical infrastructure that makes the ecosystem stronger, yet its licensing choices limit its potential as a fully open public good.",
+          "confidence": 0.85,
+          "mean_score": 78.33,
+          "evaluated_at": "2026-03-22T04:58:49.555164+00:00"
+        }
+      ],
+      "aggregated_scores": {
+        "code_quality": 92.0,
+        "maintenance_health": 45.0,
+        "security_posture": 88.0,
+        "adoption_metrics": 98.0,
+        "community_engagement": 75.0,
+        "user_experience": 82.0,
+        "capital_efficiency": 88.0,
+        "funding_sustainability": 95.0,
+        "track_record": 92.0,
+        "composability": 88.0,
+        "network_effects": 92.0,
+        "mission_alignment": 55.0
+      },
+      "overall_score": 82.5,
+      "bradley_terry_rank": 1.5484,
+      "tensions": [],
+      "data_completeness": 0.71,
+      "evaluated_at": "2026-03-22T04:58:49.728522+00:00",
+      "bt_percentile": 80.5
+    }
+  ],
+  "bradley_terry": {
+    "rankings": {
+      "ethstaker": -1.618596,
+      "gitcoin-passport": -0.0096,
+      "openzeppelin": 2.406396,
+      "protocol-guild": -2.3266,
+      "uniswap-v3": 1.5484
+    },
+    "comparisons": [
+      [
+        "ethstaker",
+        "gitcoin-passport",
+        0.16672749671650908
+      ],
+      [
+        "ethstaker",
+        "openzeppelin",
+        0.01754992244482437
+      ],
+      [
+        "ethstaker",
+        "protocol-guild",
+        0.6699590824057516
+      ],
+      [
+        "ethstaker",
+        "uniswap-v3",
+        0.040426632063778584
+      ],
+      [
+        "gitcoin-passport",
+        "openzeppelin",
+        0.08196072528740718
+      ],
+      [
+        "gitcoin-passport",
+        "protocol-guild",
+        0.9102752193260635
+      ],
+      [
+        "gitcoin-passport",
+        "uniswap-v3",
+        0.17393382134188273
+      ],
+      [
+        "openzeppelin",
+        "protocol-guild",
+        0.9912767337104015
+      ],
+      [
+        "openzeppelin",
+        "uniswap-v3",
+        0.7022426277306182
+      ],
+      [
+        "protocol-guild",
+        "uniswap-v3",
+        0.020332353342658753
+      ]
+    ],
+    "percentiles": {
+      "ethstaker": 18.44,
+      "gitcoin-passport": 49.79,
+      "openzeppelin": 90.92,
+      "protocol-guild": 9.82,
+      "uniswap-v3": 80.5
+    }
+  },
+  "sqf_mechanism": {
+    "matching_pool": 100000,
+    "sqf_allocations": {
+      "openzeppelin": 29660.175499174875,
+      "protocol-guild": 24403.62175971983,
+      "ethstaker": 6177.600277100362,
+      "gitcoin-passport": 16438.36738620336,
+      "uniswap-v3": 23320.23507780157
+    },
+    "standard_qf_allocations": {
+      "openzeppelin": 24325.376271798126,
+      "protocol-guild": 25000.0,
+      "ethstaker": 7052.985751431336,
+      "gitcoin-passport": 18621.63797677055,
+      "uniswap-v3": 25000.0
+    },
+    "pheromone_state": {
+      "openzeppelin": 5.4554,
+      "protocol-guild": 5.21875,
+      "ethstaker": 5.25415,
+      "gitcoin-passport": 5.3346,
+      "uniswap-v3": 5.4125
+    },
+    "pagerank_nodes": [
+      "gitcoin-passport",
+      "openzeppelin",
+      "uniswap-v3",
+      "ethstaker",
+      "protocol-guild"
+    ],
+    "contributions_used": {
+      "openzeppelin": 10,
+      "protocol-guild": 10,
+      "ethstaker": 10,
+      "gitcoin-passport": 10,
+      "uniswap-v3": 10
+    }
+  },
+  "attestations": [
+    {
+      "project_id": "openzeppelin",
+      "project_hash": "0xsha256:e982415c36e216044fbe38bf22a82d428b2cb6969f89502967150832175213fc",
+      "evaluation_hash": "0xsha256:a4a9ca53e6e7789125b61e8a5ecd49327270597401a1a089d50a91f6664f4c21",
+      "overall_score": 91.08,
+      "sqf_allocation": 29660.175499174875,
+      "evidence_size_bytes": 11459,
+      "evidence_sha256": "a4a9ca53e6e7789125b61e8a5ecd49327270597401a1a089d50a91f6664f4c21",
+      "onchain_status": "local_only"
+    },
+    {
+      "project_id": "protocol-guild",
+      "project_hash": "0xsha256:ab3fd1cf5c911d27084a06094ff60ca7f96900f412196f0c177fc1aeeb26b5cf",
+      "evaluation_hash": "0xsha256:b4301003c7e8c1395df16fe9273757004243eed21ac1401baa6c5edd56b0afdf",
+      "overall_score": 43.75,
+      "sqf_allocation": 24403.62175971983,
+      "evidence_size_bytes": 10555,
+      "evidence_sha256": "b4301003c7e8c1395df16fe9273757004243eed21ac1401baa6c5edd56b0afdf",
+      "onchain_status": "local_only"
+    },
+    {
+      "project_id": "ethstaker",
+      "project_hash": "0xsha256:0d789ec3726501b4b49cdaf6ead1b063017483edb8c74950cdd6e81c3497ab6b",
+      "evaluation_hash": "0xsha256:f3347925a290bf3ca9d241f82faa1bc9570c278766956ce3c2f41a8c3122ca64",
+      "overall_score": 50.83,
+      "sqf_allocation": 6177.600277100362,
+      "evidence_size_bytes": 11083,
+      "evidence_sha256": "f3347925a290bf3ca9d241f82faa1bc9570c278766956ce3c2f41a8c3122ca64",
+      "onchain_status": "local_only"
+    },
+    {
+      "project_id": "gitcoin-passport",
+      "project_hash": "0xsha256:45a9766dc4735df99944436d96c60f8e95eb86d99de35ce45174688556ee47eb",
+      "evaluation_hash": "0xsha256:d425dff7525d49f054ba35270631196c41b6d0eb9ed15103fe0862026b08d12a",
+      "overall_score": 66.92,
+      "sqf_allocation": 16438.36738620336,
+      "evidence_size_bytes": 10648,
+      "evidence_sha256": "d425dff7525d49f054ba35270631196c41b6d0eb9ed15103fe0862026b08d12a",
+      "onchain_status": "local_only"
+    },
+    {
+      "project_id": "uniswap-v3",
+      "project_hash": "0xsha256:da77e4e61e89eed126776b3ffa2e98374e616822c8037d90eddebd782205916f",
+      "evaluation_hash": "0xsha256:9db742d32e267c981d731e9665766975a29b59d027143e4353e47d1bf30f44bf",
+      "overall_score": 82.5,
+      "sqf_allocation": 23320.23507780157,
+      "evidence_size_bytes": 15401,
+      "evidence_sha256": "9db742d32e267c981d731e9665766975a29b59d027143e4353e47d1bf30f44bf",
+      "onchain_status": "local_only"
+    }
+  ],
+  "tensions": [
+    {
+      "dimension": "overall_mean",
+      "agents": {
+        "developer": 32,
+        "user": 48,
+        "funder": 30,
+        "ecosystem": 65
+      },
+      "spread": 35,
+      "high_agent": "ecosystem",
+      "low_agent": "funder",
+      "narrative": "The ecosystem agent is significantly more positive (mean: 65) (strongest: Mission Alignment at 78) than the funder agent (mean: 30) (weakest: Capital Efficiency at 25). This 35-point gap suggests the project's strengths are unevenly distributed across stakeholder concerns.",
+      "project_id": "protocol-guild"
+    },
+    {
+      "dimension": "ecosystem_vs_funder",
+      "agents": {
+        "ecosystem": 65,
+        "funder": 30
+      },
+      "spread": 35,
+      "high_agent": "ecosystem",
+      "low_agent": "funder",
+      "narrative": "Cross-stakeholder tension: ecosystem (mean 65) is 35 points above funder (mean 30). The project resonates much more strongly with ecosystem concerns than funder priorities.",
+      "project_id": "protocol-guild"
+    }
+  ],
+  "evidence_storage": {
+    "openzeppelin": {
+      "local_path": "/workspace/pipeline_output/evidence/openzeppelin_evidence.json",
+      "size_bytes": 13818,
+      "sha256": "9fd72c9b836d4d3fb21022cff915473d1f0ab8886621a3ed574e69ebe35e9492",
+      "filecoin_status": "local_only"
+    },
+    "protocol-guild": {
+      "local_path": "/workspace/pipeline_output/evidence/protocol-guild_evidence.json",
+      "size_bytes": 13028,
+      "sha256": "5f00d0bc11705e1e4810d037e4a1bc715722aaacf7a6a26ee967a56c39f04bf0",
+      "filecoin_status": "local_only"
+    },
+    "ethstaker": {
+      "local_path": "/workspace/pipeline_output/evidence/ethstaker_evidence.json",
+      "size_bytes": 13360,
+      "sha256": "ed1f882be961a76e43263dad669a538d285c2abf38b5e30c20cebf10bd534887",
+      "filecoin_status": "local_only"
+    },
+    "gitcoin-passport": {
+      "local_path": "/workspace/pipeline_output/evidence/gitcoin-passport_evidence.json",
+      "size_bytes": 12945,
+      "sha256": "da1700db46abd2fbc06e73c11a88bc272944b5fb0a12448d60fd92a481af269b",
+      "filecoin_status": "local_only"
+    },
+    "uniswap-v3": {
+      "local_path": "/workspace/pipeline_output/evidence/uniswap-v3_evidence.json",
+      "size_bytes": 22146,
+      "sha256": "1f62de43699864459a2e53144e0c10236eab22999f04c891265c26b9a171deba",
+      "filecoin_status": "local_only"
+    }
+  },
+  "dependencies_used": [
+    [
+      "gitcoin-passport",
+      "openzeppelin"
+    ],
+    [
+      "uniswap-v3",
+      "openzeppelin"
+    ],
+    [
+      "ethstaker",
+      "protocol-guild"
+    ],
+    [
+      "gitcoin-passport",
+      "uniswap-v3"
+    ],
+    [
+      "protocol-guild",
+      "openzeppelin"
+    ],
+    [
+      "uniswap-v3",
+      "protocol-guild"
+    ],
+    [
+      "ethstaker",
+      "openzeppelin"
+    ]
+  ]
+}

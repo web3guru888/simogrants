@@ -1,0 +1,243 @@
+{
+  "project_id": "gitcoin-passport",
+  "evaluation": {
+    "project_id": "gitcoin-passport",
+    "stakeholder_evaluations": [
+      {
+        "agent_type": "developer",
+        "project_id": "gitcoin-passport",
+        "scores": {
+          "code_quality": {
+            "score": 72,
+            "justification": "Large TypeScript codebase (2.1M lines) with a mature architecture and proper separation of concerns across frontend and infrastructure components. However, the absence of a CONTRIBUTING guide and Code of Conduct suggests documentation gaps that could hinder onboarding and long-term maintainability."
+          },
+          "maintenance_health": {
+            "score": 55,
+            "justification": "Concerning maintenance signals with 0 commits in the last year despite recent activity in early 2026, and a staggering 917 open issues that may indicate backlog management challenges. While 38 contributors and 1,258 closed PRs show historical activity, the recent commit drought raises questions about current development momentum."
+          },
+          "security_posture": {
+            "score": 58,
+            "justification": "Identity verification system handling sensitive user data, but no evidence of security audits in the provided data and license status is unclear (NOASSERTION). The recent commits show SIWE (Sign-In with Ethereum) improvements and auth changes, suggesting active security work, but without audit documentation or clear licensing, the security posture cannot be rated higher."
+          }
+        },
+        "overall_narrative": "Gitcoin Passport is a mature TypeScript project with substantial code volume and historical contributor activity, but recent maintenance patterns are concerning. The zero commits in the past year combined with a large open issue backlog suggests potential development stagnation, though the recent early 2026 activity may indicate renewed momentum. As a security-sensitive identity verification system, the lack of audit documentation and unclear licensing are notable gaps that need addressing before this could be considered exceptional.",
+        "confidence": 0.45,
+        "mean_score": 61.67,
+        "evaluated_at": "2026-03-22T04:58:44.866852+00:00"
+      },
+      {
+        "agent_type": "user",
+        "project_id": "gitcoin-passport",
+        "scores": {
+          "adoption_metrics": {
+            "score": 78,
+            "justification": "Gitcoin Passport has strong adoption with 1,213 GitHub stars, 507 forks, and 38 contributors, indicating significant developer interest and usage. The project is actively integrated across Gitcoin's grant rounds and numerous other protocols for Sybil resistance, though recent commit activity (0 commits in the last year per the data) raises questions about current development velocity."
+          },
+          "community_engagement": {
+            "score": 72,
+            "justification": "The community shows solid engagement with 38 contributors and 1,258 closed PRs, though the high number of open issues (917) suggests maintenance challenges. The lack of a contributing guide or code of conduct may hinder broader community participation, but the project's integration into Gitcoin's ecosystem ensures ongoing relevance."
+          },
+          "user_experience": {
+            "score": 68,
+            "justification": "Passport provides a user-friendly decentralized identity interface with TypeScript-based code quality, but the high open issue count (917) and missing documentation standards (no contributing guide) indicate potential friction points. The project's focus on aggregating stamps across web2 and web3 sources offers good accessibility, though onboarding complexity remains a consideration."
+          }
+        },
+        "overall_narrative": "Gitcoin Passport demonstrates strong adoption and community engagement as a key Sybil resistance tool in the Ethereum ecosystem, with solid GitHub metrics and widespread protocol integration. However, concerning signals around recent development activity and maintenance backlog (917 open issues, 0 commits in the last year) suggest potential sustainability challenges. The user experience is functional but could benefit from improved documentation and issue resolution to maintain its position as a leading identity verification solution.",
+        "confidence": 0.55,
+        "mean_score": 72.67,
+        "evaluated_at": "2026-03-22T04:58:45.093715+00:00"
+      },
+      {
+        "agent_type": "funder",
+        "project_id": "gitcoin-passport",
+        "scores": {
+          "capital_efficiency": {
+            "score": 58,
+            "justification": "The project shows substantial technical output with 2.1M lines of TypeScript and 38 contributors, but the alarming 917 open issues and zero commits in the last year suggest bloated maintenance overhead. Without financial data or clear deliverable metrics, I cannot confirm efficient capital deployment relative to outcomes."
+          },
+          "funding_sustainability": {
+            "score": 45,
+            "justification": "No revenue models, fee structures, or diversified funding sources are documented in the provided data. The project appears entirely grant-dependent with no visible path to financial independence, creating significant risk if public funding streams dry up."
+          },
+          "track_record": {
+            "score": 62,
+            "justification": "Gitcoin Passport has established credibility with 1,213 GitHub stars, 507 forks, and 1,258 closed PRs demonstrating historical delivery capability. However, zero commits in the last year and a concerning open-to-closed PR ratio raise red flags about recent execution and momentum."
+          }
+        },
+        "overall_narrative": "No narrative provided.",
+        "confidence": 0.5,
+        "mean_score": 55.0,
+        "evaluated_at": "2026-03-22T04:58:45.103143+00:00"
+      },
+      {
+        "agent_type": "ecosystem",
+        "project_id": "gitcoin-passport",
+        "scores": {
+          "composability": {
+            "score": 78,
+            "justification": "Gitcoin Passport provides open APIs and a modular stamp architecture that numerous projects integrate for Sybil resistance, evidenced by 507 forks and widespread adoption across Gitcoin Grants and other protocols. The TypeScript codebase and extensible stamp system enable easy integration, though some components could be more modular."
+          },
+          "network_effects": {
+            "score": 82,
+            "justification": "Passport creates strong positive-sum dynamics by reducing Sybil attack coordination costs across the entire Ethereum public goods ecosystem, with value increasing as more users and projects adopt it. It fills a critical infrastructure gap for decentralized identity verification and enables new categories of quadratic funding applications."
+          },
+          "mission_alignment": {
+            "score": 75,
+            "justification": "The project strongly aligns with Ethereum's public goods mission through its focus on credible neutrality and permissionless access to identity verification, though the NOASSERTION license and centralized verification providers raise some concerns about full decentralization. It actively supports the broader Web3 public goods ecosystem by enabling fairer resource distribution."
+          }
+        },
+        "overall_narrative": "Gitcoin Passport is a foundational public good that addresses the critical Sybil resistance problem through decentralized identity aggregation, creating strong network effects as more projects adopt its stamp system. While it demonstrates excellent composability and ecosystem alignment, concerns about license clarity and some centralized verification components prevent it from reaching the highest tier. The project is clearly above average for Ethereum public goods and provides essential infrastructure for the ecosystem.",
+        "confidence": 0.65,
+        "mean_score": 78.33,
+        "evaluated_at": "2026-03-22T04:58:44.886906+00:00"
+      }
+    ],
+    "aggregated_scores": {
+      "code_quality": 72.0,
+      "maintenance_health": 55.0,
+      "security_posture": 58.0,
+      "adoption_metrics": 78.0,
+      "community_engagement": 72.0,
+      "user_experience": 68.0,
+      "capital_efficiency": 58.0,
+      "funding_sustainability": 45.0,
+      "track_record": 62.0,
+      "composability": 78.0,
+      "network_effects": 82.0,
+      "mission_alignment": 75.0
+    },
+    "overall_score": 66.92,
+    "bradley_terry_rank": -0.0096,
+    "tensions": [],
+    "data_completeness": 0.522,
+    "evaluated_at": "2026-03-22T04:58:45.103519+00:00",
+    "bt_percentile": 49.79
+  },
+  "profile": {
+    "project_id": "gitcoin-passport",
+    "name": "Gitcoin Passport",
+    "github": {
+      "repo_owner": "gitcoinco",
+      "repo_name": "passport",
+      "full_name": "passportxyz/passport",
+      "description": "Passport allows users to prove their identity through a secure, decentralized UI",
+      "language": "TypeScript",
+      "languages": {
+        "TypeScript": 2102496,
+        "HTML": 54959,
+        "JavaScript": 48766,
+        "Shell": 8294,
+        "CSS": 7428,
+        "Dockerfile": 1425
+      },
+      "stars": 1213,
+      "forks": 507,
+      "open_issues": 917,
+      "watchers": 62,
+      "created_at": "2022-03-14T17:57:02Z",
+      "updated_at": "2026-03-21T12:36:20Z",
+      "pushed_at": "2026-03-09T18:02:30Z",
+      "default_branch": "main",
+      "license_name": "NOASSERTION",
+      "topics": [],
+      "is_fork": false,
+      "is_archived": false,
+      "homepage": "",
+      "contributors_count": 38,
+      "commits_count_last_year": 0,
+      "recent_commits": [
+        {
+          "sha": "50918764",
+          "message": "chore: integrate skeptic sub-agent triage into Reviewer role (#3884)",
+          "author": "human-dot-bot[bot]",
+          "date": "2026-03-09T18:02:30Z"
+        },
+        {
+          "sha": "cc12f2cc",
+          "message": "chore: add dev team workflow for structured multi-role development (#3883)",
+          "author": "human-dot-bot[bot]",
+          "date": "2026-03-09T16:53:38Z"
+        },
+        {
+          "sha": "0cf8ff3f",
+          "message": "refactor: update HumanID stamp icon to use currentColor (#3877)",
+          "author": "human-dot-bot[bot]",
+          "date": "2026-02-19T19:12:16Z"
+        },
+        {
+          "sha": "cfe71566",
+          "message": "Remove challenge-based auth fallback, add SIWE expiration (#3874)",
+          "author": "human-dot-bot[bot]",
+          "date": "2026-02-19T00:00:20Z"
+        },
+        {
+          "sha": "df72434b",
+          "message": "feat(app,iam): custom nft stamps (#3872)",
+          "author": "Lucian",
+          "date": "2026-02-17T13:46:43Z"
+        },
+        {
+          "sha": "e3e05947",
+          "message": "chore: fix campaign images page (#3870)",
+          "author": "Lucian",
+          "date": "2026-02-11T20:43:12Z"
+        },
+        {
+          "sha": "a97cf6e9",
+          "message": "chore: add campaign images gallery page at /campaign-images (#3869)",
+          "author": "Lucian",
+          "date": "2026-02-10T17:46:50Z"
+        },
+        {
+          "sha": "787a672b",
+          "message": "chore(app): additional campaign images (#3867)",
+          "author": "Lucian",
+          "date": "2026-02-09T16:23:51Z"
+        },
+        {
+          "sha": "9ed2c2f9",
+          "message": "feat(platforms): add isEVM flag to Coinbase, Government ID, and Phone Verification stamps (#3780)",
+          "author": "Daniel | human.tech",
+          "date": "2026-02-09T15:42:42Z"
+        },
+        {
+          "sha": "86b52f9d",
+          "message": "feat(infra): add auto-credits Lambda for Human Network credits (#3856)",
+          "author": "Lucian",
+          "date": "2026-02-04T19:52:26Z"
+        }
+      ],
+      "open_prs": 16,
+      "closed_prs": 1258,
+      "has_readme": true,
+      "has_contributing": false,
+      "has_license": true,
+      "has_code_of_conduct": false,
+      "collected_at": "2026-03-22T04:58:16.162186+00:00"
+    },
+    "etherscan": null,
+    "defillama": null,
+    "gitcoin": null,
+    "snapshot": null,
+    "octant": null,
+    "packages": [],
+    "collection_metadata": [
+      {
+        "source": "github",
+        "status": "success",
+        "started_at": "2026-03-22T04:58:14.934394+00:00",
+        "finished_at": "2026-03-22T04:58:16.162257+00:00",
+        "duration_seconds": 1.228,
+        "error_message": "",
+        "retries": 0
+      }
+    ],
+    "data_completeness": 0.1429,
+    "collected_at": "2026-03-22T04:58:16.162442+00:00",
+    "description": "Decentralized identity verification aggregating stamps across web2 and web3 for Sybil resistance",
+    "github_url": "https://github.com/gitcoinco/passport"
+  },
+  "sqf_allocation": 16438.36738620336,
+  "timestamp": "2026-03-22T04:58:50.216887+00:00",
+  "system": "SIMOGRANTS v1.0.0"
+}

@@ -1,0 +1,261 @@
+{
+  "project_id": "protocol-guild",
+  "evaluation": {
+    "project_id": "protocol-guild",
+    "stakeholder_evaluations": [
+      {
+        "agent_type": "developer",
+        "project_id": "protocol-guild",
+        "scores": {
+          "code_quality": {
+            "score": 25,
+            "justification": "This is a documentation repository with no actual codebase, no detected programming language, no license, and missing standard governance files like CONTRIBUTING.md or code of conduct. The repository appears to be archived with zero commits in the last year, indicating minimal engineering infrastructure."
+          },
+          "maintenance_health": {
+            "score": 20,
+            "justification": "Zero commits in the last year and the last push was in January 2024, indicating the project is effectively abandoned. While there were 14 historical contributors, recent activity is nonexistent with 0 open issues and 0 open PRs, suggesting the repository is in maintenance mode or deprecated."
+          },
+          "security_posture": {
+            "score": 50,
+            "justification": "No smart contracts or security-critical code are present in this documentation-only repository, so traditional security concerns are minimal. However, the lack of a license file and absence of security policies or audit documentation represents poor security governance practices."
+          }
+        },
+        "overall_narrative": "Protocol Guild's docs repository is a documentation-only project with no actual codebase, making traditional engineering evaluation challenging. The repository shows clear signs of abandonment with zero commits in the past year and appears to be archived, despite not being marked as such in GitHub. Without access to the actual Protocol Guild smart contracts or operational infrastructure, this repository provides insufficient evidence to evaluate the technical quality of the Protocol Guild funding mechanism itself.",
+        "confidence": 0.3,
+        "mean_score": 31.67,
+        "evaluated_at": "2026-03-22T04:58:36.144523+00:00"
+      },
+      {
+        "agent_type": "user",
+        "project_id": "protocol-guild",
+        "scores": {
+          "adoption_metrics": {
+            "score": 62,
+            "justification": "Protocol Guild serves a critical niche with 14 contributors and 58 closed PRs, indicating meaningful engagement from Ethereum core protocol contributors. However, zero commits in the last year and an archived status suggest declining activity, limiting confidence in current adoption trajectory."
+          },
+          "community_engagement": {
+            "score": 45,
+            "justification": "The project lacks basic community infrastructure including no contributing guidelines, code of conduct, or license, which hinders broader community participation. While there's evidence of collaborative work through pull requests, the absence of active governance channels and recent updates signals waning community health."
+          },
+          "user_experience": {
+            "score": 38,
+            "justification": "With only 19 stars and minimal documentation infrastructure, the project appears difficult for new contributors to discover and engage with. The lack of clear onboarding materials, contributing guidelines, and recent maintenance creates significant friction for potential users."
+          }
+        },
+        "overall_narrative": "No narrative provided.",
+        "confidence": 0.5,
+        "mean_score": 48.33,
+        "evaluated_at": "2026-03-22T04:58:36.173667+00:00"
+      },
+      {
+        "agent_type": "funder",
+        "project_id": "protocol-guild",
+        "scores": {
+          "capital_efficiency": {
+            "score": 25,
+            "justification": "Zero commits in the last year and an archived documentation repository suggest minimal active output despite likely receiving significant funding. The complete absence of financial transparency, spending breakdowns, or measurable deliverables makes it impossible to assess whether capital is being used efficiently."
+          },
+          "funding_sustainability": {
+            "score": 30,
+            "justification": "No evidence of diversified funding sources, revenue models, or any sustainability planning beyond grant dependency. The project appears entirely reliant on continued public funding with no visible path to financial independence or risk mitigation."
+          },
+          "track_record": {
+            "score": 35,
+            "justification": "While the project has existed since 2021 with 14 contributors, the complete lack of recent activity (zero commits in the past year) and an archived documentation repository raise serious concerns about current delivery capability. No milestone completion data or transparent progress reporting is available to verify past performance."
+          }
+        },
+        "overall_narrative": "Protocol Guild presents a concerning picture from a capital stewardship perspective: minimal recent activity, zero transparency on financials or deliverables, and no evidence of sustainable funding beyond continued grants. The archived documentation repository and complete lack of commits in the past year suggest the project may be dormant or severely under-delivering relative to any funding received. Without concrete evidence of output, efficiency, or a sustainability plan, this project fails to meet basic due diligence standards for public fund allocation.",
+        "confidence": 0.35,
+        "mean_score": 30.0,
+        "evaluated_at": "2026-03-22T04:58:36.810749+00:00"
+      },
+      {
+        "agent_type": "ecosystem",
+        "project_id": "protocol-guild",
+        "scores": {
+          "composability": {
+            "score": 45,
+            "justification": "The archived docs repository provides limited evidence of open APIs, SDKs, or modular architecture that other projects can build upon. While the funding mechanism concept could be composable, the repository itself is documentation-focused with no code artifacts or integration points visible."
+          },
+          "network_effects": {
+            "score": 72,
+            "justification": "Protocol Guild addresses a critical infrastructure gap by providing collective funding for Ethereum core protocol contributors, creating positive-sum value as more contributors join and are sustained. The ecosystem would be meaningfully worse without mechanisms to support core development talent, though the archived repository limits visibility into current network effects."
+          },
+          "mission_alignment": {
+            "score": 78,
+            "justification": "The project strongly aligns with Ethereum's public goods mission by funding core protocol contributors who maintain the network's decentralization and security. The collective, non-extractive approach to supporting developers demonstrates credible neutrality and commitment to the broader ecosystem's success."
+          }
+        },
+        "overall_narrative": "Protocol Guild addresses a fundamental ecosystem need by providing collective funding for Ethereum core protocol contributors, representing strong mission alignment with Ethereum's public goods values. However, the archived documentation repository provides limited visibility into the project's technical composability and current network effects, making it difficult to fully assess integration potential and active ecosystem impact.",
+        "confidence": 0.45,
+        "mean_score": 65.0,
+        "evaluated_at": "2026-03-22T04:58:36.035972+00:00"
+      }
+    ],
+    "aggregated_scores": {
+      "code_quality": 25.0,
+      "maintenance_health": 20.0,
+      "security_posture": 50.0,
+      "adoption_metrics": 62.0,
+      "community_engagement": 45.0,
+      "user_experience": 38.0,
+      "capital_efficiency": 25.0,
+      "funding_sustainability": 30.0,
+      "track_record": 35.0,
+      "composability": 45.0,
+      "network_effects": 72.0,
+      "mission_alignment": 78.0
+    },
+    "overall_score": 43.75,
+    "bradley_terry_rank": -2.3266,
+    "tensions": [
+      {
+        "dimension": "overall_mean",
+        "agents": {
+          "developer": 32,
+          "user": 48,
+          "funder": 30,
+          "ecosystem": 65
+        },
+        "spread": 35,
+        "high_agent": "ecosystem",
+        "low_agent": "funder",
+        "narrative": "The ecosystem agent is significantly more positive (mean: 65) (strongest: Mission Alignment at 78) than the funder agent (mean: 30) (weakest: Capital Efficiency at 25). This 35-point gap suggests the project's strengths are unevenly distributed across stakeholder concerns."
+      },
+      {
+        "dimension": "ecosystem_vs_funder",
+        "agents": {
+          "ecosystem": 65,
+          "funder": 30
+        },
+        "spread": 35,
+        "high_agent": "ecosystem",
+        "low_agent": "funder",
+        "narrative": "Cross-stakeholder tension: ecosystem (mean 65) is 35 points above funder (mean 30). The project resonates much more strongly with ecosystem concerns than funder priorities."
+      }
+    ],
+    "data_completeness": 0.44,
+    "evaluated_at": "2026-03-22T04:58:36.811390+00:00",
+    "bt_percentile": 9.82
+  },
+  "profile": {
+    "project_id": "protocol-guild",
+    "name": "Protocol Guild",
+    "github": {
+      "repo_owner": "protocolguild",
+      "repo_name": "docs",
+      "full_name": "protocolguild/docs",
+      "description": "ARCHIVED - This repo hosts the docs site for the Protocol Guild",
+      "language": "",
+      "languages": {},
+      "stars": 19,
+      "forks": 16,
+      "open_issues": 0,
+      "watchers": 5,
+      "created_at": "2021-11-24T16:10:20Z",
+      "updated_at": "2025-07-14T02:08:11Z",
+      "pushed_at": "2024-01-26T22:32:00Z",
+      "default_branch": "outline",
+      "license_name": "",
+      "topics": [],
+      "is_fork": false,
+      "is_archived": false,
+      "homepage": "",
+      "contributors_count": 14,
+      "commits_count_last_year": 0,
+      "recent_commits": [
+        {
+          "sha": "0c8499ed",
+          "message": "Update README.md",
+          "author": "tvanepps",
+          "date": "2024-01-26T22:32:00Z"
+        },
+        {
+          "sha": "e9adb6a7",
+          "message": "Merge pull request #58 from tvanepps/outline",
+          "author": "cheeky-gorilla",
+          "date": "2024-01-26T14:32:45Z"
+        },
+        {
+          "sha": "eaac65d4",
+          "message": "Update 4-roles-expectations.md",
+          "author": "tvanepps",
+          "date": "2024-01-19T19:27:41Z"
+        },
+        {
+          "sha": "64dc58de",
+          "message": "Merge pull request #57 from siladu/clarify-contribution-breaks",
+          "author": "cheeky-gorilla",
+          "date": "2024-01-08T18:59:25Z"
+        },
+        {
+          "sha": "a66abdcd",
+          "message": "Updated media with new podcast",
+          "author": "cheeky-gorilla",
+          "date": "2023-12-12T09:43:07Z"
+        },
+        {
+          "sha": "f8bfa212",
+          "message": "Clarify contribution breaks in roles and expectations",
+          "author": "Simon Dudley",
+          "date": "2023-12-02T23:44:16Z"
+        },
+        {
+          "sha": "9febf758",
+          "message": "Merge pull request #55 from protocolguild/cheeky-gorilla-patch-8",
+          "author": "cheeky-gorilla",
+          "date": "2023-11-27T12:00:10Z"
+        },
+        {
+          "sha": "9fa7c638",
+          "message": "Merge pull request #56 from protocolguild/cheeky-gorilla-patch-9",
+          "author": "cheeky-gorilla",
+          "date": "2023-11-27T11:54:14Z"
+        },
+        {
+          "sha": "b8b4e170",
+          "message": "Nov '23 membership update",
+          "author": "cheeky-gorilla",
+          "date": "2023-11-16T11:45:17Z"
+        },
+        {
+          "sha": "b180c037",
+          "message": "Organize links + add Polygon multisig",
+          "author": "cheeky-gorilla",
+          "date": "2023-11-16T11:36:18Z"
+        }
+      ],
+      "open_prs": 0,
+      "closed_prs": 58,
+      "has_readme": true,
+      "has_contributing": false,
+      "has_license": false,
+      "has_code_of_conduct": false,
+      "collected_at": "2026-03-22T04:58:13.711360+00:00"
+    },
+    "etherscan": null,
+    "defillama": null,
+    "gitcoin": null,
+    "snapshot": null,
+    "octant": null,
+    "packages": [],
+    "collection_metadata": [
+      {
+        "source": "github",
+        "status": "success",
+        "started_at": "2026-03-22T04:58:12.936693+00:00",
+        "finished_at": "2026-03-22T04:58:13.711413+00:00",
+        "duration_seconds": 0.775,
+        "error_message": "",
+        "retries": 0
+      }
+    ],
+    "data_completeness": 0.1429,
+    "collected_at": "2026-03-22T04:58:13.711536+00:00",
+    "description": "Collective funding mechanism for Ethereum core protocol contributors",
+    "github_url": "https://github.com/protocolguild/docs"
+  },
+  "sqf_allocation": 24403.62175971983,
+  "timestamp": "2026-03-22T04:58:50.215451+00:00",
+  "system": "SIMOGRANTS v1.0.0"
+}

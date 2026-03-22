@@ -1,0 +1,113 @@
+{
+  "project_id": "openzeppelin",
+  "stakeholder_evaluations": [
+    {
+      "agent_type": "developer",
+      "project_id": "openzeppelin",
+      "scores": {
+        "code_quality": {
+          "score": 95,
+          "justification": "OpenZeppelin Contracts is the gold standard for Solidity development with exceptional architecture, comprehensive documentation, and extensive test coverage. The codebase demonstrates industry-leading practices with clear separation of concerns, thorough NatSpec documentation, and a mature testing infrastructure that has been battle-tested across thousands of production deployments."
+        },
+        "maintenance_health": {
+          "score": 92,
+          "justification": "The project shows outstanding maintenance with 494 contributors, regular commits (256 in the last year), and active dependency management via Dependabot and Renovate. Recent commits show continuous security improvements and feature additions, while the high closed-to-open PR ratio (4049 closed vs 98 open) indicates excellent responsiveness to community contributions."
+        },
+        "security_posture": {
+          "score": 98,
+          "justification": "As the de facto standard for secure smart contract development, OpenZeppelin undergoes regular professional audits with recent v5.6 audit reports committed directly to the repository. Recent commits demonstrate proactive security fixes for edge cases and potential vulnerabilities, while the library's design philosophy prioritizes security patterns and access control best practices."
+        }
+      },
+      "overall_narrative": "OpenZeppelin Contracts represents the pinnacle of Ethereum public goods infrastructure, setting the standard for secure smart contract development. The codebase demonstrates world-class engineering with exceptional architecture, comprehensive testing, and industry-leading security practices that have been battle-tested across thousands of production deployments. With nearly 500 contributors, active maintenance, and regular professional audits, this project exemplifies what a mature, sustainable public good should be.",
+      "confidence": 0.95,
+      "mean_score": 95.0,
+      "evaluated_at": "2026-03-22T04:58:31.753298+00:00"
+    },
+    {
+      "agent_type": "user",
+      "project_id": "openzeppelin",
+      "scores": {
+        "adoption_metrics": {
+          "score": 95,
+          "justification": "OpenZeppelin Contracts is ubiquitous in Ethereum development with 27,000+ GitHub stars, 12,000+ forks, and 494 contributors. It's the de facto standard library used by virtually every serious smart contract project, making it one of the most adopted public goods in the ecosystem."
+        },
+        "community_engagement": {
+          "score": 88,
+          "justification": "The project maintains excellent community health with 98 open PRs, 4,049 closed PRs, and active contributions from hundreds of developers. Strong governance practices are evidenced by comprehensive documentation including contributing guidelines and code of conduct."
+        },
+        "user_experience": {
+          "score": 85,
+          "justification": "The library offers exceptional developer experience with well-documented, modular, and battle-tested smart contract patterns. Security-focused design and extensive test coverage provide confidence to users, though the breadth of features can be overwhelming for beginners."
+        }
+      },
+      "overall_narrative": "OpenZeppelin Contracts represents the gold standard for Ethereum public goods, serving as the foundational security library that underpins the vast majority of smart contract development. Its near-universal adoption, active maintenance with 256 commits in the past year, and strong community engagement demonstrate exceptional public goods impact. The project delivers outstanding user experience through battle-tested, well-documented code that has prevented countless security vulnerabilities across the ecosystem.",
+      "confidence": 0.85,
+      "mean_score": 89.33,
+      "evaluated_at": "2026-03-22T04:58:31.212921+00:00"
+    },
+    {
+      "agent_type": "funder",
+      "project_id": "openzeppelin",
+      "scores": {
+        "capital_efficiency": {
+          "score": 85,
+          "justification": "OpenZeppelin delivers exceptional output per dollar with a lean, volunteer-driven model producing battle-tested security infrastructure used across the entire ecosystem. The library's massive adoption (27k+ stars, 12k+ forks) demonstrates extraordinary leverage from minimal resources, with 494 contributors and sustained development activity indicating efficient resource utilization."
+        },
+        "funding_sustainability": {
+          "score": 75,
+          "justification": "The project benefits from OpenZeppelin's commercial services model providing diversified revenue, though the specific contracts library remains grant-dependent for maintenance. Strong institutional backing and ecosystem-critical position create sustainability, but the lack of explicit revenue models for the open-source component itself warrants some caution."
+        },
+        "track_record": {
+          "score": 95,
+          "justification": "World-class track record spanning nearly a decade with consistent delivery of secure, audited smart contract patterns that have become the industry standard. Recent commits show active security maintenance and feature development, while the project's universal adoption and reputation for reliability demonstrate exceptional execution and credibility."
+        }
+      },
+      "overall_narrative": "OpenZeppelin Contracts represents the gold standard for Ethereum public goods infrastructure, delivering exceptional security value with remarkable capital efficiency. Their decade-long track record of reliable, battle-tested code and massive ecosystem adoption justifies strong confidence in continued stewardship of public funds. While the commercial sustainability model could be more transparent, this is exactly the type of foundational infrastructure that deserves sustained support.",
+      "confidence": 0.7,
+      "mean_score": 85.0,
+      "evaluated_at": "2026-03-22T04:58:31.901955+00:00"
+    },
+    {
+      "agent_type": "ecosystem",
+      "project_id": "openzeppelin",
+      "scores": {
+        "composability": {
+          "score": 98,
+          "justification": "OpenZeppelin Contracts is the gold standard for composable smart contract infrastructure, providing modular, audited implementations of ERC standards and security patterns that thousands of projects build upon. The library's design philosophy emphasizes inheritable components and clear interfaces, making it exceptionally easy for developers to remix and integrate across the entire Ethereum ecosystem."
+        },
+        "network_effects": {
+          "score": 95,
+          "justification": "With 27,000+ GitHub stars, 12,000+ forks, and 494 contributors, OpenZeppelin has achieved massive adoption that creates powerful positive-sum dynamics\u2014every project using it benefits from collective security improvements and battle-testing. The ecosystem would be significantly less secure and more fragmented without this shared foundation, as it dramatically reduces coordination costs around secure development practices."
+        },
+        "mission_alignment": {
+          "score": 92,
+          "justification": "OpenZeppelin exemplifies Ethereum's public goods ethos through its MIT-licensed, open-source library that prioritizes security and accessibility over profit. The project actively contributes to Ethereum's roadmap by implementing emerging standards (ERC-4337, ERC-7579) and maintaining credible neutrality through community-driven governance and rigorous auditing processes."
+        }
+      },
+      "overall_narrative": "OpenZeppelin Contracts represents one of Ethereum's most critical public goods, serving as the foundational security layer that underpins thousands of protocols and applications. Its exceptional composability, massive network effects, and unwavering commitment to open-source principles make it a paradigmatic example of ecosystem-strengthening infrastructure. The project's continued evolution and adoption directly contribute to Ethereum's security, developer experience, and long-term viability.",
+      "confidence": 0.95,
+      "mean_score": 95.0,
+      "evaluated_at": "2026-03-22T04:58:32.527997+00:00"
+    }
+  ],
+  "aggregated_scores": {
+    "code_quality": 95.0,
+    "maintenance_health": 92.0,
+    "security_posture": 98.0,
+    "adoption_metrics": 95.0,
+    "community_engagement": 88.0,
+    "user_experience": 85.0,
+    "capital_efficiency": 85.0,
+    "funding_sustainability": 75.0,
+    "track_record": 95.0,
+    "composability": 98.0,
+    "network_effects": 95.0,
+    "mission_alignment": 92.0
+  },
+  "overall_score": 91.08,
+  "bradley_terry_rank": 2.406396,
+  "tensions": [],
+  "data_completeness": 0.718,
+  "evaluated_at": "2026-03-22T04:58:32.528542+00:00",
+  "bt_percentile": 90.92
+}

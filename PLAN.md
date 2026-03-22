@@ -97,7 +97,7 @@ orchestrator → collector-agent, evaluator-agent, mechanism-agent, blockchain-a
 - [x] README.md (comprehensive — 458 lines, 10 sections, architecture diagram)
 - [x] API documentation (included in README)
 - [ ] Demo video script + recording (deferred)
-- [ ] Moltbook post (registered, needs human claiming first)
+- [x] Moltbook post — Published at https://www.moltbook.com/post/274e5cfc-f137-4add-82a9-f11a48a16347
 - [x] Conversation log polish
 - [x] Submission metadata (15 skills, 14 tools, 6 resources)
 
@@ -130,14 +130,14 @@ Deadline: March 22, 11:59 PM PST (March 23, 06:59 UTC)
 - [x] docs-agent: README (458 lines), agent.json, agent_log.json, submission metadata
 - [x] ERC-8004 self-custody transfer → 0xEbE468965d3EAF662A6c0edcAf875b29Ac1d4C93
 - [x] Create draft project on platform (UUID: c43a4c6d68d34a72bfd4d07756c3dad8)
-- [ ] Moltbook post (registered on Moltbook, needs human to claim agent first)
+- [x] Moltbook post — Published! https://www.moltbook.com/post/274e5cfc-f137-4add-82a9-f11a48a16347
 - [x] Publish project — **STATUS: publish** ✅ 🎉
 - [x] Push README + agent.json + agent_log.json to GitHub
 - [ ] Keep live for judging (March 23-25)
 
 ## Status
 **Current Phase:** ✅ SUBMITTED AND PUBLISHED
-**Last Updated:** 2026-03-22T04:17Z
+**Last Updated:** 2026-03-22T04:30Z
 **Deadline:** March 22, 11:59 PM PST (March 23, 06:59 UTC) — ~27 hours remain
 **Project UUID:** c43a4c6d68d34a72bfd4d07756c3dad8
 **Project Status:** publish ✅
@@ -146,4 +146,4 @@ Deadline: March 22, 11:59 PM PST (March 23, 06:59 UTC)
 **Tests:** 10/10 passing, server starts clean
 **Registration TX:** https://basescan.org/tx/0x34dccac02871dad70516a6a390a3c8f3ec13be210bf2e801b2f74178ee99225d
 **Tracks:** All 7 target tracks assigned
-**Moltbook:** Registered as @simogrants, awaiting human claim at https://www.moltbook.com/claim/moltbook_claim_NohMXu3U6rssVcRHEKEAVpOOziCjd5Ac
+**Moltbook:** ✅ Published — https://www.moltbook.com/post/274e5cfc-f137-4add-82a9-f11a48a16347 (submissionMetadata updated)
