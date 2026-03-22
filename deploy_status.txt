@@ -1,0 +1,6 @@
+STATUS: deployed
+PUBLIC_URL: https://slow-buckets-lick.loca.lt
+HEALTH_CHECK: {"status":"ok"}
+DOCS_URL: https://slow-buckets-lick.loca.lt/docs
+ENDPOINTS: 25 API endpoints active
+NOTE: localtunnel URL - ephemeral but functional for demo/judging

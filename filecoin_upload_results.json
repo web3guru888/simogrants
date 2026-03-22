@@ -1,0 +1,73 @@
+{
+  "uploads": [
+    {
+      "project_id": "ethstaker",
+      "filename": "ethstaker_evidence.json",
+      "cid": "bafkreihnd6ecx2lbu5xegjr5vvtjuu4nfbocvpzywxrqyigox4il2u2iq4",
+      "size_bytes": 13360,
+      "url": "https://w3s.link/ipfs/bafkreihnd6ecx2lbu5xegjr5vvtjuu4nfbocvpzywxrqyigox4il2u2iq4",
+      "ipfs_io_url": "https://ipfs.io/ipfs/bafkreihnd6ecx2lbu5xegjr5vvtjuu4nfbocvpzywxrqyigox4il2u2iq4",
+      "dweb_url": "https://bafkreihnd6ecx2lbu5xegjr5vvtjuu4nfbocvpzywxrqyigox4il2u2iq4.ipfs.dweb.link"
+    },
+    {
+      "project_id": "gitcoin-passport",
+      "filename": "gitcoin-passport_evidence.json",
+      "cid": "bafkreig2c4anwrvl2l54a3ttyenirpbhffcll6ykcjci2yh5sksidlzgtm",
+      "size_bytes": 12945,
+      "url": "https://w3s.link/ipfs/bafkreig2c4anwrvl2l54a3ttyenirpbhffcll6ykcjci2yh5sksidlzgtm",
+      "ipfs_io_url": "https://ipfs.io/ipfs/bafkreig2c4anwrvl2l54a3ttyenirpbhffcll6ykcjci2yh5sksidlzgtm",
+      "dweb_url": "https://bafkreig2c4anwrvl2l54a3ttyenirpbhffcll6ykcjci2yh5sksidlzgtm.ipfs.dweb.link"
+    },
+    {
+      "project_id": "openzeppelin",
+      "filename": "openzeppelin_evidence.json",
+      "cid": "bafkreie724wjxa3nju73eebcz74rkrz5d4flrcdgegr62v2onhv6gxuusi",
+      "size_bytes": 13818,
+      "url": "https://w3s.link/ipfs/bafkreie724wjxa3nju73eebcz74rkrz5d4flrcdgegr62v2onhv6gxuusi",
+      "ipfs_io_url": "https://ipfs.io/ipfs/bafkreie724wjxa3nju73eebcz74rkrz5d4flrcdgegr62v2onhv6gxuusi",
+      "dweb_url": "https://bafkreie724wjxa3nju73eebcz74rkrz5d4flrcdgegr62v2onhv6gxuusi.ipfs.dweb.link"
+    },
+    {
+      "project_id": "protocol-guild",
+      "filename": "protocol-guild_evidence.json",
+      "cid": "bafkreic7adilyelqlypeqegqg7skdpdrk4rkvlhxu2rg52lhuvwdt4cl6a",
+      "size_bytes": 13028,
+      "url": "https://w3s.link/ipfs/bafkreic7adilyelqlypeqegqg7skdpdrk4rkvlhxu2rg52lhuvwdt4cl6a",
+      "ipfs_io_url": "https://ipfs.io/ipfs/bafkreic7adilyelqlypeqegqg7skdpdrk4rkvlhxu2rg52lhuvwdt4cl6a",
+      "dweb_url": "https://bafkreic7adilyelqlypeqegqg7skdpdrk4rkvlhxu2rg52lhuvwdt4cl6a.ipfs.dweb.link"
+    },
+    {
+      "project_id": "uniswap-v3",
+      "filename": "uniswap-v3_evidence.json",
+      "cid": "bafkreia7mlpeg2mymrczulstcrhayebdn2vsfgm7atejcjs4e242c4o6xi",
+      "size_bytes": 22146,
+      "url": "https://w3s.link/ipfs/bafkreia7mlpeg2mymrczulstcrhayebdn2vsfgm7atejcjs4e242c4o6xi",
+      "ipfs_io_url": "https://ipfs.io/ipfs/bafkreia7mlpeg2mymrczulstcrhayebdn2vsfgm7atejcjs4e242c4o6xi",
+      "dweb_url": "https://bafkreia7mlpeg2mymrczulstcrhayebdn2vsfgm7atejcjs4e242c4o6xi.ipfs.dweb.link"
+    }
+  ],
+  "evidence_directory": {
+    "root_cid": "QmdZgRRZEuvzsfPjtYzfDyzwAqwvv6Z8RMnHNahmaPPHZq",
+    "url": "https://w3s.link/ipfs/QmdZgRRZEuvzsfPjtYzfDyzwAqwvv6Z8RMnHNahmaPPHZq",
+    "ipfs_io_url": "https://ipfs.io/ipfs/QmdZgRRZEuvzsfPjtYzfDyzwAqwvv6Z8RMnHNahmaPPHZq",
+    "file_count": 5,
+    "total_size_bytes": 75297
+  },
+  "car_file": {
+    "path": "/workspace/pipeline_output/evidence_bundle.car",
+    "size_bytes": 75942,
+    "description": "CAR archive containing all evidence files, ready for Filecoin storage deals"
+  },
+  "upload_method": "ipfs-kubo-local-node",
+  "upload_details": {
+    "method": "Local IPFS Kubo node (v0.32.1) with DHT client routing",
+    "cid_version": 1,
+    "codec": "raw",
+    "hash_algorithm": "sha2-256",
+    "peers_connected": 53,
+    "dht_provided": true,
+    "note": "Files are pinned locally and provided via IPFS DHT. CIDs are content-addressed and deterministic - any IPFS node that fetches these CIDs will receive the exact evidence files. For persistent Filecoin storage, the CAR file can be submitted to a Filecoin storage provider or Storacha with proper authentication."
+  },
+  "storacha_auth_note": "Storacha (web3.storage) w3up-client and w3 CLI both require interactive email verification (clicking a link in an email sent to robin@vbrl.ai). This is not possible in a headless container environment. The DID key provided was for agent identification, not for bypassing email auth. Files are available via IPFS network instead.",
+  "timestamp": "2026-03-22T05:38:50.807Z"
+}

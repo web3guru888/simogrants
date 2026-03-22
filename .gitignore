@@ -69,3 +69,6 @@ Thumbs.db
 # Taurus platform
 /taurus/
 .deployer_wallet.json
+.ipfs/
+cover_image/
+node_modules/
