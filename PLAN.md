@@ -150,7 +150,7 @@ Deadline: March 22, 11:59 PM PST (March 23, 06:59 UTC)
 **Tracks:** All 7 target tracks assigned
 **Moltbook:** ✅ Published — https://www.moltbook.com/post/274e5cfc-f137-4add-82a9-f11a48a16347
 **Cover Image:** ✅ https://raw.githubusercontent.com/web3guru888/simogrants/main/docs/cover.png
-**Live API:** ✅ https://limited-scheme-prostate-python.trycloudflare.com (25 endpoints, Swagger at /docs)
+**Live API:** ✅ https://web3guru888.github.io/simogrants/dashboard/ (permanent dashboard via GitHub Pages, live API via Cloudflare tunnel)
 **IPFS Evidence:** ✅ 5 bundles pinned (215+ peers), directory CID: QmdZgRRZEuvzsfPjtYzfDyzwAqwvv6Z8RMnHNahmaPPHZq
 
 ## IPFS Evidence CIDs
