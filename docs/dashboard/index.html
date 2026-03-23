@@ -104,6 +104,10 @@
     <span class="status-dot" id="status-dot"></span>
     <span id="status-text">Checking API status...</span>
   </div>
+  <div style="margin:10px auto;max-width:600px;">
+    <input id="api-url-input" type="text" placeholder="API Base URL" style="width:70%;padding:8px 14px;border-radius:8px 0 0 8px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.1);color:white;font-size:0.9rem;outline:none;" />
+    <button onclick="updateApiUrl()" style="padding:8px 16px;border-radius:0 8px 8px 0;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.2);color:white;cursor:pointer;font-size:0.9rem;">Update</button>
+  </div>
   <div class="nav-links">
     <a href="https://github.com/web3guru888/simogrants" target="_blank">📂 GitHub Repo</a>
     <a href="#" id="swagger-link" target="_blank">📡 Swagger UI</a>
@@ -289,32 +293,80 @@
 </footer>
 
 <script>
-const API_BASE = "https://classics-interact-sites-oxygen.trycloudflare.com";
+// API URL management — tries saved URL, then falls back to known tunnels
+let API_BASE = localStorage.getItem('simogrants_api_url') || "";
 
-// Check API status
+const KNOWN_URLS = [
+  "https://statements-adjusted-portraits-nano.trycloudflare.com",
+  "https://classics-interact-sites-oxygen.trycloudflare.com",
+  "http://localhost:8000"
+];
+
+function updateApiUrl() {
+  const input = document.getElementById('api-url-input');
+  const url = input.value.replace(/\/+$/, '');
+  if (url) {
+    API_BASE = url;
+    localStorage.setItem('simogrants_api_url', url);
+    checkStatus();
+  }
+}
+
+async function probe(url) {
+  try {
+    const r = await fetch(url + '/health', { signal: AbortSignal.timeout(4000) });
+    if (r.ok) { const d = await r.json(); return d.status === 'ok'; }
+  } catch {}
+  return false;
+}
+
+async function autoDiscover() {
+  // Try saved URL first
+  if (API_BASE && await probe(API_BASE)) return API_BASE;
+  // Try known URLs
+  for (const url of KNOWN_URLS) {
+    if (await probe(url)) {
+      API_BASE = url;
+      localStorage.setItem('simogrants_api_url', url);
+      return url;
+    }
+  }
+  return null;
+}
+
 async function checkStatus() {
   const dot = document.getElementById('status-dot');
   const text = document.getElementById('status-text');
   const link = document.getElementById('swagger-link');
-  link.href = API_BASE + '/docs';
-  try {
-    const r = await fetch(API_BASE + '/health', { signal: AbortSignal.timeout(5000) });
-    if (r.ok) {
-      dot.className = 'status-dot online';
-      text.textContent = 'API Online — ' + API_BASE;
-    } else { throw new Error(); }
-  } catch {
+  const input = document.getElementById('api-url-input');
+
+  const found = await autoDiscover();
+  if (found) {
+    API_BASE = found;
+    input.value = API_BASE;
+    link.href = API_BASE + '/docs';
+    dot.className = 'status-dot online';
+    text.textContent = 'API Online — ' + API_BASE;
+  } else {
     dot.className = 'status-dot offline';
-    text.textContent = 'API Offline (tunnel may have restarted) — check GitHub for setup instructions';
+    text.innerHTML = 'API Offline — Paste a tunnel URL above, or run locally: <code style="background:rgba(255,255,255,0.15);padding:2px 8px;border-radius:4px;">python3 -m uvicorn src.main:app</code>';
+    link.href = 'https://github.com/web3guru888/simogrants#-quick-start';
+    if (API_BASE) input.value = API_BASE;
   }
 }
 
-// Try endpoint
 async function tryEndpoint(path) {
   const box = document.getElementById('api-response');
   const label = document.getElementById('api-endpoint');
   const result = document.getElementById('api-result');
   box.style.display = 'block';
+
+  if (!API_BASE) {
+    label.textContent = 'GET ' + path;
+    result.textContent = 'No API URL configured. Paste a tunnel URL in the input above and click Update.';
+    return;
+  }
+
   label.textContent = 'GET ' + API_BASE + path;
   result.textContent = 'Loading...';
   try {
@@ -322,12 +374,19 @@ async function tryEndpoint(path) {
     const data = await r.json();
     result.textContent = JSON.stringify(data, null, 2);
   } catch (e) {
-    result.textContent = 'Error: ' + e.message + '\n\nThe tunnel may be down. Visit the GitHub repo for local setup instructions.';
+    result.textContent = 'Error: ' + e.message + '\n\nThe API tunnel may be down. You can:\n1. Paste a new tunnel URL above\n2. Clone the repo and run locally: python3 -m uvicorn src.main:app\n3. Visit the GitHub repo for full instructions';
   }
 }
 
+// Check URL query parameter (allows sharing: ?api=https://...)
+const params = new URLSearchParams(window.location.search);
+if (params.get('api')) {
+  API_BASE = params.get('api').replace(/\/+$/, '');
+  localStorage.setItem('simogrants_api_url', API_BASE);
+}
+
 checkStatus();
-setInterval(checkStatus, 30000);
+setInterval(checkStatus, 60000);
 </script>
 </body>
 </html>
