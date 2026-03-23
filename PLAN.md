@@ -133,14 +133,14 @@ Deadline: March 22, 11:59 PM PST (March 23, 06:59 UTC)
 - [x] Moltbook post — Published! https://www.moltbook.com/post/274e5cfc-f137-4add-82a9-f11a48a16347
 - [x] Publish project — **STATUS: publish** ✅ 🎉
 - [x] Push README + agent.json + agent_log.json to GitHub
-- [x] Live API deployed via localtunnel: https://slow-buckets-lick.loca.lt (25 endpoints)
+- [x] Live API deployed via localtunnel: https://solid-rivers-cover.loca.lt (25 endpoints)
 - [x] Cover image uploaded: https://raw.githubusercontent.com/web3guru888/simogrants/main/docs/cover.png
 - [x] Project updated with coverImageURL + deployedURL
 
 ## Status
 **Current Phase:** ✅ SUBMITTED, PUBLISHED, AND FULLY OPERATIONAL
-**Last Updated:** 2026-03-22T06:24Z
-**Deadline:** March 22, 11:59 PM PST (March 23, 06:59 UTC) — ~25 hours remain
+**Last Updated:** 2026-03-23T02:43Z
+**Deadline:** March 22, 11:59 PM PST (March 23, 06:59 UTC) — ~4 hours remain
 **Project UUID:** c43a4c6d68d34a72bfd4d07756c3dad8
 **Project Status:** publish ✅
 **Repo:** https://github.com/web3guru888/simogrants (public, mainnet deployment updates pending push)
@@ -150,7 +150,7 @@ Deadline: March 22, 11:59 PM PST (March 23, 06:59 UTC)
 **Tracks:** All 7 target tracks assigned
 **Moltbook:** ✅ Published — https://www.moltbook.com/post/274e5cfc-f137-4add-82a9-f11a48a16347
 **Cover Image:** ✅ https://raw.githubusercontent.com/web3guru888/simogrants/main/docs/cover.png
-**Live API:** ✅ https://slow-buckets-lick.loca.lt (25 endpoints, Swagger at /docs)
+**Live API:** ✅ https://solid-rivers-cover.loca.lt (25 endpoints, Swagger at /docs)
 **IPFS Evidence:** ✅ 5 bundles pinned (215+ peers), directory CID: QmdZgRRZEuvzsfPjtYzfDyzwAqwvv6Z8RMnHNahmaPPHZq
 
 ## IPFS Evidence CIDs
