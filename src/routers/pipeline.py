@@ -121,7 +121,7 @@ async def _execute_pipeline(run_id: str, project_ids: list[str], matching_pool: 
         try:
             from src.evaluator.engine import EvaluationEngine
             from src.config import settings
-            evaluator = EvaluationEngine(settings.anthropic_api_key, settings.evaluator_model)
+            evaluator = EvaluationEngine(settings.asi1_api_key, settings.evaluator_model)
         except ImportError:
             evaluator = None
 

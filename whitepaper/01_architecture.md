@@ -47,7 +47,7 @@ SIMOGRANTS addresses each through its three-layer architecture.
 - **API Framework:** FastAPI with uvicorn
 - **Database:** SQLite (via aiosqlite for async)
 - **HTTP Client:** httpx (async)
-- **LLM:** Claude Sonnet 4 via Anthropic API
+- **LLM:** ASI1-mini via ASI1 API (https://api.asi1.ai/v1/chat/completions)
 - **Math:** scipy (Bradley-Terry, optimization), numpy
 - **Graph:** networkx (PageRank, dependency graphs)
 - **Blockchain:** Solidity 0.8.20+, ethers.js, Hardhat
@@ -112,7 +112,7 @@ collector:
   cache_ttl_hours: 24
 
 evaluator:
-  model: "claude-sonnet-4-20250514"
+  model: "asi1-mini"
   temperature: 0.3
   max_tokens: 4096
   stakeholder_agents:

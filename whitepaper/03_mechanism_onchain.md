@@ -399,7 +399,7 @@ Each evaluation produces a JSON evidence bundle uploaded to Filecoin:
   },
   "evaluation_hash": "0x...",
   "metadata": {
-    "model": "claude-sonnet-4-20250514",
+    "model": "asi1-mini",
     "system_version": "1.0.0",
     "data_completeness": 0.72
   }

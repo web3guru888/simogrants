@@ -248,7 +248,7 @@ Target projects for evaluation:
 
 # API Keys (from environment variables)
 env:
-  ANTHROPIC_API_KEY: ""           # For LLM evaluations
+  ASI1_API_KEY: ""                # For LLM evaluations (ASI1-mini)
   GITHUB_TOKEN: ""                # GitHub API (optional, higher rate limits)
   ETHERSCAN_API_KEY: ""           # Etherscan API
   WEB3_STORAGE_TOKEN: ""          # Filecoin uploads
@@ -266,7 +266,7 @@ collector:
 
 # Evaluator configuration
 evaluator:
-  model: "claude-sonnet-4-20250514"
+  model: "asi1-mini"
   temperature: 0.3
   max_tokens: 4096
   stakeholder_agents:

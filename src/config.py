@@ -22,7 +22,6 @@ class Settings:
     collector_cache_ttl_hours: int = 24
 
     # API Keys (from environment — NEVER log these)
-    anthropic_api_key: str = ""
     asi1_api_key: str = ""
     github_token: str = ""
     etherscan_api_key: str = ""
@@ -58,7 +57,6 @@ class Settings:
     def from_env(cls) -> "Settings":
         """Load settings from environment variables."""
         return cls(
-            anthropic_api_key=os.environ.get("ANTHROPIC_API_KEY", ""),
             asi1_api_key=os.environ.get("ASI1_API_KEY", ""),
             github_token=os.environ.get("GITHUB_TOKEN", ""),
             etherscan_api_key=os.environ.get("ETHERSCAN_API_KEY", ""),

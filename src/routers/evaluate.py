@@ -40,7 +40,7 @@ async def evaluate_project(project_id: str, req: EvaluateRequest | None = None):
         from src.config import settings
 
         engine = EvaluationEngine(
-            api_key=settings.anthropic_api_key,
+            api_key=settings.asi1_api_key,
             model=settings.evaluator_model,
         )
         result = await engine.evaluate_project(profile["profile_data"])
@@ -96,7 +96,7 @@ async def batch_evaluate(req: BatchEvaluateRequest):
             from src.config import settings
 
             engine = EvaluationEngine(
-                api_key=settings.anthropic_api_key,
+                api_key=settings.asi1_api_key,
                 model=settings.evaluator_model,
             )
             result = await engine.evaluate_project(profile["profile_data"])

@@ -15,8 +15,14 @@ import time
 from datetime import datetime, timezone
 from typing import Any, Optional
 
-import anthropic
 import httpx
+
+try:
+    import anthropic
+    _AnthropicAPIError = anthropic.APIError
+except ImportError:
+    anthropic = None  # Anthropic SDK optional; ASI1 is the primary provider
+    _AnthropicAPIError = Exception  # Fallback so except clauses still work
 
 from .models import (
     DimensionScore,
@@ -68,7 +74,7 @@ class EvaluationEngine:
         Initialize the evaluation engine.
 
         Args:
-            api_key: Anthropic API key.
+            api_key: ASI1 API key (or Anthropic key if using anthropic provider).
             model: Model to use for LLM calls.
             weights: Optional stakeholder weights for aggregation.
             tension_threshold: Spread threshold for tension detection.
@@ -76,7 +82,11 @@ class EvaluationEngine:
         self._api_key = api_key
         self._model = model
         self._provider = "asi1" if model.startswith("asi1") else "anthropic"
-        self._client = anthropic.AsyncAnthropic(api_key=api_key) if self._provider == "anthropic" else None
+        self._client = (
+            anthropic.AsyncAnthropic(api_key=api_key)
+            if self._provider == "anthropic" and anthropic is not None
+            else None
+        )
         self._weights = weights or self.DEFAULT_WEIGHTS.copy()
         self._tension_threshold = tension_threshold
 
@@ -240,7 +250,7 @@ class EvaluationEngine:
                     "JSON parse error from %s (attempt %d): %s",
                     agent_type, attempt, e,
                 )
-            except anthropic.APIError as e:
+            except _AnthropicAPIError as e:
                 last_error = e
                 logger.warning(
                     "API error from %s (attempt %d): %s",
