@@ -2,5 +2,15 @@
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^6.1.2",
     "hardhat": "^2.28.6"
+  },
+  "dependencies": {
+    "@ipld/car": "^5.4.2",
+    "@ipld/dag-json": "^10.2.6",
+    "@ipld/unixfs": "^3.0.0",
+    "@storacha/client": "^2.1.2",
+    "@web3-storage/w3up-client": "^17.3.0",
+    "blockstore-core": "^6.1.2",
+    "ipfs-unixfs-importer": "^16.1.4",
+    "multiformats": "^13.4.2"
   }
 }
