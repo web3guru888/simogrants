@@ -29,6 +29,7 @@
     "languages": ["Python 3.11", "Solidity 0.8.20+", "JavaScript"],
     "frameworks": ["FastAPI", "Hardhat"],
     "libraries": ["httpx", "scipy", "networkx", "numpy", "aiosqlite", "ethers.js", "Pydantic"],
+    "llm": {"model": "asi1-mini", "provider": "ASI1", "api": "https://api.asi1.ai/v1/chat/completions"},
     "infrastructure": ["Taurus Agent Platform", "Base L2", "Filecoin", "SQLite"]
   },
   "compute_constraints": {

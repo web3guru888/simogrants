@@ -60,7 +60,7 @@ class EvaluationEngine:
     def __init__(
         self,
         api_key: str,
-        model: str = "claude-sonnet-4-20250514",
+        model: str = "asi1-mini",
         weights: Optional[dict[str, float]] = None,
         tension_threshold: int = 35,
     ) -> None:

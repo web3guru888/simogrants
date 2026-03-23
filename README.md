@@ -231,7 +231,7 @@ This is not a "one prompt to rule them all" system — it's a genuine multi-agen
 | Layer | Technologies |
 |-------|-------------|
 | **Backend** | Python 3.11, FastAPI, httpx, aiosqlite, Pydantic |
-| **AI / Evaluation** | Anthropic Claude, structured JSON prompts, asyncio parallel execution |
+| **AI / Evaluation** | ASI1-mini (via ASI1 API), structured JSON prompts, asyncio parallel execution |
 | **Math** | scipy (L-BFGS-B optimization), networkx (PageRank), numpy |
 | **Blockchain** | Solidity 0.8.20+, Hardhat, ethers.js, Base mainnet / Base Sepolia |
 | **Storage** | Filecoin via web3.storage + Lighthouse fallback |
@@ -245,7 +245,7 @@ This is not a "one prompt to rule them all" system — it's a genuine multi-agen
 
 - Python 3.11+
 - Node.js 18+ (for smart contract tooling)
-- API key for LLM provider (Anthropic)
+- API key for LLM provider (ASI1 — get one at https://asi1.ai)
 - Optional: Filecoin storage token, Etherscan API key
 
 ### 1. Clone & Install
@@ -259,8 +259,8 @@ pip install -r requirements.txt
 ### 2. Configure Environment
 
 ```bash
-# Required for evaluation
-export ANTHROPIC_API_KEY=your_key
+# Required for evaluation (ASI1 LLM provider)
+export ASI1_API_KEY=your_key
 
 # Optional — collector API keys
 export ETHERSCAN_API_KEY=your_key
