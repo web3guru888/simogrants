@@ -42,6 +42,7 @@ export function RoundDetail() {
   const deadline = new Date(round.applicationDeadline);
   const isExpired = deadline < new Date();
   const canApply = round.status === 'active' || round.status === 'accepting';
+  const appCount = applications.length;
 
   return (
     <div className="min-h-screen bg-slate-900">
@@ -98,7 +99,7 @@ export function RoundDetail() {
             <div className="rounded-xl bg-slate-800/50 border border-slate-700/50 p-4">
               <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Applications</div>
               <div className="text-xl font-bold text-slate-200">
-                {round.applicationsCount} <span className="text-sm text-slate-400">/ {round.maxApplications}</span>
+                {appCount} <span className="text-sm text-slate-400">/ {round.maxApplications}</span>
               </div>
             </div>
             <div className="rounded-xl bg-slate-800/50 border border-slate-700/50 p-4">

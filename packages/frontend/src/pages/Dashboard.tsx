@@ -20,14 +20,23 @@ export function Dashboard() {
     setLoading(true);
     setError(null);
     try {
-      const [user, roundsData, projectsData] = await Promise.all([
-        api.getMe(),
+      // Always fetch public data (rounds & projects)
+      const [roundsData, projectsData] = await Promise.all([
         api.getRounds(),
         api.getProjects(),
       ]);
-      setUserInfo(user);
       setRounds(roundsData.rounds);
       setProjects(projectsData.projects);
+
+      // Only fetch user-specific data if connected
+      if (isConnected && api.getToken()) {
+        try {
+          const user = await api.getMe();
+          setUserInfo(user);
+        } catch {
+          // Auth expired or invalid - show dashboard with public data
+        }
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load dashboard');
     } finally {
@@ -56,11 +65,22 @@ export function Dashboard() {
           </div>
           <h2 className="text-2xl font-bold text-white mb-3">Connect Your Wallet</h2>
           <p className="text-slate-400 mb-6">
-            Connect your wallet to access your dashboard, view your rounds, and track your applications.
+            Connect your wallet to access your personalized dashboard, view your rounds, and track your applications.
           </p>
           <p className="text-sm text-slate-500">
             Use the "Connect Wallet" button in the navigation bar to get started.
           </p>
+          {/* Show public stats even when not connected */}
+          <div className="mt-8 grid grid-cols-2 gap-3">
+            <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-4">
+              <div className="text-2xl font-bold text-white">{rounds.length}</div>
+              <div className="text-xs text-slate-500 mt-1">Total Rounds</div>
+            </div>
+            <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-4">
+              <div className="text-2xl font-bold text-white">{projects.length}</div>
+              <div className="text-xs text-slate-500 mt-1">Total Projects</div>
+            </div>
+          </div>
         </div>
       </div>
     );
