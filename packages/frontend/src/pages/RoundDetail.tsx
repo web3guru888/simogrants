@@ -173,9 +173,9 @@ export function RoundDetail() {
                           )}
                         </p>
                       </div>
-                      {app.overallScore !== undefined && (
+                      {((app as any).projectScore ?? app.overallScore) !== undefined && (
                         <div className="w-48 shrink-0">
-                          <ScoreBar score={app.overallScore} label="Overall Score" color="violet" />
+                          <ScoreBar score={(app as any).projectScore ?? app.overallScore!} label="Overall Score" color="violet" />
                         </div>
                       )}
                     </div>
@@ -195,7 +195,7 @@ export function RoundDetail() {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <div>
                   <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Total Applications</div>
-                  <div className="text-xl font-bold text-white">{statistics.totalApplications}</div>
+                  <div className="text-xl font-bold text-white">{appCount}</div>
                 </div>
                 <div>
                   <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Matching Pool</div>
@@ -207,7 +207,7 @@ export function RoundDetail() {
                 </div>
                 <div>
                   <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Avg. Score</div>
-                  <div className="text-xl font-bold text-violet-400">{statistics.averageScore.toFixed(1)}</div>
+                  <div className="text-xl font-bold text-violet-400">{statistics.averageScore != null ? statistics.averageScore.toFixed(1) : '—'}</div>
                 </div>
               </div>
             </div>

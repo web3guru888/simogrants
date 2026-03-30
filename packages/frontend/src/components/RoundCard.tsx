@@ -35,7 +35,7 @@ export function RoundCard({ round }: RoundCardProps) {
         <div>
           <div className="text-xs text-slate-500 uppercase tracking-wider">Applications</div>
           <div className="text-sm font-semibold text-slate-200">
-            {round.applicationsCount}/{round.maxApplications}
+            {(round.applicationsCount ?? 0)}/{round.maxApplications}
           </div>
         </div>
         <div>
