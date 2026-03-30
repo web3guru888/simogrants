@@ -11,9 +11,10 @@
 
 | Component | URL |
 |-----------|-----|
-| **Frontend** | [https://simogrants.pages.dev](https://simogrants.pages.dev) |
-| **Backend API** | [https://simogrants-api.web3guru888.workers.dev/api](https://simogrants-api.web3guru888.workers.dev/api) |
-| **API Health** | [https://simogrants-api.web3guru888.workers.dev/api/health](https://simogrants-api.web3guru888.workers.dev/api/health) |
+| **Frontend** | [https://simogrants.com](https://simogrants.com) ([.pages.dev](https://simogrants.pages.dev)) |
+| **Backend API** | [https://simogrants-api.jingjai.workers.dev/api](https://simogrants-api.jingjai.workers.dev/api) |
+| **API Health** | [https://simogrants-api.jingjai.workers.dev/api/health](https://simogrants-api.jingjai.workers.dev/api/health) |
+| **Custom Domain** | [https://simogrants.com](https://simogrants.com) |
 
 ## 🎯 What is SIMOGRANTS?
 

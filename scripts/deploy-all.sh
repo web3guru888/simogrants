@@ -159,16 +159,21 @@ echo "════════════════════════�
 echo ""
 if [ -n "$FRONTEND_URL" ]; then
   echo -e "  🌐 Frontend:   ${CYAN}$FRONTEND_URL${NC}"
+  echo -e "  🌐 Custom:     ${CYAN}https://simogrants.com${NC}"
 fi
 if [ -n "$BACKEND_URL" ]; then
   echo -e "  ⚙️  API:        ${CYAN}$BACKEND_URL${NC}"
   echo -e "  🏥 Health:     ${CYAN}${BACKEND_URL}/api/health${NC}"
+else
+  # If backend wasn't deployed just now, show known production URL
+  echo -e "  ⚙️  API (prod): ${CYAN}https://simogrants-api.jingjai.workers.dev${NC}"
 fi
 echo ""
 echo "  📊 D1 Database: simogrants-db"
 echo "  🔑 KV:         SESSIONS namespace"
 echo "  📦 R2:         simogrants-evidence bucket"
 echo ""
+API_CHECK_URL="${BACKEND_URL:-https://simogrants-api.jingjai.workers.dev}"
 echo "  💡 To verify the backend is working:"
-echo "     curl $BACKEND_URL/api/health"
+echo "     curl $API_CHECK_URL/api/health"
 echo ""
