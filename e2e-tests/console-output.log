@@ -1,0 +1,13 @@
+[Test 4: Round Results] [error] https://simogrants.pages.dev/rounds/round-001/results
+  Failed to load resource: the server responded with a status of 400 ()
+
+[Test 4: Round Results] [error] https://simogrants.pages.dev/rounds/round-001/results
+  Failed to load resource: the server responded with a status of 403 ()
+
+[Test 4: Round Results] [warning] https://simogrants.pages.dev/rounds/round-001/results
+  [Reown Config] Failed to fetch remote project configuration. Using local/default values. Error: HTTP status code: 403
+    at Zr (https://simogrants.pages.dev/assets/core-DGJfjGJj.js:2:35720)
+    at async Li.get (https://simogrants.pages.dev/assets/core-DGJfjGJj.js:2:35936)
+    at async Object.fetchProjectConfig (https://simogrants.pages.dev/assets/core-DGJfjGJj.js:4:6414)
+    at async Object.fetchRemoteFeatures (https://simogrants.pages.dev/assets/core-DGJfjGJj.js:908:14946)
+    at async $h.initialize (https://simogrants.pages.dev/assets/core-DGJfjGJj.js:908:19812)

@@ -155,16 +155,16 @@ export function RoundResults() {
                       </span>
                     </td>
                     <td className="px-6 py-4 text-sm text-slate-300">
-                      {entry.sqfDetails.qfBase.toLocaleString()}
+                      {entry.sqfDetails?.qfBase?.toLocaleString() ?? '—'}
                     </td>
                     <td className="px-6 py-4">
-                      <span className={`text-sm font-medium ${entry.sqfDetails.pheromoneMod >= 1 ? 'text-emerald-400' : 'text-red-400'}`}>
-                        {entry.sqfDetails.pheromoneMod.toFixed(2)}x
+                      <span className={`text-sm font-medium ${(entry.sqfDetails?.pheromoneMod ?? 1) >= 1 ? 'text-emerald-400' : 'text-red-400'}`}>
+                        {entry.sqfDetails?.pheromoneMod?.toFixed(2) ?? '—'}x
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <span className={`text-sm font-medium ${entry.sqfDetails.pagerankMod >= 1 ? 'text-emerald-400' : 'text-red-400'}`}>
-                        {entry.sqfDetails.pagerankMod.toFixed(2)}x
+                      <span className={`text-sm font-medium ${(entry.sqfDetails?.pagerankMod ?? 1) >= 1 ? 'text-emerald-400' : 'text-red-400'}`}>
+                        {entry.sqfDetails?.pagerankMod?.toFixed(2) ?? '—'}x
                       </span>
                     </td>
                     <td className="px-6 py-4">
@@ -206,12 +206,12 @@ export function RoundResults() {
                 </div>
                 <ScoreBar score={entry.score} size="sm" color="violet" />
                 <div className="flex gap-4 text-xs text-slate-500">
-                  <span>QF: {entry.sqfDetails.qfBase.toLocaleString()}</span>
-                  <span className={entry.sqfDetails.pheromoneMod >= 1 ? 'text-emerald-400' : 'text-red-400'}>
-                    Phero: {entry.sqfDetails.pheromoneMod.toFixed(2)}x
+                  <span>QF: {entry.sqfDetails?.qfBase?.toLocaleString() ?? '—'}</span>
+                  <span className={(entry.sqfDetails?.pheromoneMod ?? 1) >= 1 ? 'text-emerald-400' : 'text-red-400'}>
+                    Phero: {entry.sqfDetails?.pheromoneMod?.toFixed(2) ?? '—'}x
                   </span>
-                  <span className={entry.sqfDetails.pagerankMod >= 1 ? 'text-emerald-400' : 'text-red-400'}>
-                    PR: {entry.sqfDetails.pagerankMod.toFixed(2)}x
+                  <span className={(entry.sqfDetails?.pagerankMod ?? 1) >= 1 ? 'text-emerald-400' : 'text-red-400'}>
+                    PR: {entry.sqfDetails?.pagerankMod?.toFixed(2) ?? '—'}x
                   </span>
                 </div>
               </div>
