@@ -10,6 +10,61 @@ import { SQFMechanism } from '../lib/sqf';
 
 export const evaluationRoutes = new Hono<{ Bindings: Env }>();
 
+// --- GET /api/evaluations (list with optional round_id filter) ---
+evaluationRoutes.get('/evaluations', async (c) => {
+  const roundId = c.req.query('round_id');
+
+  let query: string;
+  const params: unknown[] = [];
+
+  if (roundId) {
+    query = `SELECT e.*, a.project_id, a.round_id, r.title as round_title
+             FROM evaluations e
+             JOIN applications a ON e.application_id = a.id
+             JOIN rounds r ON a.round_id = r.id
+             WHERE a.round_id = ?
+             ORDER BY e.evaluated_at DESC`;
+    params.push(roundId);
+  } else {
+    query = `SELECT e.*, a.project_id, a.round_id, r.title as round_title
+             FROM evaluations e
+             JOIN applications a ON e.application_id = a.id
+             JOIN rounds r ON a.round_id = r.id
+             ORDER BY e.evaluated_at DESC
+             LIMIT 50`;
+  }
+
+  const { results: evalRows } = await c.env.DB.prepare(query).bind(...params).all();
+
+  const evaluations = (evalRows || []).map((row: Record<string, unknown>) => {
+    let evalData;
+    try {
+      evalData = typeof row.evaluation_data === 'string'
+        ? JSON.parse(row.evaluation_data)
+        : row.evaluation_data;
+    } catch {
+      evalData = null;
+    }
+
+    return {
+      id: row.id,
+      applicationId: row.application_id,
+      projectId: row.project_id,
+      roundId: row.round_id,
+      roundTitle: row.round_title,
+      stakeholderEvaluations: evalData?.stakeholder_evaluations || null,
+      aggregatedScores: evalData?.aggregated_scores || null,
+      overallScore: row.overall_score,
+      tensions: evalData?.tensions || null,
+      bradleyTerryRank: row.bradley_terry_rank,
+      dataCompleteness: row.data_completeness,
+      evaluatedAt: row.evaluated_at,
+    };
+  });
+
+  return c.json({ evaluations, total: evaluations.length });
+});
+
 // --- POST /api/rounds/:roundId/evaluate ---
 evaluationRoutes.post('/rounds/:roundId/evaluate', authMiddleware, async (c) => {
   const roundId = c.req.param('roundId');
@@ -217,7 +272,7 @@ evaluationRoutes.get('/pipeline/:runId', async (c) => {
     }>();
 
   if (!pipeline) {
-    return c.json({ error: 'Pipeline run not found' }, 404);
+    return c.json({ error: 'Pipeline run not found', code: 404 }, 404);
   }
 
   // Get progress

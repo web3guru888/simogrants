@@ -50,7 +50,7 @@ authRoutes.post('/nonce', async (c) => {
 const verifySchema = z.object({
   message: z.string().min(1),
   signature: z.string().min(1),
-  address: z.string().min(1),
+  address: z.string().min(1).optional(),
 });
 
 authRoutes.post('/verify', async (c) => {
@@ -58,11 +58,25 @@ authRoutes.post('/verify', async (c) => {
   try {
     body = verifySchema.parse(await c.req.json());
   } catch {
-    return c.json({ error: 'Invalid request body. Expected { message, signature, address }' }, 400);
+    return c.json({ error: 'Invalid request body. Expected { message, signature }' }, 400);
   }
 
-  const { message, signature, address } = body;
-  const normalizedAddress = address.toLowerCase();
+  const { message, signature } = body;
+
+  // Extract address from SIWE-style message if not provided
+  let normalizedAddress: string;
+  if (body.address) {
+    normalizedAddress = body.address.toLowerCase();
+  } else {
+    const addressMatch = message.match(/\n([a-zA-Z0-9]{40,42})\n/);
+    if (addressMatch) {
+      normalizedAddress = addressMatch[1].toLowerCase();
+      if (!normalizedAddress.startsWith('0x')) normalizedAddress = '0x' + normalizedAddress;
+    } else {
+      // Fallback: can't determine address, reject
+      return c.json({ error: 'Could not extract address from message. Please include address in request body.' }, 400);
+    }
+  }
 
   // For demo: skip actual crypto verification and just accept valid-looking inputs
   // In production, you'd use viem's `verifyMessage` or siwe package

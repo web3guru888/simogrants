@@ -138,8 +138,8 @@ roundRoutes.get('/:id', async (c) => {
   // Get statistics
   const stats = await c.env.DB.prepare(
     `SELECT
-       COUNT(*) as total_applications,
-       (SELECT SUM(e.overall_score) FROM evaluations e
+       (SELECT COUNT(*) FROM applications WHERE round_id = ?) as total_applications,
+       (SELECT COALESCE(SUM(e.overall_score), 0) FROM evaluations e
         JOIN applications a2 ON e.application_id = a2.id
         WHERE a2.round_id = ?) as total_score,
        (SELECT AVG(e.overall_score) FROM evaluations e
@@ -148,7 +148,7 @@ roundRoutes.get('/:id', async (c) => {
        (SELECT COALESCE(SUM(al.amount), 0) FROM allocations al
         WHERE al.round_id = ?) as total_allocated`
   )
-    .bind(id, id, id)
+    .bind(id, id, id, id)
     .first<{
       total_applications: number;
       total_score: number;
@@ -232,6 +232,93 @@ roundRoutes.patch('/:id', authMiddleware, async (c) => {
     .first();
 
   return c.json({ round: updated });
+});
+
+// --- POST /api/rounds/:id/apply (auth required) ---
+const applySchema = z.object({
+  projectId: z.string().min(1),
+});
+
+roundRoutes.post('/:id/apply', authMiddleware, async (c) => {
+  const roundId = c.req.param('id');
+  const userAddress = c.get('userAddress');
+
+  let body: z.infer<typeof applySchema>;
+  try {
+    body = applySchema.parse(await c.req.json());
+  } catch {
+    return c.json({ error: 'Validation error. Expected { projectId }' }, 400);
+  }
+
+  // Verify round exists and is accepting
+  const round = await c.env.DB.prepare('SELECT * FROM rounds WHERE id = ?')
+    .bind(roundId)
+    .first<{ status: string; application_deadline: string | null; max_applications: number | null }>();
+
+  if (!round) {
+    return c.json({ error: 'Round not found' }, 404);
+  }
+
+  if (round.status !== 'active' && round.status !== 'accepting') {
+    return c.json({ error: `Round is ${round.status}, not accepting applications` }, 409);
+  }
+
+  // Verify project exists and belongs to user
+  const project = await c.env.DB.prepare('SELECT * FROM projects WHERE id = ?')
+    .bind(body.projectId)
+    .first<{ created_by: string }>();
+
+  if (!project) {
+    return c.json({ error: 'Project not found' }, 404);
+  }
+
+  if (project.created_by.toLowerCase() !== userAddress.toLowerCase()) {
+    return c.json({ error: 'Only the project creator can apply' }, 403);
+  }
+
+  // Check for duplicate application
+  const existing = await c.env.DB.prepare(
+    'SELECT id FROM applications WHERE round_id = ? AND project_id = ?'
+  )
+    .bind(roundId, body.projectId)
+    .first();
+
+  if (existing) {
+    return c.json({ error: 'Project already applied to this round' }, 409);
+  }
+
+  // Check application limit
+  const appCount = await c.env.DB.prepare(
+    'SELECT COUNT(*) as count FROM applications WHERE round_id = ?'
+  )
+    .bind(roundId)
+    .first<{ count: number }>();
+
+  if (appCount && round.max_applications && appCount.count >= round.max_applications) {
+    return c.json({ error: 'Round has reached maximum applications' }, 409);
+  }
+
+  // Create application
+  const appId = `app-${body.projectId.slice(0, 12)}-${roundId.slice(0, 12)}`;
+  const now = new Date().toISOString();
+
+  await c.env.DB.prepare(
+    `INSERT INTO applications (id, round_id, project_id, status, applied_at)
+     VALUES (?, ?, ?, 'submitted', ?)`
+  )
+    .bind(appId, roundId, body.projectId, now)
+    .run();
+
+  return c.json(
+    {
+      applicationId: appId,
+      roundId,
+      projectId: body.projectId,
+      status: 'submitted',
+      appliedAt: now,
+    },
+    201
+  );
 });
 
 // --- POST /api/rounds/:id/close ---

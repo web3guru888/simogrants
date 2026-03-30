@@ -230,7 +230,19 @@ export function RoundDetail() {
                 {round.contractAddress && (
                   <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
                     <dt className="text-sm text-slate-500 sm:w-40">Contract</dt>
-                    <dd className="text-sm text-slate-300 font-mono">{round.contractAddress.slice(0, 10)}...{round.contractAddress.slice(-8)}</dd>
+                    <dd>
+                      <a
+                        href={`https://sepolia.basescan.org/address/${round.contractAddress}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-violet-400 hover:text-violet-300 font-mono transition-colors"
+                      >
+                        {round.contractAddress.slice(0, 10)}...{round.contractAddress.slice(-8)}
+                        <svg className="inline w-3 h-3 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </a>
+                    </dd>
                   </div>
                 )}
               </dl>
