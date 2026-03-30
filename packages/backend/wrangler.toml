@@ -1,0 +1,24 @@
+name = "simogrants-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "simogrants-db"
+database_id = "0b0bc658-b6ea-429c-9634-ff2475702d28"
+
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "d795fd0e52154eabb348f65ebb8bad26"
+
+[[r2_buckets]]
+binding = "EVIDENCE"
+bucket_name = "simogrants-evidence"
+
+[vars]
+ENVIRONMENT = "development"
+
+[dev]
+port = 8787
+local_protocol = "http"

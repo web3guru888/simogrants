@@ -1,0 +1,29 @@
+{
+  "name": "simogrants-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --local",
+    "deploy": "wrangler deploy",
+    "deploy:dry-run": "wrangler deploy --dry-run",
+    "db:init": "wrangler d1 execute simogrants-db --local --file=migrations/0001_initial.sql",
+    "db:seed": "wrangler d1 execute simogrants-db --local --file=migrations/0002_seed_data.sql",
+    "db:init:remote": "wrangler d1 execute simogrants-db --remote --file=migrations/0001_initial.sql",
+    "db:seed:remote": "wrangler d1 execute simogrants-db --remote --file=migrations/0002_seed_data.sql",
+    "db:reset": "wrangler d1 execute simogrants-db --local --command=\"PRAGMA foreign_keys=off;\" && wrangler d1 execute simogrants-db --local --file=migrations/0001_initial.sql && wrangler d1 execute simogrants-db --local --file=migrations/0002_seed_data.sql",
+    "db:reset:remote": "wrangler d1 execute simogrants-db --remote --file=migrations/0001_initial.sql && wrangler d1 execute simogrants-db --remote --file=migrations/0002_seed_data.sql",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "ethers": "^6.16.0",
+    "hono": "^4.4.0",
+    "siwe": "^3.0.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240529.0",
+    "typescript": "^5.4.0",
+    "wrangler": "^4.78.0"
+  }
+}

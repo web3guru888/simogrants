@@ -1,482 +1,242 @@
-<p align="center">
-  <h1 align="center">🏛️ SIMOGRANTS</h1>
-  <p align="center">
-    <strong>Stigmergic Impact Oracle for Public Goods</strong>
-  </p>
-  <p align="center">
-    Autonomous multi-agent evaluation + stigmergic quadratic funding for Ethereum public goods
-  </p>
-  <p align="center">
-    <img src="https://img.shields.io/badge/python-3.11-blue?logo=python&logoColor=white" alt="Python 3.11" />
-    <img src="https://img.shields.io/badge/license-MIT-green" alt="License: MIT" />
-    <img src="https://img.shields.io/badge/hackathon-The%20Synthesis-purple" alt="Hackathon: The Synthesis" />
-    <img src="https://img.shields.io/badge/chain-Base-0052FF?logo=coinbase" alt="Chain: Base" />
-    <img src="https://img.shields.io/badge/storage-Filecoin-0090FF?logo=filecoin" alt="Storage: Filecoin" />
-  </p>
-</p>
+# 🏛️ SIMOGRANTS — Stigmergic Impact Oracle for Grants
 
----
+> Autonomous multi-agent evaluation system for Ethereum public goods funding, rebuilt as a Cloudflare-native Web4 platform.
 
-> **The problem:** Public goods funding relies on single-metric scoring that's easy to game, expensive human juries, or black-box AI. Every simple proxy — stars, donations, TVL — can be Goodharted.
->
-> **Our answer:** A multi-agent system where four stakeholder agents evaluate projects independently, disagree productively, and allocate funding through a novel mechanism that combines quadratic funding with stigmergic reputation and network topology — with every decision attested on-chain.
+[![Built for PL_Genesis](https://img.shields.io/badge/PL_Genesis-Hackathon-blue)](https://dorahacks.io)
+[![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-orange)](https://workers.cloudflare.com)
+[![Base](https://img.shields.io/badge/Network-Base%20Sepolia-2153FF)](https://sepolia.base.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
----
+## 🌐 Live Demo
 
-## 📑 Table of Contents
+| Component | URL |
+|-----------|-----|
+| **Frontend** | [https://simogrants.pages.dev](https://simogrants.pages.dev) |
+| **Backend API** | [https://simogrants-api.web3guru888.workers.dev/api](https://simogrants-api.web3guru888.workers.dev/api) |
+| **API Health** | [https://simogrants-api.web3guru888.workers.dev/api/health](https://simogrants-api.web3guru888.workers.dev/api/health) |
 
-- [Architecture](#-architecture)
-- [How It Works — 3 Layers](#-how-it-works)
-- [Stigmergic Quadratic Funding (SQF)](#-stigmergic-quadratic-funding-sqf)
-- [Multi-Agent Architecture](#-multi-agent-architecture)
-- [Tech Stack](#-tech-stack)
-- [Quick Start](#-quick-start)
-- [API Endpoints](#-api-endpoints)
-- [Research References](#-research-references)
-- [Hackathon Track Alignment](#-hackathon-track-alignment)
-- [License](#-license)
-- [Acknowledgments](#-acknowledgments)
+## 🎯 What is SIMOGRANTS?
 
----
+SIMOGRANTS is an **autonomous multi-agent system** that evaluates Ethereum public goods projects for funding allocation. It uses **stigmergic coordination** — the same mechanism ants use to build colonies — to create an emergent, trustless evaluation framework.
 
-## 🏗 Architecture
+**Key innovation:** Instead of centralized grant reviewers, SIMOGRANTS deploys specialized AI agents that independently evaluate projects across multiple dimensions (impact, feasibility, team, innovation) and coordinate through a shared "pheromone" signal system. The result is a transparent, reproducible, and game-theory-resilient funding recommendation.
+
+### Core Features
+
+- 🔗 **Web3 Login** — Connect your wallet via MetaMask (SIWE authentication)
+- 📊 **Grant Round Management** — Create, browse, and participate in funding rounds
+- 🤖 **Autonomous Evaluation Pipeline** — Multi-agent AI evaluation with stigmergic coordination
+- 💰 **Quadratic Funding Integration** — SQF mechanism for fair matching pool allocation
+- ⛓️ **On-Chain Attestations** — Evaluation results stored on Base blockchain
+- 📦 **Evidence Bundles** — IPFS/Filecoin-stored supporting documents
+- 📈 **Leaderboards & Rankings** — PageRank + pheromone-based project scoring
+
+## 🏗️ Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                      SIMOGRANTS Pipeline                        │
-│                                                                 │
-│  ┌───────────┐    ┌───────────────┐    ┌────────────────────┐  │
-│  │  COLLECT  │───▶│   EVALUATE    │───▶│  ALLOCATE (SQF)    │  │
-│  │ 7 sources │    │ 4 stakeholder │    │ QF × Pheromone ×   │  │
-│  │ async     │    │ agents + B-T  │    │ PageRank           │  │
-│  └───────────┘    └───────────────┘    └────────────────────┘  │
-│       │                  │                       │              │
-│       ▼                  ▼                       ▼              │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │               ON-CHAIN ATTESTATION                        │  │
-│  │    Base (Solidity) + Filecoin (evidence) + ERC-8004       │  │
-│  └──────────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────┐
+│                   Cloudflare Edge                    │
+│  ┌─────────────┐  ┌──────┐  ┌────┐  ┌──────────┐  │
+│  │  React SPA   │  │  D1  │  │ KV │  │    R2     │  │
+│  │  (Pages)     │  │(SQLite)│ │(Sess)│ │(Evidence)│  │
+│  └──────┬───────┘  └──▲───┘  └──▲──┘  └────┬─────┘  │
+│         │              │        │            │        │
+│  ┌──────▼──────────────▼────────▼────────────▼─────┐ │
+│  │          Cloudflare Workers (API)                │ │
+│  │   SIWE Auth · REST API · QF Engine · Pipeline   │ │
+│  └──────────────────────┬──────────────────────────┘ │
+└─────────────────────────┼───────────────────────────┘
+                          │
+              ┌───────────▼───────────┐
+              │    Base Blockchain     │
+              │  ┌────┐ ┌──────┐ ┌──┐│
+              │  │Factory│ │SQF  │ │AR││
+              │  └────┘ └──────┘ └──┘│
+              └───────────────────────┘
 ```
 
-### Module Map
+## 🛠️ Tech Stack
 
-```
-simogrants/
-├── collectors/
-│   ├── orchestrator.py       # Fan-out across 7 async sources
-│   ├── github.py             # Stars, commits, contributors, health files
-│   ├── etherscan.py          # Balances, tx count, contract verification
-│   ├── defillama.py          # TVL, fees, revenue, chain presence
-│   ├── gitcoin.py            # Rounds, donors, matching history
-│   ├── snapshot.py           # Governance activity, voter turnout
-│   ├── octant.py             # Epoch participation, GLM allocation
-│   ├── packages.py           # npm/PyPI downloads, dependents
-│   └── models.py             # ProjectProfile dataclass (50+ fields)
-├── evaluator/
-│   ├── engine.py             # 4 stakeholder agents in parallel
-│   ├── prompts.py            # Stakeholder-specific system prompts
-│   ├── tension.py            # Disagreement detection (threshold: 35)
-│   ├── bradley_terry.py      # MLE pairwise ranking (scipy L-BFGS-B)
-│   └── models.py             # Evaluation structures + dimensions
-├── blockchain/
-│   ├── contracts/
-│   │   └── SIMOGrantsAttestation.sol   # On-chain receipt contract
-│   ├── python/
-│   │   ├── attester.py       # Python publisher (keccak256 + publish)
-│   │   └── filecoin.py       # web3.storage / Lighthouse uploader
-│   ├── scripts/deploy.js     # Hardhat deployment to Base mainnet / Base Sepolia
-│   └── test/attestation.test.js
-└── docs/
-    ├── API.md
-    ├── AGENTS.md
-    ├── demo_script.md
-    └── submission_metadata.json
-```
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | React 19, Vite 6, Tailwind CSS 4, wagmi, viem |
+| **Backend** | Cloudflare Workers (TypeScript) |
+| **Database** | Cloudflare D1 (SQLite) |
+| **Sessions** | Cloudflare KV |
+| **Storage** | Cloudflare R2 |
+| **Auth** | SIWE (Sign-In with Ethereum) |
+| **Smart Contracts** | Solidity 0.8.20+, Hardhat |
+| **Blockchain** | Base (Ethereum L2) |
+| **Deployment** | Wrangler CLI, Cloudflare Pages |
 
----
+## ⛓️ Deployed Contracts (Base Sepolia)
 
-## 🔬 How It Works
+| Contract | Address |
+|----------|---------|
+| **GrantFactory** | `0x795b0475aBd01B5F09479d81a4C56f8dF829e5dA` |
+| **GrantRound (Implementation)** | `0x27E39D006baAbD15f38D8Ecf63Dd61086affeC66` |
+| **SQFMechanism** | `0x77FFD92fbD6720Dc1cE504B971E9AbdDd7F5b1BA` |
+| **AttestationRegistry** | `0xb7064a2C8283a7a5f2D54E43c509FE76DA2D1dD9` |
+| **DemoGrantRound** | `0x09b246c9F8Eb9eDf04875228A6214D9bb0f4322A` |
 
-SIMOGRANTS operates as a three-layer pipeline — **Collect → Evaluate → Allocate** — followed by on-chain attestation. Each layer is independently testable and composable.
+Verify on [BaseScan Sepolia](https://sepolia.basescan.org/).
 
-### Layer 1: Data Collection — 7 Async Sources
-
-The **Collection Orchestrator** fans out across seven data sources simultaneously using `asyncio.gather` + `httpx`:
-
-| Source | What It Captures |
-|--------|-----------------|
-| **GitHub** | Stars, forks, contributors, commit frequency, PRs, health files (README, LICENSE, CONTRIBUTING) |
-| **Etherscan** | Balance, tx count, contract verification, unique senders/receivers, gas usage |
-| **DefiLlama** | TVL, fees, revenue, chain presence, category, audit links |
-| **Gitcoin** | Rounds participated, total donations, unique donors, matching amounts |
-| **Snapshot** | Proposals, voter turnout, member count, governance strategies |
-| **Octant** | Epoch participation, GLM allocation, matched amounts, donor count |
-| **npm/PyPI** | Weekly downloads, dependents count, maintainers, release cadence |
-
-The output is a typed `ProjectProfile` dataclass with **50+ fields** and a `data_completeness` score (0.0–1.0) based on how many sources returned data. Collection degrades gracefully — if Etherscan is down, the other six sources still produce a valid profile.
-
-### Layer 2: Simocratic Evaluation — 4 Stakeholder Agents
-
-Inspired by Simocracy's multi-institutional reasoning, SIMOGRANTS runs **four LLM stakeholder agents in parallel**, each representing a distinct constituency:
-
-| Stakeholder | Dimensions Scored | What They Care About |
-|-------------|------------------|---------------------|
-| 🔧 **Developer** | `code_quality`, `maintenance_health`, `security_posture` | Is this well-built? Is it maintained? Is it safe? |
-| 👤 **User** | `adoption_metrics`, `community_engagement`, `user_experience` | Do people use this? Is the community healthy? |
-| 💰 **Funder** | `capital_efficiency`, `funding_sustainability`, `track_record` | Is money well-spent? Can this sustain itself? |
-| 🌐 **Ecosystem** | `composability`, `network_effects`, `mission_alignment` | Does this make the ecosystem better? |
-
-Each agent returns:
-- **Per-dimension scores** (0–100) with written justification
-- **Overall narrative** (2–4 sentence summary)
-- **Confidence score** (0.0–1.0) based on data availability
-
-**Why four agents instead of one?** A project can be brilliant engineering (Developer: 92) but have terrible UX (User: 41). A single score hides this. SIMOGRANTS preserves the structure.
-
-#### Tension Detection
-
-When stakeholder scores diverge by more than **35 points**, the system flags a **tension** — a first-class output, not an error. Tensions are detected at three levels:
-
-1. **Dimension-level** — Same dimension, different agents disagree
-2. **Meta-tension** — One agent's mean score diverges from group mean
-3. **Cross-category** — Developer thinks it's great, Funder thinks it's wasteful
-
-This is SIMOGRANTS' **anti-Goodhart** mechanism: projects face a plural evaluation surface that can't be optimized by gaming a single metric.
-
-#### Bradley-Terry Pairwise Ranking
-
-For comparing multiple projects, SIMOGRANTS uses **Bradley-Terry Maximum Likelihood Estimation** via `scipy.optimize.minimize` (L-BFGS-B). Instead of sorting raw scores, the system estimates latent strength parameters from pairwise comparisons:
-
-```
-P(A beats B) = sigmoid(θ_A − θ_B)
-```
-
-This produces rankings that are more robust to score scale inconsistencies across different evaluation runs.
-
-### Layer 3: Stigmergic Quadratic Funding (SQF)
-
-The allocation layer introduces **SQF** — our novel mechanism-design contribution:
-
-```
-SQF = QF × Pheromone_Modifier × PageRank_Modifier
-```
-
-Each component captures a different signal family (see [SQF section](#-stigmergic-quadratic-funding-sqf) below).
-
-### On-Chain: Attestation & Receipts
-
-Every evaluation produces a verifiable receipt:
-
-1. Evidence JSON is canonicalized and hashed → `evaluationHash = keccak256(evidence)`
-2. Evidence bundle uploaded to **Filecoin** (via web3.storage or Lighthouse) → `filecoinCID`
-3. Both are published to `SIMOGrantsAttestation.sol` on **Base** → on-chain event
-
-The contract stores per-attestation: `evaluationHash`, `filecoinCID`, `timestamp`, `attester`, and `epoch`. It supports single and batch attestation, epoch management, and authorized attester control — following **ERC-8004** patterns for machine-verifiable agent receipts.
-
----
-
-## 📐 Stigmergic Quadratic Funding (SQF)
-
-SQF extends traditional Quadratic Funding with two evidence-aware modifiers:
-
-```
-SQF(p) = QF(p) × Φ(p) × R(p)
-```
-
-| Component | What It Measures | Intuition |
-|-----------|-----------------|-----------|
-| **QF(p)** — Quadratic Funding | Breadth of community support | "Do many people support this?" |
-| **Φ(p)** — Pheromone Modifier | Accumulated reputation over time | "Has this project consistently delivered value?" |
-| **R(p)** — PageRank Modifier | Structural importance in the ecosystem graph | "Is this project load-bearing infrastructure?" |
-
-### Why "Stigmergic"?
-
-In biology, stigmergy is indirect coordination through environmental traces — ants leaving pheromone trails. SIMOGRANTS applies this concept:
-
-- **Pheromone** trails accumulate when a project produces credible evidence across epochs. They decay at **20% per epoch**, so past performance matters but doesn't lock in forever.
-- **PageRank** is computed via `networkx` over the dependency graph — a project depended on by many others has higher structural importance regardless of popularity.
-
-### The Anti-Goodhart Angle
-
-Standard QF can be gamed by manufacturing many small donations. SQF makes gaming harder because optimizing for one axis hurts another:
-
-- Manufacturing donors helps QF but doesn't affect Pheromone (needs real evidence over time)
-- Inflating metrics doesn't change PageRank (structural position is independently verifiable)
-- **Dimension rotation** — the evaluation surface shifts across epochs, preventing metric ossification
-
-A project with moderate visibility but strong ecosystem centrality and repeated evidence of usefulness may deserve more funding than popularity alone would imply.
-
----
-
-## 🤖 Multi-Agent Architecture
-
-SIMOGRANTS was built by a coordinated team of **6 AI agents** on the Taurus multi-agent orchestration platform:
-
-| Agent | Role | What It Built |
-|-------|------|--------------|
-| 🎯 **SIMO** (orchestrator) | Sprint planning, delegation, integration | Architecture decisions, task breakdown, cross-agent coordination |
-| 📊 **collector-agent** | Data collection specialist | 7 async collectors, ProjectProfile model, collection orchestrator |
-| 🧠 **evaluator-agent** | LLM evaluation + aggregation | 4 stakeholder agents, tension detection, Bradley-Terry ranking |
-| ⚙️ **mechanism-agent** | Funding mechanism design | SQF formula, pheromone decay, PageRank computation |
-| ⛓️ **blockchain-agent** | Smart contracts + storage | SIMOGrantsAttestation.sol, Filecoin uploader, deployment scripts |
-| 📝 **docs-agent** | Documentation + submission | README, API docs, demo script, submission metadata |
-
-This is not a "one prompt to rule them all" system — it's a genuine multi-agent collaboration where each agent has domain expertise, operates independently, and produces auditable artifacts.
-
----
-
-## 🛠 Tech Stack
-
-| Layer | Technologies |
-|-------|-------------|
-| **Backend** | Python 3.11, FastAPI, httpx, aiosqlite, Pydantic |
-| **AI / Evaluation** | ASI1-mini (via ASI1 API), structured JSON prompts, asyncio parallel execution |
-| **Math** | scipy (L-BFGS-B optimization), networkx (PageRank), numpy |
-| **Blockchain** | Solidity 0.8.20+, Hardhat, ethers.js, Base mainnet / Base Sepolia |
-| **Storage** | Filecoin via web3.storage + Lighthouse fallback |
-| **Orchestration** | Taurus multi-agent platform |
-
----
-
-## 🚀 Quick Start
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Python 3.11+
-- Node.js 18+ (for smart contract tooling)
-- API key for LLM provider (ASI1 — get one at https://asi1.ai)
-- Optional: Filecoin storage token, Etherscan API key
+- Node.js 18+
+- npm 9+
+- A Cloudflare account with API token
+- MetaMask browser extension
 
-### 1. Clone & Install
+### 1. Clone and Install
 
 ```bash
-git clone https://github.com/web3guru888/simogrants
+git clone https://github.com/web3guru888/simogrants.git
 cd simogrants
-pip install -r requirements.txt
+npm install
 ```
 
 ### 2. Configure Environment
 
 ```bash
-# Required for evaluation (ASI1 LLM provider)
-export ASI1_API_KEY=your_key
-
-# Optional — collector API keys
-export ETHERSCAN_API_KEY=your_key
-export GITHUB_TOKEN=your_token
-
-# Optional — blockchain
-export DEPLOYER_PRIVATE_KEY=0x...
-export BASE_SEPOLIA_RPC=https://sepolia.base.org
-
-# Optional — Filecoin storage
-export WEB3STORAGE_TOKEN=your_token
-export LIGHTHOUSE_TOKEN=your_token
+cp .env.example .env
+# Edit .env with your Cloudflare credentials and other settings
 ```
 
-### 3. Run the Server
+### 3. Setup Infrastructure (D1, KV, R2)
 
 ```bash
-python -m uvicorn src.main:app --reload
+bash scripts/setup-d1.sh
 ```
 
-### 4. Run the Full Pipeline
+### 4. Run Backend Locally
 
 ```bash
-# Collect → Evaluate → Allocate → Attest in one call
-curl -X POST http://localhost:8000/pipeline/run \
-  -H "Content-Type: application/json" \
-  -d '{"project_id": "uniswap", "github": "Uniswap/v3-core", "etherscan": "0x1F98431c8aD98523631AE4a59f267346ea31F984"}'
-```
-
-### 5. Run Tests
-
-```bash
-# Python tests
-pytest src/tests/
-
-# Smart contract tests
-cd blockchain && npm install && npm test
-```
-
-### 6. Deploy Contract (Base Mainnet)
-
-```bash
+cd packages/backend
 npm install
-npx hardhat run scripts/deploy.js --network base
+npx wrangler dev
+# API available at http://localhost:8787
 ```
 
----
+### 5. Run Frontend Locally
 
-## 📡 API Endpoints
-
-| Method | Path | Description |
-|--------|------|-------------|
-| `GET` | `/health` | Health check |
-| `GET` | `/version` | API version and build info |
-| `POST` | `/projects` | Create a new project for evaluation |
-| `GET` | `/projects/{id}` | Get project details and latest evaluation |
-| `POST` | `/collect/{project_id}` | Run all 7 collectors for a project |
-| `POST` | `/evaluate/{project_id}` | Run 4-stakeholder evaluation |
-| `POST` | `/mechanism/allocate` | Run SQF allocation across a project set |
-| `POST` | `/pipeline/run` | Full pipeline: collect → evaluate → allocate → attest |
-| `POST` | `/attestations/{project_id}` | Generate and publish on-chain attestation |
-| `GET` | `/mechanism/pheromone/{project_id}` | Get current pheromone state for a project |
-
-> 📖 Full request/response examples in [docs/API.md](docs/API.md)
-
----
-
-## 📚 Research References
-
-SIMOGRANTS builds on seven research papers from **IERR 2025** (International Evaluation & Reputation Research):
-
-| # | Paper | Authors | How It Informs SIMOGRANTS |
-|---|-------|---------|--------------------------|
-| 1 | **Simocracy** | Dao & Rekhan (Protocol Labs) | Multi-stakeholder institutional evaluation — the conceptual foundation for our 4-agent architecture |
-| 2 | **Better Rankings with Agents** | Gasquez (Protocol Labs) | Agentic pairwise comparison methodology — directly implemented in our Bradley-Terry module |
-| 3 | **QF Under Constrained Budget is Suboptimal** | Old School Mathematicians | Formal proof that standard QF has limitations — motivates SQF's evidence-aware modifiers |
-| 4 | **MERI Framework** | Dao & Jeff | Iterative evaluation-to-funding loops — informs our epoch-based pheromone accumulation |
-| 5 | **Hybrid PageRank** | Carl | Dependency-graph attribution for ecosystem impact — implemented via networkx in our PageRank modifier |
-| 6 | **Impact Drift** | Hu | Anti-Goodhart defense through dimension rotation — motivates our tension detection and multi-axis evaluation |
-| 7 | **Deep Funding Juror Data** | Yeung & Lido | Empirical analysis of juror preferences and Bradley-Terry aggregation — validates our stakeholder disagreement modeling |
-
----
-
-## 🎯 Hackathon Track Alignment
-
-SIMOGRANTS addresses **7 tracks** in The Synthesis hackathon:
-
-### 1. 🏗 Mechanism Design for Public Goods Evaluation (Octant)
-**SQF is a novel funding mechanism.** It extends QF with pheromone-based reputation and PageRank topology. The multi-stakeholder evaluation with tension detection is itself a mechanism-design contribution — it makes evaluation plural, transparent, and harder to game.
-
-### 2. 📊 Agents for Public Goods Data Collection (Octant)
-**7 async collectors running in parallel.** GitHub, Etherscan, DefiLlama, Gitcoin, Snapshot, Octant, and npm/PyPI — each with typed models, graceful degradation, and completeness scoring. The `CollectionOrchestrator` is a production-grade data pipeline, not a demo wrapper.
-
-### 3. 🧠 Agents for Public Goods Data Analysis (Octant)
-**4 stakeholder evaluation agents** with distinct perspectives, structured scoring, written justification, and tension detection. Bradley-Terry pairwise ranking for comparing projects. This is analysis with a plural lens, not a single-score reducer.
-
-### 4. 🍳 Let the Agent Cook (Protocol Labs)
-**A genuine multi-agent system.** Six specialized agents collaborated to build this — from smart contract authoring to data model design to documentation. The evaluation pipeline itself runs four agents concurrently. Disagreement is treated as signal, not noise.
-
-### 5. 🧾 Agents With Receipts — ERC-8004 (Protocol Labs)
-**Every evaluation produces an on-chain receipt.** `evaluationHash` as proof of work, `filecoinCID` as the evidence trail, `attester` as agent identity, `epoch` for temporal context. The `SIMOGrantsAttestation.sol` contract follows ERC-8004 compliance patterns.
-
-### 6. 💾 Best Use Case with Agentic Storage (Filecoin)
-**Evidence bundles stored on Filecoin** before on-chain publication. Content-addressed, durable, independently verifiable. Supports both web3.storage and Lighthouse backends with automatic retry and fallback.
-
-### 7. 🌐 Synthesis Open Track
-**SIMOGRANTS synthesizes everything.** Mechanism design + multi-agent AI + blockchain attestation + decentralized storage + public goods evaluation. It's not a tool that does one thing — it's infrastructure for a more plural, evidence-based, and game-resistant grants ecosystem.
-
----
-
-## 📊 Evaluation Model Deep Dive
-
-### Stakeholder × Dimension Matrix
-
-```
-                    ┌─────────────┬──────────────┬──────────────┬──────────────┐
-                    │  Developer  │     User     │    Funder    │  Ecosystem   │
-┌───────────────────┼─────────────┼──────────────┼──────────────┼──────────────┤
-│ code_quality      │     ✓       │              │              │              │
-│ maintenance_health│     ✓       │              │              │              │
-│ security_posture  │     ✓       │              │              │              │
-│ adoption_metrics  │             │      ✓       │              │              │
-│ community_engage  │             │      ✓       │              │              │
-│ user_experience   │             │      ✓       │              │              │
-│ capital_efficiency│             │              │      ✓       │              │
-│ funding_sustain   │             │              │      ✓       │              │
-│ track_record      │             │              │      ✓       │              │
-│ composability     │             │              │              │      ✓       │
-│ network_effects   │             │              │              │      ✓       │
-│ mission_alignment │             │              │              │      ✓       │
-└───────────────────┴─────────────┴──────────────┴──────────────┴──────────────┘
-                              12 dimensions × 4 agents
+```bash
+cd packages/frontend
+npm install
+npm run dev
+# App available at http://localhost:5173
 ```
 
-### Example Tension Output
+### 6. Deploy Contracts (Optional)
 
-```json
-{
-  "dimension": "developer_vs_funder",
-  "agents": {"developer": 88, "funder": 45},
-  "spread": 43,
-  "high_agent": "developer",
-  "low_agent": "funder",
-  "narrative": "Cross-stakeholder tension: developer (mean 88) is 43 points above funder (mean 45). The project resonates much more strongly with developer concerns than funder priorities."
-}
+```bash
+cd packages/contracts
+npm install
+export DEPLOYER_PRIVATE_KEY=your_private_key
+npx hardhat run scripts/deploy.js --network baseSepolia
 ```
 
-This tension tells a story: the project is technically excellent but may have capital efficiency or sustainability concerns. A human reviewer now has structured insight, not just a number.
+## 📦 Deployment
 
----
+### Quick Deploy (All Components)
 
-## 🔐 Smart Contract
-
-**`SIMOGrantsAttestation.sol`** — Live on Base mainnet
-
-- Contract: `0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee`
-- Deployment TX: `0x89a49559d131f9ab3287f7959ca68bd603db52a29b4e21a5055a77ee224faef1`
-- BaseScan: https://basescan.org/address/0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee
-- Verification status: **Pending on BaseScan** at time of this update. In a final recovery pass, we found an exact Hardhat artifact/build-info match for the deployed bytecode in this repo (`artifacts/contracts/SIMOGrantsAttestation.sol/SIMOGrantsAttestation.json` and `artifacts/build-info/f49f8487356a52a2ebeeec5cbeb587fe.json`), confirming the live contract bytecode exactly matches the current compiled source. We then attempted direct verification through the Etherscan V2 API using Standard JSON Input for Base (`chainid=8453`) and the exact recovered compiler input. Those requests were rejected at the API-auth layer, and Etherscan's supported-chains docs indicate Base Mainnet API access is **not available on the free tier**. Prior Hardhat/plugin verification had also failed with a BaseScan/Etherscan-side `Expected valid bigint: 0 < bigint < curve.n` error. The remaining blocker is explorer/API access/tooling, not source mismatch.
-- Verification URL: https://basescan.org/verifyContract?a=0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee
-
-```solidity
-struct Attestation {
-    bytes32 evaluationHash;  // keccak256 of evidence JSON
-    string  filecoinCID;     // IPFS/Filecoin CID of evidence bundle
-    uint64  timestamp;       // block.timestamp at publication
-    address attester;        // agent address that published
-    uint64  epoch;           // governance epoch at publication
-}
+```bash
+bash scripts/deploy-all.sh
 ```
 
-**Capabilities:**
-- `publishAttestation()` — Single attestation with validation
-- `publishBatch()` — Gas-optimized batch publishing
-- `advanceEpoch()` — Owner-controlled epoch management
-- `setAttester()` — Authorized attester management
-- `getLatestAttestation()` / `getAllAttestations()` — Query interface
-- Custom errors for gas-efficient reverts
+### Deploy Backend Only
 
-- 5 mainnet attestation TXs:
-  - OpenZeppelin: `0x79974ed682a7838d8afd606bd2e80813326f33b42118d5045a37fd1128e27575`
-  - Uniswap v3: `0x7380b20feafc763ce6ca89943bb58d0b936d842170990c4bdbff0c7329ebea62`
-  - Gitcoin Passport: `0xd8dcfa4a68da5234dbbbb3ba5fc178891edb7eee4345c364312d1f2873778992`
-  - ETHStaker: `0x3911e06cd47fce95f9e97aeef2f75c37727800de3412065747877554316a860e`
-  - Protocol Guild: `0x4a200f59ac02972694482a6e8a5b057f5236589ae19758067e47692281930254`
-- Recovery-pass finding: live deployed bytecode exactly matches the local Hardhat artifact and build-info produced from `contracts/SIMOGrantsAttestation.sol` with solc `0.8.24`, optimizer enabled, runs `10000`, EVM `paris`.
-- Verification command: `BASESCAN_API_KEY=*** ETHERSCAN_API_KEY=*** npx hardhat verify --network base --contract contracts/SIMOGrantsAttestation.sol:SIMOGrantsAttestation 0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee`
-- If Hardhat still returns `Expected valid bigint: 0 < bigint < curve.n`, verify manually on BaseScan with Standard JSON Input using the existing Hardhat build info:
-  - Contract Address: `0x6158Ee59Ab932866952A0c1aF5e60321db3dA2Ee`
-  - Contract Name: `contracts/SIMOGrantsAttestation.sol:SIMOGrantsAttestation`
-  - Exact build artifact: `artifacts/contracts/SIMOGrantsAttestation.sol/SIMOGrantsAttestation.json`
-  - Exact build info / compiler input: `artifacts/build-info/f49f8487356a52a2ebeeec5cbeb587fe.json`
-  - Compiler Type/Version: Standard JSON Input, solc `0.8.24`
-  - Optimization: **Yes**, runs **10000**
-  - EVM Version: `paris`
-  - Constructor arguments: **none**
-  - Note: verification remains pending due to BaseScan/Etherscan submission access/tooling failure — including direct Etherscan V2 rejection while Base Mainnet is documented as not available on the free tier — not because the deployed bytecode is fake, wrong, or undeployed.
+```bash
+cd packages/backend
+npx wrangler deploy
+```
 
----
+### Deploy Frontend Only
+
+```bash
+cd packages/frontend
+npm run build
+npx wrangler pages deploy dist --project-name=simogrants
+```
+
+## 🧪 Hackathon Submission
+
+### PL_Genesis: Frontiers of Collaboration
+
+**Track:** Existing Code (extending an existing operational codebase)
+
+**What's New for PL_Genesis:**
+- 🔄 **Full Cloudflare Migration** — Rebuilt from Python/FastAPI to Cloudflare Workers + D1
+- 🌐 **Web4 Frontend** — New React SPA with Web3 wallet authentication (SIWE)
+- ⛓️ **Smart Contracts** — GrantFactory with EIP-1167 minimal proxy pattern for scalable round creation
+- 💰 **SQF Mechanism** — On-chain quadratic funding for fair matching pool allocation
+- 📊 **Real-time Pipeline** — Multi-agent evaluation with live status tracking
+- 🏗️ **Edge-Native** — D1 database, KV sessions, R2 storage — all serverless
+
+**Bounties Targeting:**
+| Bounty | Track | Prize |
+|--------|-------|-------|
+| Existing Code | Top 10 | $5,000 |
+| Crypto Focus Area | 1st/2nd/3rd | $3K/$2K/$1K |
+| Infrastructure & Digital Rights | 1st/2nd/3rd | $3K/$2K/$1K |
+| Filecoin Bounty | Integration | $2,500 |
+| Storacha Bounty | Integration | $500 |
+| Hypercerts Bounty | Integration | TBD |
+| Community Vote | Most engagement | $1,000 |
+
+## 📁 Project Structure
+
+```
+simogrants/
+├── packages/
+│   ├── backend/           # Cloudflare Workers API
+│   │   ├── src/
+│   │   │   ├── routes/    # REST API route handlers
+│   │   │   ├── lib/       # QF, pheromone, PageRank engines
+│   │   │   ├── middleware/ # SIWE auth middleware
+│   │   │   ├── index.ts   # Entry point
+│   │   │   └── types.ts
+│   │   ├── migrations/    # D1 SQL schema
+│   │   ├── wrangler.toml  # Workers config
+│   │   └── package.json
+│   ├── frontend/          # React SPA
+│   │   ├── src/
+│   │   │   ├── pages/     # Route components
+│   │   │   ├── components/# Reusable UI components
+│   │   │   ├── hooks/     # React hooks (auth, API)
+│   │   │   ├── lib/       # API client, wagmi config
+│   │   │   └── styles/    # Tailwind CSS
+│   │   ├── vite.config.ts
+│   │   └── package.json
+│   └── contracts/         # Solidity smart contracts
+│       ├── contracts/     # GrantFactory, GrantRound, SQFMechanism, AttestationRegistry
+│       ├── scripts/       # Deployment scripts
+│       ├── artifacts/     # Compiled ABIs
+│       ├── hardhat.config.js
+│       └── package.json
+├── scripts/
+│   ├── deploy-all.sh      # Full deployment
+│   └── setup-d1.sh        # D1/KV/R2 infrastructure setup
+├── src/                   # Original Python codebase (reference)
+├── .env.example           # Environment template
+└── README.md
+```
+
+## 🤝 Contributing
+
+1. Fork the repo
+2. Create your feature branch (`git checkout -b feature/amazing`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing`)
+5. Open a Pull Request
 
 ## 📄 License
 
-[MIT](LICENSE) — Use it, fork it, build on it.
+MIT License — see [LICENSE](LICENSE) for details.
 
 ---
 
-## 🙏 Acknowledgments
-
-- **IERR 2025 researchers** — The seven papers that shaped our mechanism design and evaluation framework
-- **Protocol Labs** — For the Simocracy vision and agent infrastructure
-- **Octant** — For pioneering public goods funding mechanisms
-- **Ethereum public goods community** — For building things worth evaluating
-- **Taurus** — Multi-agent orchestration platform that made 6-agent collaboration possible
-
----
-
-<p align="center">
-  <strong>SIMOGRANTS</strong> — Because public goods deserve evaluation that's as plural as the communities they serve.
-</p>
+Built for **[PL_Genesis: Frontiers of Collaboration](https://dorahacks.io)** on DoraHacks.
+Powered by **Cloudflare**, **Base**, and **Ethereum**.
