@@ -18,6 +18,10 @@ bucket_name = "simogrants-evidence"
 
 [vars]
 ENVIRONMENT = "development"
+ASI1_MODEL = "asi1-mini"
+
+# ASI1_API_KEY must be set as a secret:
+#   npx wrangler secret put ASI1_API_KEY
 
 [dev]
 port = 8787

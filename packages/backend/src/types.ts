@@ -10,6 +10,8 @@ export interface Env {
   SESSIONS: KVNamespace;
   EVIDENCE: R2Bucket;
   ENVIRONMENT: string;
+  ASI1_API_KEY?: string;
+  ASI1_MODEL?: string;
 }
 
 // ─── DB Row Types (mirror D1 schema) ────────────────────────────────

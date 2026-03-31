@@ -5,9 +5,13 @@
 import { Hono } from 'hono';
 import { z } from 'zod';
 import type { Env } from '../types';
+import type { EvaluationData } from '../types';
 import { authMiddleware } from '../middleware/auth';
 import { generateMockEvaluation } from '../lib/mockEvaluator';
+import { evaluateProject } from '../lib/evaluator';
 import { SQFMechanism } from '../lib/sqf';
+
+const DEFAULT_ASI1_MODEL = 'asi1-mini';
 
 export const pipelineRoutes = new Hono<{ Bindings: Env }>();
 
@@ -98,61 +102,90 @@ pipelineRoutes.post('/run', authMiddleware, async (c) => {
     .bind(now, roundId)
     .run();
 
-  // Step 3: Run mock evaluation on each project (unless skipped)
+  // Step 3: Run evaluation on each project (real ASI1 or mock fallback)
+  const apiKey = c.env.ASI1_API_KEY;
+  const model = c.env.ASI1_MODEL || DEFAULT_ASI1_MODEL;
+  const useRealEvaluator = !!apiKey;
+
   const evaluationScores: Record<string, number> = {};
   let completed = 0;
   let failed = 0;
 
   if (!skipEvaluation) {
-    for (const app of applications as Array<Record<string, unknown>>) {
-      try {
-        const evaluationData = generateMockEvaluation({
-          id: app.project_id as string,
-          name: app.name as string,
-          description: app.description as string,
-          category: app.category as string,
-        });
+    // Phase 1: Run all evaluations in parallel
+    const evalResults = await Promise.allSettled(
+      (applications as Array<Record<string, unknown>>).map(async (app) => {
+        let evaluationData: EvaluationData;
+        if (useRealEvaluator) {
+          evaluationData = await evaluateProject(apiKey, model, {
+            id: app.project_id as string,
+            name: app.name as string,
+            description: (app.description as string) || '',
+            category: (app.category as string) || '',
+            github_url: (app.github_url as string) || undefined,
+            website: (app.website as string) || undefined,
+          });
+        } else {
+          evaluationData = generateMockEvaluation({
+            id: app.project_id as string,
+            name: app.name as string,
+            description: app.description as string,
+            category: app.category as string,
+          });
+        }
+        return { app, evaluationData };
+      })
+    );
 
-        evaluationScores[app.project_id as string] = evaluationData.overall_score;
+    // Phase 2: Process results and write to DB sequentially
+    for (const result of evalResults) {
+      if (result.status === 'fulfilled') {
+        const { app, evaluationData } = result.value;
+        try {
+          evaluationScores[app.project_id as string] = evaluationData.overall_score;
 
-        // Delete old evaluation if exists, then insert
-        await c.env.DB.prepare(
-          `DELETE FROM evaluations WHERE application_id = ?`
-        )
-          .bind(app.app_id)
-          .run();
-
-        await c.env.DB.prepare(
-          `INSERT INTO evaluations (application_id, evaluation_data, overall_score, data_completeness, bradley_terry_rank, evaluated_at)
-           VALUES (?, ?, ?, ?, ?, ?)`
-        )
-          .bind(
-            app.app_id,
-            JSON.stringify(evaluationData),
-            evaluationData.overall_score,
-            evaluationData.data_completeness,
-            completed + 1,
-            evaluationData.evaluated_at
+          // Delete old evaluation if exists, then insert
+          await c.env.DB.prepare(
+            `DELETE FROM evaluations WHERE application_id = ?`
           )
-          .run();
+            .bind(app.app_id)
+            .run();
 
-        // Update application status
-        await c.env.DB.prepare(
-          `UPDATE applications SET status = 'evaluated', evaluated_at = ? WHERE id = ?`
-        )
-          .bind(evaluationData.evaluated_at, app.app_id)
-          .run();
+          await c.env.DB.prepare(
+            `INSERT INTO evaluations (application_id, evaluation_data, overall_score, data_completeness, bradley_terry_rank, evaluated_at)
+             VALUES (?, ?, ?, ?, ?, ?)`
+          )
+            .bind(
+              app.app_id,
+              JSON.stringify(evaluationData),
+              evaluationData.overall_score,
+              evaluationData.data_completeness,
+              completed + 1,
+              evaluationData.evaluated_at
+            )
+            .run();
 
-        // Update project overall score
-        await c.env.DB.prepare(
-          `UPDATE projects SET overall_score = ?, updated_at = ? WHERE id = ?`
-        )
-          .bind(evaluationData.overall_score, now, app.project_id)
-          .run();
+          // Update application status
+          await c.env.DB.prepare(
+            `UPDATE applications SET status = 'evaluated', evaluated_at = ? WHERE id = ?`
+          )
+            .bind(evaluationData.evaluated_at, app.app_id)
+            .run();
 
-        completed++;
-      } catch (err) {
-        console.error(`Pipeline evaluation failed for ${app.project_id}:`, err);
+          // Update project overall score
+          await c.env.DB.prepare(
+            `UPDATE projects SET overall_score = ?, updated_at = ? WHERE id = ?`
+          )
+            .bind(evaluationData.overall_score, now, app.project_id)
+            .run();
+
+          completed++;
+        } catch (err) {
+          console.error(`Pipeline DB write failed for ${app.project_id}:`, err);
+          failed++;
+        }
+      } else {
+        console.error('Pipeline evaluation failed:', result.reason);
         failed++;
       }
     }

@@ -89,7 +89,7 @@ export interface Allocation {
   roundId: string;
   amount: number;
   currency: string;
-  sqfDetails: SQFDetails;
+  sqfDetails: SQFDetails | null;
 }
 
 export interface ProjectDetail {
@@ -103,7 +103,7 @@ export interface ResultEntry {
   project: Project;
   score: number;
   allocation: number;
-  sqfDetails: SQFDetails;
+  sqfDetails: SQFDetails | null;
   attestationStatus?: string;
 }
 

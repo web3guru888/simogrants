@@ -230,18 +230,18 @@ export function ProjectDetail() {
                   <div className="grid grid-cols-3 gap-4 text-sm">
                     <div>
                       <span className="text-slate-500">QF Base</span>
-                      <div className="font-medium text-slate-300">{alloc.sqfDetails.qfBase.toLocaleString()}</div>
+                      <div className="font-medium text-slate-300">{alloc.sqfDetails?.qfBase?.toLocaleString() ?? '—'}</div>
                     </div>
                     <div>
                       <span className="text-slate-500">Pheromone Mod</span>
-                      <div className={`font-medium ${alloc.sqfDetails.pheromoneMod >= 1 ? 'text-emerald-400' : 'text-red-400'}`}>
-                        {alloc.sqfDetails.pheromoneMod.toFixed(2)}x
+                      <div className={`font-medium ${(alloc.sqfDetails?.pheromoneMod ?? 1) >= 1 ? 'text-emerald-400' : 'text-red-400'}`}>
+                        {alloc.sqfDetails?.pheromoneMod?.toFixed(2) ?? '—'}x
                       </div>
                     </div>
                     <div>
                       <span className="text-slate-500">PageRank Mod</span>
-                      <div className={`font-medium ${alloc.sqfDetails.pagerankMod >= 1 ? 'text-emerald-400' : 'text-red-400'}`}>
-                        {alloc.sqfDetails.pagerankMod.toFixed(2)}x
+                      <div className={`font-medium ${(alloc.sqfDetails?.pagerankMod ?? 1) >= 1 ? 'text-emerald-400' : 'text-red-400'}`}>
+                        {alloc.sqfDetails?.pagerankMod?.toFixed(2) ?? '—'}x
                       </div>
                     </div>
                   </div>

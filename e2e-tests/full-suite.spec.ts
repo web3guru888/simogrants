@@ -105,10 +105,10 @@ test('Test 2: Browse Rounds', async ({ page }) => {
   const bodyText = await page.textContent('body');
   console.log(`  Body text length: ${bodyText?.length}`);
 
-  // Check for round cards or round-related content
-  const cards = page.locator('[class*="card"], [class*="round"], [class*="Round"]');
+  // Check for round cards using data-testid
+  const cards = page.locator('[data-testid="round-card"]');
   const cardCount = await cards.count();
-  console.log(`  Cards/round elements found: ${cardCount}`);
+  console.log(`  Round cards found: ${cardCount}`);
 
   // Should have some content about rounds
   expect(bodyText?.length).toBeGreaterThan(50);
@@ -120,9 +120,11 @@ test('Test 2: Browse Rounds', async ({ page }) => {
      cardCount > 0);
   console.log(`  Has round content: ${hasRoundContent}`);
 
-  // Try clicking the first card/round link
+  // Try clicking the first round card
   if (cardCount > 0) {
     const firstCard = cards.first();
+    const href = await firstCard.getAttribute('href');
+    console.log(`  First card href: ${href}`);
     await firstCard.click();
     await page.waitForTimeout(2000);
     console.log(`  Navigated to: ${page.url()}`);

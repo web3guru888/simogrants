@@ -14,6 +14,8 @@ export function RoundCard({ round }: RoundCardProps) {
   return (
     <Link
       to={`/rounds/${round.id}`}
+      data-testid="round-card"
+      data-round-id={round.id}
       className="group block rounded-xl border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm p-5 hover:border-violet-500/50 hover:shadow-lg hover:shadow-violet-500/10 transition-all duration-300"
     >
       <div className="flex items-start justify-between mb-3">
