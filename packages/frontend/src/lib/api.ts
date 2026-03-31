@@ -4,7 +4,7 @@ import type {
 } from './types';
 import { mockApi } from './mockApi';
 
-const USE_MOCK = import.meta.env.VITE_USE_MOCK_API !== 'false';
+const USE_MOCK = import.meta.env.VITE_USE_MOCK_API === 'true';
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8787/api';
 
 function getToken(): string | null {

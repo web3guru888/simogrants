@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useAccount } from 'wagmi';
 import { api } from '@/lib/api';
+import { useApplyToRound as useApplyOnChain } from '@/hooks/useContracts';
 import type { Round } from '@/lib/types';
 import { LoadingSkeleton } from '@/components/LoadingSkeleton';
 import { ErrorMessage } from '@/components/ErrorMessage';
@@ -37,6 +39,8 @@ const initialForm: FormData = {
 export function ApplyToRound() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { isConnected } = useAccount();
+  const { apply: applyOnChain, isPending: txPending, isConfirming, error: txError } = useApplyOnChain();
   const [round, setRound] = useState<Round | null>(null);
   const [form, setForm] = useState<FormData>(initialForm);
   const [loading, setLoading] = useState(true);
@@ -66,7 +70,7 @@ export function ApplyToRound() {
     setError(null);
 
     try {
-      // Create project first
+      // Step 1: Create project in backend
       const project = await api.createProject({
         name: form.name.trim(),
         description: form.description.trim(),
@@ -76,8 +80,26 @@ export function ApplyToRound() {
         category: form.category,
       });
 
-      // Then apply to round
+      // Step 2: Apply to round in backend
       await api.applyToRound(id, project.id);
+
+      // Step 3: Submit on-chain if wallet connected and round has contract address
+      if (isConnected && round?.contractAddress &&
+          round.contractAddress !== '0x0000000000000000000000000000000000000000') {
+        try {
+          const metadataURI = JSON.stringify({
+            projectId: project.id,
+            name: form.name.trim(),
+            category: form.category,
+          });
+          await applyOnChain({
+            roundAddress: round.contractAddress as `0x${string}`,
+            metadataURI,
+          });
+        } catch (txErr) {
+          console.warn('On-chain application tx failed:', txErr);
+        }
+      }
 
       // Redirect to round detail
       navigate(`/rounds/${id}`);
@@ -126,10 +148,17 @@ export function ApplyToRound() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* On-chain info */}
+            {isConnected && round?.contractAddress && (
+              <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-4">
+                <p className="text-sm text-emerald-300">Your application will be recorded on-chain via the round's smart contract.</p>
+              </div>
+            )}
+
             {/* Error banner */}
-            {error && (
+            {(error || txError) && (
               <div className="rounded-xl border border-red-500/30 bg-red-500/5 p-4">
-                <p className="text-sm text-red-300">{error}</p>
+                <p className="text-sm text-red-300">{error || txError?.message}</p>
               </div>
             )}
 
@@ -233,16 +262,16 @@ export function ApplyToRound() {
             <div className="flex items-center gap-4 pt-4">
               <button
                 type="submit"
-                disabled={submitting || !form.name.trim() || !form.description.trim()}
+                disabled={submitting || txPending || isConfirming || !form.name.trim() || !form.description.trim()}
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-semibold px-8 py-3 rounded-lg hover:from-violet-500 hover:to-cyan-400 transition-all shadow-lg shadow-violet-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
               >
-                {submitting ? (
+                {txPending || isConfirming || submitting ? (
                   <>
                     <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                     </svg>
-                    Submitting...
+                    {txPending ? 'Confirm in Wallet...' : isConfirming ? 'Waiting for Confirmation...' : 'Submitting...'}
                   </>
                 ) : (
                   'Submit Application'

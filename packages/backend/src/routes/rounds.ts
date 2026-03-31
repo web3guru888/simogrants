@@ -55,6 +55,7 @@ const createRoundSchema = z.object({
   applicationDeadline: z.string().optional(),
   maxApplications: z.number().optional().default(100),
   evaluationConfig: z.record(z.unknown()).optional(),
+  contractAddress: z.string().optional(),
 });
 
 roundRoutes.post('/', authMiddleware, async (c) => {
@@ -68,7 +69,7 @@ roundRoutes.post('/', authMiddleware, async (c) => {
   const creatorAddress = c.get('userAddress');
   const id = `round-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
   const now = new Date().toISOString();
-  const contractAddress = `0x${Math.random().toString(16).slice(2, 42).padEnd(40, '0')}`;
+  const contractAddress = body.contractAddress || null;
 
   const result = await c.env.DB.prepare(
     `INSERT INTO rounds (id, title, description, creator_address, status, matching_pool, currency, chain, application_deadline, max_applications, evaluation_config, contract_address, created_at, updated_at)

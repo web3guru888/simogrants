@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useAccount } from 'wagmi';
 import { api } from '@/lib/api';
+import { useCreateRound } from '@/hooks/useContracts';
 import { ErrorMessage } from '@/components/ErrorMessage';
 
 interface RoundForm {
@@ -25,6 +27,8 @@ const initialForm: RoundForm = {
 
 export function CreateRound() {
   const navigate = useNavigate();
+  const { isConnected } = useAccount();
+  const { createRound: createOnChain, isPending: txPending, isConfirming, error: txError } = useCreateRound();
   const [form, setForm] = useState<RoundForm>(initialForm);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -37,6 +41,26 @@ export function CreateRound() {
     setError(null);
 
     try {
+      // Step 1: Submit on-chain transaction if wallet connected
+      let contractAddress: string | undefined;
+      if (isConnected) {
+        const metadataURI = JSON.stringify({
+          title: form.title.trim(),
+          description: form.description.trim(),
+        });
+        const txHash = await createOnChain({
+          metadataURI,
+          matchingPool: form.matchingPool,
+          token: '0x0000000000000000000000000000000000000000' as `0x${string}`,
+          applicationDeadline: new Date(form.applicationDeadline),
+          votingDeadline: new Date(new Date(form.applicationDeadline).getTime() + 14 * 24 * 60 * 60 * 1000),
+        });
+        if (txHash) {
+          contractAddress = txHash;
+        }
+      }
+
+      // Step 2: Save to backend database
       await api.createRound({
         title: form.title.trim(),
         description: form.description.trim(),
@@ -45,6 +69,7 @@ export function CreateRound() {
         chain: form.chain,
         applicationDeadline: new Date(form.applicationDeadline).toISOString(),
         maxApplications: form.maxApplications,
+        ...(contractAddress ? { contractAddress } : {}),
       });
       navigate('/rounds');
     } catch (err) {
@@ -78,9 +103,16 @@ export function CreateRound() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Error */}
-          {error && (
+          {(error || txError) && (
             <div className="rounded-xl border border-red-500/30 bg-red-500/5 p-4">
-              <p className="text-sm text-red-300">{error}</p>
+              <p className="text-sm text-red-300">{error || txError?.message}</p>
+            </div>
+          )}
+
+          {/* Wallet prompt */}
+          {!isConnected && (
+            <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 p-4">
+              <p className="text-sm text-amber-300">Connect your wallet to deploy this round on-chain. You can still create a round without a wallet (off-chain only).</p>
             </div>
           )}
 
@@ -183,19 +215,19 @@ export function CreateRound() {
           <div className="flex items-center gap-4 pt-4">
             <button
               type="submit"
-              disabled={submitting || !form.title.trim() || !form.description.trim() || !form.applicationDeadline}
+              disabled={submitting || txPending || isConfirming || !form.title.trim() || !form.description.trim() || !form.applicationDeadline}
               className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-semibold px-8 py-3 rounded-lg hover:from-violet-500 hover:to-cyan-400 transition-all shadow-lg shadow-violet-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
             >
-              {submitting ? (
+              {txPending || isConfirming || submitting ? (
                 <>
                   <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                   </svg>
-                  Creating...
+                  {txPending ? 'Confirm in Wallet...' : isConfirming ? 'Waiting for Confirmation...' : 'Creating...'}
                 </>
               ) : (
-                'Create Round'
+                isConnected ? 'Create Round (On-Chain)' : 'Create Round'
               )}
             </button>
             <Link

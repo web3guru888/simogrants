@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { useChainId } from 'wagmi';
 import { api } from '@/lib/api';
+import { getAddresses, isContractsDeployed } from '@/lib/contractsConfig';
 import type { RoundResults as RoundResultsType } from '@/lib/types';
 import { ScoreBar } from '@/components/ScoreBar';
 import { AllocationBar } from '@/components/AllocationBar';
@@ -31,6 +33,10 @@ export function RoundResults() {
   useEffect(() => {
     fetchResults();
   }, [id]);
+
+  const chainId = useChainId();
+  const contractsReady = isContractsDeployed(chainId);
+  const addresses = getAddresses(chainId);
 
   if (loading) return <LoadingSkeleton type="page" />;
   if (error) return <ErrorMessage message={error} onRetry={fetchResults} />;
@@ -64,7 +70,7 @@ export function RoundResults() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Summary Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
           <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-5">
             <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Total Pool</div>
             <div className="text-2xl font-bold text-cyan-400">
@@ -86,6 +92,24 @@ export function RoundResults() {
           <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-5">
             <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Average Score</div>
             <div className="text-2xl font-bold text-blue-400">{summary.averageScore.toFixed(1)}</div>
+          </div>
+          <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-5">
+            <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">On-Chain</div>
+            <div className="text-2xl font-bold text-emerald-400">
+              {contractsReady ? (
+                <a
+                  href={`https://sepolia.basescan.org/address/${addresses.AttestationRegistry}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-emerald-300 transition-colors"
+                >
+                  Verified
+                  <svg className="inline w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              ) : 'Off-Chain'}
+            </div>
           </div>
         </div>
 
@@ -168,13 +192,27 @@ export function RoundResults() {
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        entry.attestationStatus === 'attested'
-                          ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-                          : 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                      }`}>
-                        {entry.attestationStatus === 'attested' ? '✓ Attested' : '⏳ Pending'}
-                      </span>
+                      {contractsReady ? (
+                        <a
+                          href={`https://sepolia.basescan.org/address/${addresses.AttestationRegistry}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30 transition-colors"
+                        >
+                          On-Chain
+                          <svg className="w-3 h-3 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                        </a>
+                      ) : (
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                          entry.attestationStatus === 'attested'
+                            ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                            : 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                        }`}>
+                          {entry.attestationStatus === 'attested' ? '✓ Attested' : '⏳ Pending'}
+                        </span>
+                      )}
                     </td>
                   </tr>
                 ))}

@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { useAccount } from 'wagmi';
+import type { Address } from 'viem';
 import { api } from '@/lib/api';
+import { useRoundOnChainStatus, useOnChainApplicationIds, useFactoryRoundCount } from '@/hooks/useContracts';
 import type { RoundDetail as RoundDetailType, Application } from '@/lib/types';
 import { StatusBadge } from '@/components/StatusBadge';
 import { ScoreBar } from '@/components/ScoreBar';
@@ -33,6 +36,13 @@ export function RoundDetail() {
   useEffect(() => {
     fetchRound();
   }, [id]);
+
+  const { isConnected } = useAccount();
+  const roundAddress = data?.round?.contractAddress as Address | undefined;
+  const validRoundAddress = roundAddress && roundAddress !== '0x0000000000000000000000000000000000000000' ? roundAddress : undefined;
+  const { data: onChainStatus } = useRoundOnChainStatus(validRoundAddress);
+  const { data: onChainAppIds } = useOnChainApplicationIds(validRoundAddress);
+  const { data: factoryCount } = useFactoryRoundCount();
 
   if (loading) return <LoadingSkeleton type="page" />;
   if (error) return <ErrorMessage message={error} onRetry={fetchRound} />;
@@ -84,6 +94,21 @@ export function RoundDetail() {
                 >
                   View Results
                 </Link>
+              )}
+              {isConnected && (round.status === 'accepting' || round.status === 'evaluating' || round.status === 'active') && (
+                <button
+                  onClick={async () => {
+                    try {
+                      await api.triggerEvaluation(round.id);
+                      fetchRound();
+                    } catch (err) {
+                      setError(err instanceof Error ? err.message : 'Evaluation failed');
+                    }
+                  }}
+                  className="inline-flex items-center gap-2 bg-emerald-600 text-white font-semibold px-6 py-2.5 rounded-lg hover:bg-emerald-500 transition-colors"
+                >
+                  Run AI Evaluation
+                </button>
               )}
             </div>
           </div>
@@ -244,6 +269,26 @@ export function RoundDetail() {
                         </svg>
                       </a>
                     </dd>
+                  </div>
+                )}
+                {onChainStatus !== undefined && (
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                    <dt className="text-sm text-slate-500 sm:w-40">On-Chain Status</dt>
+                    <dd className="text-sm text-emerald-400 font-medium">
+                      {['Created', 'Accepting', 'Evaluating', 'Distributing', 'Closed'][Number(onChainStatus)] || 'Unknown'}
+                    </dd>
+                  </div>
+                )}
+                {onChainAppIds !== undefined && (
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                    <dt className="text-sm text-slate-500 sm:w-40">On-Chain Applications</dt>
+                    <dd className="text-sm text-slate-300">{(onChainAppIds as bigint[])?.length ?? 0}</dd>
+                  </div>
+                )}
+                {factoryCount !== undefined && (
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                    <dt className="text-sm text-slate-500 sm:w-40">Factory Round Count</dt>
+                    <dd className="text-sm text-slate-300">{Number(factoryCount)}</dd>
                   </div>
                 )}
               </dl>
