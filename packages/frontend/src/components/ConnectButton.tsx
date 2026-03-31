@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useConnect, useAccount } from 'wagmi';
 import { useAuth } from '@/hooks/useAuth';
+import { api } from '@/lib/api';
 
 export function ConnectButton() {
   const { connect, connectors } = useConnect();
@@ -10,9 +11,12 @@ export function ConnectButton() {
 
   // Auto-trigger signIn when wallet connects and we don't have a session
   useEffect(() => {
-    if (wagmiConnected && wagmiAddress && !user && !isLoading && pendingSignIn.current) {
-      pendingSignIn.current = false;
-      signIn();
+    if (wagmiConnected && wagmiAddress && !user && !isLoading) {
+      // Either fresh connect (pendingSignIn) or reconnect without stored token
+      if (pendingSignIn.current || !api.getToken()) {
+        pendingSignIn.current = false;
+        signIn();
+      }
     }
   }, [wagmiConnected, wagmiAddress, user, isLoading, signIn]);
 
