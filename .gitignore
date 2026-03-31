@@ -79,3 +79,7 @@ Thumbs.db
 .deployer_wallet.json
 .ipfs/
 cover_image/
+
+# Test results
+test-results/
+playwright-report/

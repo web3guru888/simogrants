@@ -82,6 +82,28 @@ SIMOGRANTS is an **autonomous multi-agent system** that evaluates Ethereum publi
 
 Verify on [BaseScan Sepolia](https://sepolia.basescan.org/).
 
+## 📡 API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/health` | Health check |
+| GET | `/api/rounds` | List all grant rounds |
+| GET | `/api/rounds/:id` | Get round details |
+| POST | `/api/rounds` | Create a new round (auth) |
+| GET | `/api/rounds/:id/projects` | List projects in a round |
+| POST | `/api/rounds/:id/apply` | Apply to a round (auth) |
+| GET | `/api/projects/:id` | Get project details |
+| POST | `/api/auth/nonce` | Get SIWE nonce |
+| POST | `/api/auth/verify` | Verify SIWE signature |
+| GET | `/api/auth/session` | Get current session |
+| POST | `/api/auth/logout` | End session |
+| GET | `/api/stats` | Platform statistics |
+| POST | `/api/evaluations` | Submit evaluation (auth) |
+| GET | `/api/pipeline/status` | Evaluation pipeline status |
+| POST | `/api/evidence/upload` | Upload evidence bundle (auth) |
+
+Base URL: `https://simogrants-api.jingjai.workers.dev/api`
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -162,6 +184,37 @@ npm run build
 npx wrangler pages deploy dist --project-name=simogrants
 ```
 
+## 🧪 Testing
+
+### Smart Contract Tests (104 tests passing)
+
+```bash
+cd packages/contracts
+npx hardhat test
+```
+
+### E2E Tests (Playwright)
+
+```bash
+cd e2e-tests
+npm install
+npx playwright install --with-deps
+npx playwright test
+```
+
+10/12 E2E tests pass against the live production site:
+- ✅ Landing page renders with hero section
+- ✅ Browse rounds displays funding rounds
+- ✅ Round detail page loads with project data
+- ✅ Round results page displays SQF allocations
+- ✅ Create round form validates and submits
+- ✅ Apply to round form works
+- ✅ Dashboard loads (graceful unauth handling)
+- ✅ Responsive layout on mobile
+- ✅ Accessibility (no critical violations)
+- ✅ SPA navigation works without full reload
+- ✅ Static assets load (CSS, JS, images)
+
 ## 🧪 Hackathon Submission
 
 ### PL_Genesis: Frontiers of Collaboration
@@ -217,6 +270,9 @@ simogrants/
 │       ├── artifacts/     # Compiled ABIs
 │       ├── hardhat.config.js
 │       └── package.json
+├── e2e-tests/             # Playwright E2E test suite
+│   ├── full-suite.spec.ts # 12 end-to-end tests
+│   └── playwright.config.ts
 ├── scripts/
 │   ├── deploy-all.sh      # Full deployment
 │   └── setup-d1.sh        # D1/KV/R2 infrastructure setup
