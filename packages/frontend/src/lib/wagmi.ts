@@ -1,6 +1,6 @@
 import { http, createConfig, createStorage } from 'wagmi';
 import { injected, walletConnect } from 'wagmi/connectors';
-import { BASE_SEPOLIA, BASE_MAINNET } from './chains';
+import { BASE_SEPOLIA } from './chains';
 
 const wcProjectId = import.meta.env.VITE_WC_PROJECT_ID;
 
@@ -13,12 +13,11 @@ if (!wcProjectId) {
 }
 
 export const wagmiConfig = createConfig({
-  chains: [BASE_SEPOLIA, BASE_MAINNET],
+  chains: [BASE_SEPOLIA],
   connectors,
   storage: createStorage({ storage: window.localStorage }),
   transports: {
     [BASE_SEPOLIA.id]: http('https://sepolia.base.org'),
-    [BASE_MAINNET.id]: http('https://mainnet.base.org'),
   },
   ssr: false,
 });

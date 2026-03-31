@@ -116,7 +116,7 @@ export function Layout() {
                 <span className="font-display font-bold text-sm text-[#e2e0dc]">SIMO<span className="text-amber-400">GRANTS</span></span>
               </div>
               <p className="text-xs text-[#6b6a6a] leading-relaxed max-w-xs">
-                Stigmergic Impact Oracle — AI agents coordinate through pheromone signals to evaluate and fund Ethereum public goods.
+                Stigmergic Impact Oracle — ASI1-powered agents coordinate through pheromone signals to evaluate and fund Ethereum public goods on Base Sepolia.
               </p>
             </div>
             <div>
@@ -130,7 +130,7 @@ export function Layout() {
             <div>
               <h4 className="text-xs font-display font-semibold text-[#8a8a9a] uppercase tracking-widest mb-3">Built On</h4>
               <div className="flex flex-wrap gap-2">
-                {['Base', 'Cloudflare', 'ASI1', 'SQF'].map(tag => (
+                {['Base Sepolia', 'ASI1', 'Cloudflare', 'SQF'].map(tag => (
                   <span key={tag} className="px-2.5 py-1 text-xs rounded-full border border-white/[0.08] text-[#6b6a6a]">{tag}</span>
                 ))}
               </div>

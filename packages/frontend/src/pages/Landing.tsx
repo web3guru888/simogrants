@@ -4,8 +4,8 @@ import { api } from '@/lib/api';
 
 const FEATURES = [
   {
-    title: 'Multi-Agent Evaluation',
-    description: 'Four AI stakeholder agents — Developer, User, Funder, Ecosystem — independently score every project across 12 dimensions.',
+    title: 'ASI1 Multi-Agent Evaluation',
+    description: 'Four ASI1-powered stakeholder agents — Developer, User, Funder, Ecosystem — independently score every project across 12 dimensions.',
     accent: 'amber',
   },
   {
@@ -15,7 +15,7 @@ const FEATURES = [
   },
   {
     title: 'On-Chain Attestation',
-    description: 'Every evaluation is attested on Base blockchain. Transparent, verifiable, immutable — a permanent record of impact assessment.',
+    description: 'Every evaluation is attested on Base Sepolia. Transparent, verifiable, immutable — a permanent record of impact assessment.',
     accent: 'amber',
   },
 ];
@@ -23,7 +23,7 @@ const FEATURES = [
 const STEPS = [
   { num: '01', title: 'Create Round', description: 'Define a grant round with matching pool, criteria, and evaluation parameters.' },
   { num: '02', title: 'Projects Apply', description: 'Teams submit projects with descriptions, GitHub repos, and team details.' },
-  { num: '03', title: 'Agents Evaluate', description: 'AI stakeholder agents score, SQF allocates, results attest on-chain.' },
+  { num: '03', title: 'ASI1 Agents Evaluate', description: 'ASI1 stakeholder agents score, SQF allocates, results attest on Base Sepolia.' },
 ];
 
 export function Landing() {
@@ -79,7 +79,7 @@ export function Landing() {
             </h1>
 
             <p className="animate-fade-up delay-200 text-lg sm:text-xl text-[#8a8a9a] max-w-xl mb-10 leading-relaxed">
-              AI agents coordinate through pheromone signals — like ant colonies — to evaluate and fund Ethereum public goods. Transparent. Reproducible. On-chain.
+              ASI1-powered AI agents coordinate through pheromone signals — like ant colonies — to evaluate and fund Ethereum public goods on Base Sepolia. Transparent. Reproducible. On-chain.
             </p>
 
             {/* CTA */}

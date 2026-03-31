@@ -31,13 +31,6 @@ export const CONTRACT_ADDRESSES: Record<
     SQFMechanism: (import.meta.env.VITE_SQF_MECHANISM_ADDRESS as `0x${string}`) || '0x77FFD92fbD6720Dc1cE504B971E9AbdDd7F5b1BA',
     AttestationRegistry: (import.meta.env.VITE_ATTESTATION_REGISTRY_ADDRESS as `0x${string}`) || '0xb7064a2C8283a7a5f2D54E43c509FE76DA2D1dD9',
   },
-  // Base Mainnet (production — addresses TBD, set via env)
-  8453: {
-    GrantFactory: (import.meta.env.VITE_GRANT_FACTORY_ADDRESS as `0x${string}`) || '0x0000000000000000000000000000000000000000',
-    GrantRoundImplementation: (import.meta.env.VITE_GRANT_ROUND_IMPL_ADDRESS as `0x${string}`) || '0x0000000000000000000000000000000000000000',
-    SQFMechanism: (import.meta.env.VITE_SQF_MECHANISM_ADDRESS as `0x${string}`) || '0x0000000000000000000000000000000000000000',
-    AttestationRegistry: (import.meta.env.VITE_ATTESTATION_REGISTRY_ADDRESS as `0x${string}`) || '0x0000000000000000000000000000000000000000',
-  },
 };
 
 /** Get contract addresses for a given chain ID. Falls back to hardhat. */

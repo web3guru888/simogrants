@@ -20,7 +20,7 @@ const initialForm: RoundForm = {
   description: '',
   matchingPool: 10000,
   currency: 'USDC',
-  chain: 'base',
+  chain: 'base-sepolia',
   applicationDeadline: '',
   maxApplications: 50,
 };
@@ -179,7 +179,6 @@ export function CreateRound() {
                 onChange={e => updateField('chain', e.target.value)}
                 className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[#e2e0dc] focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
               >
-                <option value="base">Base</option>
                 <option value="base-sepolia">Base Sepolia (Testnet)</option>
               </select>
             </div>
