@@ -9,7 +9,7 @@ import type { EvaluationData } from '../types';
 import { authMiddleware } from '../middleware/auth';
 import { generateMockEvaluation } from '../lib/mockEvaluator';
 import { evaluateProject } from '../lib/evaluator';
-import { SQFMechanism } from '../lib/sqf';
+import { computeSQFWithPheromone } from '../lib/sqfWithPheromone';
 
 const DEFAULT_ASI1_MODEL = 'asi1-mini';
 
@@ -224,19 +224,15 @@ pipelineRoutes.post('/run', authMiddleware, async (c) => {
         .bind(roundId)
         .run();
 
-      const sqf = new SQFMechanism(round.matching_pool);
-
       // Build dependency graph based on project relationships
       const projectIds = Object.keys(evaluationScores);
       const dependencies: [string, string][] = [];
-
-      // Infrastructure pattern: first project is "base layer",
-      // later ones depend on it
       for (let i = 1; i < projectIds.length; i++) {
         dependencies.push([projectIds[i], projectIds[0]]);
       }
 
-      const sqfResult = sqf.computeAllocationDetailed(evaluationScores, dependencies);
+      // Compute SQF with pheromone persistence
+      const sqfResult = await computeSQFWithPheromone(c.env.DB, round.matching_pool, evaluationScores, dependencies);
 
       // Store allocations in D1
       for (const [projectId, alloc] of Object.entries(sqfResult.allocations)) {
@@ -246,7 +242,7 @@ pipelineRoutes.post('/run', authMiddleware, async (c) => {
         if (appEntry) {
           await c.env.DB.prepare(
             `INSERT INTO allocations (round_id, application_id, amount, qf_base, pheromone_modifier, pagerank_modifier, pheromone_state, epoch, computed_at)
-             VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?)`
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
           )
             .bind(
               roundId,
@@ -256,6 +252,7 @@ pipelineRoutes.post('/run', authMiddleware, async (c) => {
               alloc.pheromoneMod,
               alloc.pagerankMod,
               JSON.stringify(sqfResult.pheromoneState),
+              sqfResult.epoch,
               now
             )
             .run();

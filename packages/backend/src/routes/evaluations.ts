@@ -8,7 +8,7 @@ import type { EvaluationData } from '../types';
 import { authMiddleware } from '../middleware/auth';
 import { generateMockEvaluation } from '../lib/mockEvaluator';
 import { evaluateProject } from '../lib/evaluator';
-import { SQFMechanism } from '../lib/sqf';
+import { computeSQFWithPheromone } from '../lib/sqfWithPheromone';
 
 const DEFAULT_ASI1_MODEL = 'asi1-mini';
 
@@ -208,32 +208,34 @@ evaluationRoutes.post('/rounds/:roundId/evaluate', authMiddleware, async (c) => 
     }
   }
 
-  // Compute SQF allocation
+  // Compute SQF allocation with persistent pheromone state
   let allocations: { allocations: Record<string, { amount: number }>; pheromoneState: Record<string, number> } | null = null;
   if (completed > 0 && Object.keys(evaluationScores).length > 0) {
     try {
-      const sqf = new SQFMechanism(round.matching_pool);
-
-      // Build dependency edges from known project relationships
+      // Build dependency edges
       const projectIds = Object.keys(evaluationScores);
       const dependencies: [string, string][] = [];
-      // Simple demo dependencies: earlier projects depend on later ones (infrastructure)
       for (let i = 1; i < projectIds.length; i++) {
-        dependencies.push([projectIds[i], projectIds[0]]); // All depend on first project
+        dependencies.push([projectIds[i], projectIds[0]]);
       }
 
-      const sqfResult = sqf.computeAllocationDetailed(evaluationScores, dependencies);
+      // Compute SQF with pheromone persistence (loads previous state, advances epoch)
+      const sqfResult = await computeSQFWithPheromone(
+        c.env.DB,
+        round.matching_pool,
+        evaluationScores,
+        dependencies,
+      );
 
       // Store allocations
       for (const [projectId, alloc] of Object.entries(sqfResult.allocations)) {
-        // Find the application_id for this project
         const appEntry = (applications as Array<Record<string, unknown>>).find(
           (a) => a.project_id === projectId
         );
         if (appEntry) {
           await c.env.DB.prepare(
             `INSERT INTO allocations (round_id, application_id, amount, qf_base, pheromone_modifier, pagerank_modifier, pheromone_state, epoch, computed_at)
-             VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?)`
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
           )
             .bind(
               roundId,
@@ -243,6 +245,7 @@ evaluationRoutes.post('/rounds/:roundId/evaluate', authMiddleware, async (c) => 
               alloc.pheromoneMod,
               alloc.pagerankMod,
               JSON.stringify(sqfResult.pheromoneState),
+              sqfResult.epoch,
               now
             )
             .run();
@@ -373,8 +376,7 @@ evaluationRoutes.post('/rounds/:roundId/allocate', authMiddleware, async (c) => 
     dependencies.push([projectIds[i], projectIds[0]]);
   }
 
-  const sqf = new SQFMechanism(round.matching_pool);
-  const result = sqf.computeAllocationDetailed(evaluationScores, dependencies);
+  const result = await computeSQFWithPheromone(c.env.DB, round.matching_pool, evaluationScores, dependencies);
 
   // Store allocations in D1
   const now = new Date().toISOString();
@@ -385,7 +387,7 @@ evaluationRoutes.post('/rounds/:roundId/allocate', authMiddleware, async (c) => 
     if (appEntry) {
       await c.env.DB.prepare(
         `INSERT INTO allocations (round_id, application_id, amount, qf_base, pheromone_modifier, pagerank_modifier, pheromone_state, epoch, computed_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?)`
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
       )
         .bind(
           roundId,
@@ -395,6 +397,7 @@ evaluationRoutes.post('/rounds/:roundId/allocate', authMiddleware, async (c) => 
           alloc.pheromoneMod,
           alloc.pagerankMod,
           JSON.stringify(result.pheromoneState),
+          result.epoch,
           now
         )
         .run();
@@ -403,7 +406,7 @@ evaluationRoutes.post('/rounds/:roundId/allocate', authMiddleware, async (c) => 
 
   return c.json({
     roundId,
-    epoch: 1,
+    epoch: result.epoch,
     matchingPool: round.matching_pool,
     allocations: result.allocations,
     pheromoneState: result.pheromoneState,

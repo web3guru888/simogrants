@@ -166,6 +166,10 @@ export class SQFMechanism {
     };
   }
 
+  loadPheromoneState(state: Record<string, number>): void {
+    this.pheromone.loadState(state);
+  }
+
   advanceEpoch(accuracyScores: Record<string, number>): void {
     this.pheromone.decayAll();
     for (const [project, accuracy] of Object.entries(accuracyScores)) {
