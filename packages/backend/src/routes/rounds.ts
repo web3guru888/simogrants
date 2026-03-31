@@ -53,9 +53,13 @@ const createRoundSchema = z.object({
   currency: z.string().optional().default('USDC'),
   chain: z.string().optional().default('base'),
   applicationDeadline: z.string().optional(),
+  application_deadline: z.string().optional(),
   maxApplications: z.number().optional().default(100),
+  max_applications: z.number().optional(),
   evaluationConfig: z.record(z.unknown()).optional(),
+  evaluation_config: z.record(z.unknown()).optional(),
   contractAddress: z.string().optional(),
+  contract_address: z.string().optional(),
 });
 
 roundRoutes.post('/', authMiddleware, async (c) => {
@@ -69,9 +73,12 @@ roundRoutes.post('/', authMiddleware, async (c) => {
   const creatorAddress = c.get('userAddress');
   const id = `round-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
   const now = new Date().toISOString();
-  const contractAddress = body.contractAddress || null;
+  const contractAddr = body.contractAddress || body.contract_address || null;
+  const deadline = body.applicationDeadline || body.application_deadline || null;
+  const maxApps = body.maxApplications ?? body.max_applications ?? 100;
+  const evalConfig = body.evaluationConfig || body.evaluation_config || null;
 
-  const result = await c.env.DB.prepare(
+  await c.env.DB.prepare(
     `INSERT INTO rounds (id, title, description, creator_address, status, matching_pool, currency, chain, application_deadline, max_applications, evaluation_config, contract_address, created_at, updated_at)
      VALUES (?, ?, ?, ?, 'active', ?, ?, ?, ?, ?, ?, ?, ?, ?)`
   )
@@ -83,10 +90,10 @@ roundRoutes.post('/', authMiddleware, async (c) => {
       body.matchingPool,
       body.currency,
       body.chain,
-      body.applicationDeadline || null,
-      body.maxApplications,
-      body.evaluationConfig ? JSON.stringify(body.evaluationConfig) : null,
-      contractAddress,
+      deadline,
+      maxApps,
+      evalConfig ? JSON.stringify(evalConfig) : null,
+      contractAddr,
       now,
       now
     )
@@ -105,7 +112,7 @@ roundRoutes.post('/', authMiddleware, async (c) => {
       application_deadline: body.applicationDeadline || null,
       max_applications: body.maxApplications,
       evaluation_config: body.evaluationConfig || null,
-      contract_address: contractAddress,
+      contract_address: contractAddr,
       created_at: now,
       updated_at: now,
     },
