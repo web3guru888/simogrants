@@ -33,8 +33,8 @@ export function useAuth() {
     setIsLoading(true);
     setError(null);
     try {
-      // 1. Get nonce
-      const { nonce, message } = await api.getNonce();
+      // 1. Get nonce (pass address so backend can build SIWE message)
+      const { message } = await api.getNonce(address);
 
       // 2. Sign message
       const signature = await signMessageAsync({ message });

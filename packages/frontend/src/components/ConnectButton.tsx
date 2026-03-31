@@ -1,9 +1,20 @@
-import { useConnect } from 'wagmi';
+import { useEffect, useRef } from 'react';
+import { useConnect, useAccount } from 'wagmi';
 import { useAuth } from '@/hooks/useAuth';
 
 export function ConnectButton() {
   const { connect, connectors } = useConnect();
+  const { isConnected: wagmiConnected, address: wagmiAddress } = useAccount();
   const { isConnected, address, isLoading, signIn, signOut, user } = useAuth();
+  const pendingSignIn = useRef(false);
+
+  // Auto-trigger signIn when wallet connects and we don't have a session
+  useEffect(() => {
+    if (wagmiConnected && wagmiAddress && !user && !isLoading && pendingSignIn.current) {
+      pendingSignIn.current = false;
+      signIn();
+    }
+  }, [wagmiConnected, wagmiAddress, user, isLoading, signIn]);
 
   if (isConnected && address) {
     const truncated = `${address.slice(0, 6)}...${address.slice(-4)}`;
@@ -26,15 +37,12 @@ export function ConnectButton() {
   return (
     <button
       onClick={() => {
+        pendingSignIn.current = true;
         const injected = connectors.find(c => c.id === 'injected');
         if (injected) {
-          connect({ connector: injected }, { onSuccess: () => {
-            setTimeout(() => signIn(), 500);
-          }});
+          connect({ connector: injected });
         } else if (connectors.length > 0) {
-          connect({ connector: connectors[0] }, { onSuccess: () => {
-            setTimeout(() => signIn(), 500);
-          }});
+          connect({ connector: connectors[0] });
         }
       }}
       disabled={isLoading}
@@ -46,7 +54,7 @@ export function ConnectButton() {
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
           </svg>
-          Connecting...
+          Signing In...
         </span>
       ) : (
         'Connect Wallet'

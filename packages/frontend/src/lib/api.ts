@@ -131,7 +131,10 @@ async function mockFetch(path: string, options?: RequestInit) {
 
 export const api = {
   // Auth
-  getNonce: () => apiFetch<{ nonce: string; message: string }>('/auth/nonce', { method: 'POST' }),
+  getNonce: (address?: string) => apiFetch<{ nonce: string; message: string }>('/auth/nonce', {
+    method: 'POST',
+    body: JSON.stringify({ address: address || '' }),
+  }),
   verify: (message: string, signature: string) =>
     apiFetch<{ token: string; address: string; chainId: number }>('/auth/verify', {
       method: 'POST',
