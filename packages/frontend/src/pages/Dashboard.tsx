@@ -110,7 +110,7 @@ export function Dashboard() {
               </div>
               <span className="text-sm text-slate-400">Rounds Created</span>
             </div>
-            <div className="text-3xl font-bold text-white">{userInfo?.roundsCreated ?? rounds.length}</div>
+            <div className="text-3xl font-bold text-white">{userInfo?.roundsCreated ?? 0}</div>
           </div>
 
           <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-6">

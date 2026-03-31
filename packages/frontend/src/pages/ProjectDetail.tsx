@@ -90,25 +90,26 @@ export function ProjectDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function fetchProject() {
-      if (!id) return;
-      setLoading(true);
-      setError(null);
-      try {
-        const projectData = await api.getProject(id);
-        setData(projectData);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load project');
-      } finally {
-        setLoading(false);
-      }
+  const fetchProject = async () => {
+    if (!id) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const projectData = await api.getProject(id);
+      setData(projectData);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load project');
+    } finally {
+      setLoading(false);
     }
+  };
+
+  useEffect(() => {
     fetchProject();
   }, [id]);
 
   if (loading) return <LoadingSkeleton type="page" />;
-  if (error) return <ErrorMessage message={error} />;
+  if (error) return <ErrorMessage message={error} onRetry={fetchProject} />;
   if (!data) return null;
 
   const { project, evaluations, allocations } = data;
@@ -180,7 +181,7 @@ export function ProjectDetail() {
         )}
 
         {/* Aggregated Scores */}
-        {latestEval && (
+        {latestEval?.aggregatedScores && Object.keys(latestEval.aggregatedScores).length > 0 && (
           <section className="mb-10">
             <h2 className="text-xl font-bold text-white mb-6">Aggregated Scores</h2>
             <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-6">
@@ -212,6 +213,14 @@ export function ProjectDetail() {
         )}
 
         {/* Allocation History */}
+        {allocations.length === 0 && (
+          <section className="mb-10">
+            <h2 className="text-xl font-bold text-white mb-6">Allocation History</h2>
+            <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-8 text-center">
+              <p className="text-[#6b6a6a]">This project hasn't received any funding allocations yet.</p>
+            </div>
+          </section>
+        )}
         {allocations.length > 0 && (
           <section className="mb-10">
             <h2 className="text-xl font-bold text-white mb-6">Allocation History</h2>
@@ -259,7 +268,7 @@ export function ProjectDetail() {
               <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
                 <dt className="text-sm text-slate-500 sm:w-40">Created</dt>
                 <dd className="text-sm text-slate-300">
-                  {new Date(project.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                  {new Date(project.createdAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
                 </dd>
               </div>
               {project.totalFundingReceived !== undefined && (
@@ -280,7 +289,7 @@ export function ProjectDetail() {
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
                   <dt className="text-sm text-slate-500 sm:w-40">Last Evaluated</dt>
                   <dd className="text-sm text-slate-300">
-                    {new Date(latestEval.evaluatedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                    {new Date(latestEval.evaluatedAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
                   </dd>
                 </div>
               )}

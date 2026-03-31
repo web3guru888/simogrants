@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useAccount } from 'wagmi';
 import type { Address } from 'viem';
 import { api } from '@/lib/api';
+import { getExplorerUrl } from '@/lib/explorer';
 import { useRoundOnChainStatus, useOnChainApplicationIds, useFactoryRoundCount } from '@/hooks/useContracts';
 import type { RoundDetail as RoundDetailType, Application } from '@/lib/types';
 import { StatusBadge } from '@/components/StatusBadge';
@@ -37,7 +38,7 @@ export function RoundDetail() {
     fetchRound();
   }, [id]);
 
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
   const roundAddress = data?.round?.contractAddress as Address | undefined;
   const validRoundAddress = roundAddress && roundAddress !== '0x0000000000000000000000000000000000000000' ? roundAddress : undefined;
   const { data: onChainStatus } = useRoundOnChainStatus(validRoundAddress);
@@ -95,7 +96,7 @@ export function RoundDetail() {
                   View Results
                 </Link>
               )}
-              {isConnected && (round.status === 'accepting' || round.status === 'evaluating' || round.status === 'active') && (
+              {isConnected && address && round.creatorAddress === address && (round.status === 'accepting' || round.status === 'evaluating' || round.status === 'active') && (
                 <button
                   onClick={async () => {
                     try {
@@ -130,7 +131,7 @@ export function RoundDetail() {
             <div className="rounded-xl bg-slate-800/50 border border-slate-700/50 p-4">
               <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Deadline</div>
               <div className={`text-xl font-bold ${isExpired ? 'text-red-400' : 'text-emerald-400'}`}>
-                {deadline.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                {deadline.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
               </div>
             </div>
             <div className="rounded-xl bg-slate-800/50 border border-slate-700/50 p-4">
@@ -190,17 +191,17 @@ export function RoundDetail() {
                           <StatusBadge status={app.status} />
                         </div>
                         <p className="text-xs text-slate-500">
-                          Applied {new Date(app.appliedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                          Applied {new Date(app.appliedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
                           {app.evaluatedAt && (
                             <span className="ml-3">
-                              · Evaluated {new Date(app.evaluatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                              · Evaluated {new Date(app.evaluatedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
                             </span>
                           )}
                         </p>
                       </div>
-                      {((app as any).projectScore ?? app.overallScore) !== undefined && (
+                      {(app.projectScore ?? app.overallScore) != null && (
                         <div className="w-48 shrink-0">
-                          <ScoreBar score={(app as any).projectScore ?? app.overallScore!} label="Overall Score" color="violet" />
+                          <ScoreBar score={app.projectScore ?? app.overallScore ?? 0} label="Overall Score" color="amber" />
                         </div>
                       )}
                     </div>
@@ -243,11 +244,11 @@ export function RoundDetail() {
               <dl className="space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
                   <dt className="text-sm text-slate-500 sm:w-40">Created</dt>
-                  <dd className="text-sm text-slate-300">{new Date(round.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</dd>
+                  <dd className="text-sm text-slate-300">{new Date(round.createdAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}</dd>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
                   <dt className="text-sm text-slate-500 sm:w-40">Last Updated</dt>
-                  <dd className="text-sm text-slate-300">{new Date(round.updatedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</dd>
+                  <dd className="text-sm text-slate-300">{new Date(round.updatedAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}</dd>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
                   <dt className="text-sm text-slate-500 sm:w-40">Creator</dt>
@@ -258,7 +259,7 @@ export function RoundDetail() {
                     <dt className="text-sm text-slate-500 sm:w-40">Contract</dt>
                     <dd>
                       <a
-                        href={`https://sepolia.basescan.org/address/${round.contractAddress}`}
+                        href={getExplorerUrl(84532, round.contractAddress)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm text-violet-400 hover:text-violet-300 font-mono transition-colors"

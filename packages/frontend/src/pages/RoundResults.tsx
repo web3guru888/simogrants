@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useChainId } from 'wagmi';
 import { api } from '@/lib/api';
 import { getAddresses, isContractsDeployed } from '@/lib/contractsConfig';
+import { getExplorerUrl } from '@/lib/explorer';
 import type { RoundResults as RoundResultsType } from '@/lib/types';
 import { ScoreBar } from '@/components/ScoreBar';
 import { AllocationBar } from '@/components/AllocationBar';
@@ -98,7 +99,7 @@ export function RoundResults() {
             <div className="text-2xl font-bold text-emerald-400">
               {contractsReady ? (
                 <a
-                  href={`https://sepolia.basescan.org/address/${addresses.AttestationRegistry}`}
+                  href={getExplorerUrl(chainId, addresses.AttestationRegistry)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-emerald-300 transition-colors"
@@ -194,7 +195,7 @@ export function RoundResults() {
                     <td className="px-6 py-4">
                       {contractsReady ? (
                         <a
-                          href={`https://sepolia.basescan.org/address/${addresses.AttestationRegistry}`}
+                          href={getExplorerUrl(chainId, addresses.AttestationRegistry)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30 transition-colors"

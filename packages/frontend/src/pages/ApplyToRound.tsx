@@ -96,8 +96,9 @@ export function ApplyToRound() {
             roundAddress: round.contractAddress as `0x${string}`,
             metadataURI,
           });
-        } catch (txErr) {
-          console.warn('On-chain application tx failed:', txErr);
+        } catch {
+          // Backend application succeeded; on-chain recording can be retried from round page
+          setError('Application submitted, but on-chain recording failed. You can retry from the round page.');
         }
       }
 

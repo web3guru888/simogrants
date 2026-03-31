@@ -46,8 +46,13 @@ export function CreateRound() {
       if (isConnected) {
         const metadataURI = JSON.stringify({
           title: form.title.trim(),
-          description: form.description.trim(),
+          description: form.description.trim().slice(0, 500),
         });
+        if (new Blob([metadataURI]).size > 2048) {
+          setError('Description is too long for on-chain storage. Please shorten it.');
+          setSubmitting(false);
+          return;
+        }
         const txHash = await createOnChain({
           metadataURI,
           matchingPool: form.matchingPool,

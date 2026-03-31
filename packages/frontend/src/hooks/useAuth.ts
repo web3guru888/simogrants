@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useAccount, useSignMessage, useDisconnect } from 'wagmi';
 import { api } from '@/lib/api';
 import type { UserInfo } from '@/lib/types';
@@ -22,6 +22,11 @@ export function useAuth() {
       }
     }
   }, []);
+
+  // Restore session on mount
+  useEffect(() => {
+    checkSession();
+  }, [checkSession]);
 
   const signIn = useCallback(async () => {
     if (!address) return;

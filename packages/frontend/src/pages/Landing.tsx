@@ -1,4 +1,6 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { api } from '@/lib/api';
 
 const FEATURES = [
   {
@@ -25,6 +27,17 @@ const STEPS = [
 ];
 
 export function Landing() {
+  const [stats, setStats] = useState({ dimensions: '12', agents: '4', pool: '$500K', tests: '104' });
+
+  useEffect(() => {
+    api.getRounds().then(data => {
+      const totalPool = data.rounds.reduce((s: number, r: any) => s + (r.matchingPool || 0), 0);
+      if (totalPool > 0) {
+        setStats(prev => ({ ...prev, pool: `$${(totalPool / 1000).toFixed(0)}K` }));
+      }
+    }).catch(() => {});
+  }, []);
+
   return (
     <div className="min-h-screen">
       {/* ── Hero ────────────────────────────────────────────── */}
@@ -96,10 +109,10 @@ export function Landing() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { value: '12', label: 'Scoring Dimensions' },
-              { value: '4', label: 'AI Agents' },
-              { value: '$500K', label: 'Pool Evaluated' },
-              { value: '104', label: 'Contract Tests' },
+              { value: stats.dimensions, label: 'Scoring Dimensions' },
+              { value: stats.agents, label: 'AI Agents' },
+              { value: stats.pool, label: 'Pool Evaluated' },
+              { value: stats.tests, label: 'Contract Tests' },
             ].map((stat, i) => (
               <div key={stat.label} className={`animate-fade-up delay-${(i + 1) * 100} text-center`}>
                 <div className="font-display text-3xl sm:text-4xl font-bold text-amber-400 mb-1">
