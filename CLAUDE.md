@@ -115,10 +115,32 @@ cd packages/contracts
 DEPLOYER_PRIVATE_KEY=0x... npx hardhat run scripts/deploy.js --network baseSepolia
 ```
 
+### Live Data
+
+The production database contains simulated but realistic data:
+- **Round 1 — Ethereum Core Infrastructure** ($500K, funded): 6 projects (Lodestar, Hardhat, Foundry, EthereumJS, Remix, Ethers.js) — all ASI1-evaluated with real scores and SQF allocations
+- **Round 2 — DeFi Security & Auditing** ($250K, funded): 5 projects (Slither, Echidna, OpenZeppelin, Certora, Immunefi) — all ASI1-evaluated
+- **Round 3 — Governance & Public Goods** ($350K, accepting): 5 projects (Snapshot, Gitcoin Passport, Protocol Guild, Tally, RetroPGF) — awaiting evaluation
+
+All evaluations are **real ASI1 Mini** responses, not mock data. See `ASI1_VERIFICATION_REPORT.md` for evidence.
+
+### Database Operations
+
+```bash
+# Reset and re-seed (remote)
+npx wrangler d1 execute simogrants-db --remote --command="DELETE FROM evidence; DELETE FROM allocations; DELETE FROM evaluations; DELETE FROM pipeline_runs; DELETE FROM applications; DELETE FROM projects; DELETE FROM rounds; DELETE FROM users;"
+
+# Query data
+npx wrangler d1 execute simogrants-db --remote --command="SELECT id, title, status, matching_pool FROM rounds"
+
+# Create simulation auth token
+npx wrangler kv key put "session:sim-token" '{"address":"0xsimo...","chainId":84532,"expiresAt":"2027-01-01T00:00:00Z"}' --namespace-id d795fd0e52154eabb348f65ebb8bad26 --remote
+```
+
 ## Key Constraints
 
 - **Base Sepolia testnet only** — no mainnet support. Chain ID 84532. wagmi config only includes BASE_SEPOLIA.
-- **ASI1 API** — Real evaluator requires `ASI1_API_KEY` secret (set via `npx wrangler secret put` for prod, `.dev.vars` for local)
+- **ASI1 API** — Real evaluator requires `ASI1_API_KEY` secret (set via `npx wrangler secret put` for prod, `.dev.vars` for local). Confirmed live via `ASI1_VERIFICATION_REPORT.md`.
 - **Dual-casing** — Backend Zod schemas must accept both camelCase and snake_case because frontend's `toSnakeCase` transform runs before sending. Always add both field name variants when adding new fields.
 - **Auth flow** — `ConnectButton` auto-triggers SIWE signIn when wallet connects without a stored token. `useAuth` restores sessions on mount via `checkSession()`.
 - **Dashboard filtering** — Dashboard filters rounds/projects client-side by connected wallet address (creatorAddress/createdBy). The API doesn't support server-side filtering by creator yet.
@@ -126,3 +148,15 @@ DEPLOYER_PRIVATE_KEY=0x... npx hardhat run scripts/deploy.js --network baseSepol
 - Hardhat: Solidity 0.8.24, optimizer 10,000 runs, EVM version `paris`
 - Python: ruff for linting (100-char line length), pytest with `asyncio_mode = "auto"`
 - Design system: font-display (Syne) for headings, amber-400/500 primary, teal-400 secondary, white/[opacity] surfaces on #0a0a12 base
+
+## Documentation Index
+
+| File | Purpose |
+|------|---------|
+| `CLAUDE.md` | Claude Code guidance (this file) |
+| `README.md` | Project overview, setup, API reference |
+| `TESTING_PLAN.md` | 17-section live testing plan, 150+ checkpoints |
+| `ASI1_VERIFICATION_REPORT.md` | Proof that evaluations use real ASI1 Mini |
+| `SIMULATION_PLAN.md` | Database simulation plan (3 rounds, 16 projects) |
+| `FRONTEND_REVIEW.md` | 19 frontend findings (mostly resolved) |
+| `DESIGN_REVIEW.md` | Design system review + recommendations (implemented) |
