@@ -56,13 +56,13 @@ export function RoundDetail() {
   const appCount = applications.length;
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen ">
       {/* Header */}
-      <div className="bg-gradient-to-b from-violet-950/30 to-slate-900 border-b border-slate-800">
+      <div className="border-b border-white/[0.06]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <Link
             to="/rounds"
-            className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-violet-300 transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-sm text-[#6b6a6a] hover:text-amber-400 transition-colors mb-6"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -73,17 +73,17 @@ export function RoundDetail() {
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-3">
-                <h1 className="text-2xl sm:text-3xl font-bold text-white">{round.title}</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold text-[#e2e0dc]">{round.title}</h1>
                 <StatusBadge status={round.status} />
               </div>
-              <p className="text-slate-400 max-w-2xl">{round.description}</p>
+              <p className="text-[#6b6a6a] max-w-2xl">{round.description}</p>
             </div>
 
             <div className="flex flex-wrap gap-3 shrink-0">
               {canApply && (
                 <Link
                   to={`/rounds/${round.id}/apply`}
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-semibold px-6 py-2.5 rounded-lg hover:from-violet-500 hover:to-cyan-400 transition-all shadow-lg shadow-violet-500/25"
+                  className="inline-flex items-center gap-2 bg-amber-500 text-[#0a0a12] font-semibold px-6 py-2.5 rounded-lg hover:bg-amber-400 transition-all shadow-lg shadow-amber-500/15"
                 >
                   Apply to This Round
                 </Link>
@@ -91,7 +91,7 @@ export function RoundDetail() {
               {(round.status === 'funded' || round.status === 'closed') && (
                 <Link
                   to={`/rounds/${round.id}/results`}
-                  className="inline-flex items-center gap-2 bg-slate-700 text-white font-semibold px-6 py-2.5 rounded-lg hover:bg-slate-600 transition-colors"
+                  className="inline-flex items-center gap-2 bg-white/[0.04] text-[#e2e0dc] font-semibold px-6 py-2.5 rounded-lg hover:bg-white/[0.08] transition-colors"
                 >
                   View Results
                 </Link>
@@ -106,7 +106,7 @@ export function RoundDetail() {
                       setError(err instanceof Error ? err.message : 'Evaluation failed');
                     }
                   }}
-                  className="inline-flex items-center gap-2 bg-emerald-600 text-white font-semibold px-6 py-2.5 rounded-lg hover:bg-emerald-500 transition-colors"
+                  className="inline-flex items-center gap-2 bg-emerald-600 text-[#e2e0dc] font-semibold px-6 py-2.5 rounded-lg hover:bg-emerald-500 transition-colors"
                 >
                   Run AI Evaluation
                 </button>
@@ -116,27 +116,27 @@ export function RoundDetail() {
 
           {/* Round Stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
-            <div className="rounded-xl bg-slate-800/50 border border-slate-700/50 p-4">
-              <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Matching Pool</div>
-              <div className="text-xl font-bold text-cyan-400">
-                {round.matchingPool.toLocaleString()} <span className="text-sm text-slate-400">{round.currency}</span>
+            <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4">
+              <div className="text-xs text-[#4a4a5a] uppercase tracking-wider mb-1">Matching Pool</div>
+              <div className="text-xl font-bold text-amber-400">
+                {round.matchingPool.toLocaleString()} <span className="text-sm text-[#6b6a6a]">{round.currency}</span>
               </div>
             </div>
-            <div className="rounded-xl bg-slate-800/50 border border-slate-700/50 p-4">
-              <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Applications</div>
-              <div className="text-xl font-bold text-slate-200">
-                {appCount} <span className="text-sm text-slate-400">/ {round.maxApplications}</span>
+            <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4">
+              <div className="text-xs text-[#4a4a5a] uppercase tracking-wider mb-1">Applications</div>
+              <div className="text-xl font-bold text-[#e2e0dc]">
+                {appCount} <span className="text-sm text-[#6b6a6a]">/ {round.maxApplications}</span>
               </div>
             </div>
-            <div className="rounded-xl bg-slate-800/50 border border-slate-700/50 p-4">
-              <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Deadline</div>
+            <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4">
+              <div className="text-xs text-[#4a4a5a] uppercase tracking-wider mb-1">Deadline</div>
               <div className={`text-xl font-bold ${isExpired ? 'text-red-400' : 'text-emerald-400'}`}>
                 {deadline.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
               </div>
             </div>
-            <div className="rounded-xl bg-slate-800/50 border border-slate-700/50 p-4">
-              <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Chain</div>
-              <div className="text-xl font-bold text-blue-400 capitalize">{round.chain}</div>
+            <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4">
+              <div className="text-xs text-[#4a4a5a] uppercase tracking-wider mb-1">Chain</div>
+              <div className="text-xl font-bold text-teal-400 capitalize">{round.chain}</div>
             </div>
           </div>
         </div>
@@ -145,15 +145,15 @@ export function RoundDetail() {
       {/* Tabs & Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Tab Navigation */}
-        <div className="flex gap-1 mb-6 border-b border-slate-800">
+        <div className="flex gap-1 mb-6 border-b border-white/[0.06]">
           {(['applications', 'details'] as Tab[]).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`px-5 py-3 text-sm font-medium capitalize border-b-2 transition-colors ${
                 activeTab === tab
-                  ? 'border-violet-500 text-violet-300'
-                  : 'border-transparent text-slate-400 hover:text-slate-200'
+                  ? 'border-amber-500 text-amber-400'
+                  : 'border-transparent text-[#6b6a6a] hover:text-[#e2e0dc]'
               }`}
             >
               {tab}
@@ -166,13 +166,13 @@ export function RoundDetail() {
           <div>
             {applications.length === 0 ? (
               <div className="text-center py-16">
-                <div className="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="w-16 h-16 rounded-full bg-white/[0.04] flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-[#3a3a4a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold text-slate-300 mb-2">No applications yet</h3>
-                <p className="text-slate-500">Be the first to apply to this round!</p>
+                <h3 className="text-lg font-semibold text-[#8a8a9a] mb-2">No applications yet</h3>
+                <p className="text-[#4a4a5a]">Be the first to apply to this round!</p>
               </div>
             ) : (
               <div className="space-y-3">
@@ -180,17 +180,17 @@ export function RoundDetail() {
                   <Link
                     key={app.id}
                     to={`/projects/${app.projectId}`}
-                    className="block rounded-xl border border-slate-700/50 bg-slate-800/30 p-5 hover:border-violet-500/50 transition-all group"
+                    className="block rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 hover:border-amber-500/20 transition-all group"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-1">
-                          <h3 className="text-lg font-semibold text-slate-100 group-hover:text-violet-300 transition-colors">
+                          <h3 className="text-lg font-semibold text-[#e2e0dc] group-hover:text-amber-400 transition-colors">
                             {app.projectName}
                           </h3>
                           <StatusBadge status={app.status} />
                         </div>
-                        <p className="text-xs text-slate-500">
+                        <p className="text-xs text-[#4a4a5a]">
                           Applied {new Date(app.appliedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
                           {app.evaluatedAt && (
                             <span className="ml-3">
@@ -216,53 +216,53 @@ export function RoundDetail() {
         {activeTab === 'details' && (
           <div className="space-y-6">
             {/* Statistics */}
-            <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-6">
-              <h3 className="text-lg font-semibold text-white mb-4">Statistics</h3>
+            <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
+              <h3 className="text-lg font-semibold text-[#e2e0dc] mb-4">Statistics</h3>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <div>
-                  <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Total Applications</div>
-                  <div className="text-xl font-bold text-white">{appCount}</div>
+                  <div className="text-xs text-[#4a4a5a] uppercase tracking-wider mb-1">Total Applications</div>
+                  <div className="text-xl font-bold text-[#e2e0dc]">{appCount}</div>
                 </div>
                 <div>
-                  <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Matching Pool</div>
-                  <div className="text-xl font-bold text-cyan-400">{statistics.totalMatchingPool.toLocaleString()} {round.currency}</div>
+                  <div className="text-xs text-[#4a4a5a] uppercase tracking-wider mb-1">Matching Pool</div>
+                  <div className="text-xl font-bold text-amber-400">{statistics.totalMatchingPool.toLocaleString()} {round.currency}</div>
                 </div>
                 <div>
-                  <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Allocated</div>
+                  <div className="text-xs text-[#4a4a5a] uppercase tracking-wider mb-1">Allocated</div>
                   <div className="text-xl font-bold text-emerald-400">{statistics.allocated.toLocaleString()} {round.currency}</div>
                 </div>
                 <div>
-                  <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Avg. Score</div>
-                  <div className="text-xl font-bold text-violet-400">{statistics.averageScore != null ? statistics.averageScore.toFixed(1) : '—'}</div>
+                  <div className="text-xs text-[#4a4a5a] uppercase tracking-wider mb-1">Avg. Score</div>
+                  <div className="text-xl font-bold text-amber-400">{statistics.averageScore != null ? statistics.averageScore.toFixed(1) : '—'}</div>
                 </div>
               </div>
             </div>
 
             {/* Round Info */}
-            <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-6">
-              <h3 className="text-lg font-semibold text-white mb-4">Round Information</h3>
+            <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
+              <h3 className="text-lg font-semibold text-[#e2e0dc] mb-4">Round Information</h3>
               <dl className="space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                  <dt className="text-sm text-slate-500 sm:w-40">Created</dt>
-                  <dd className="text-sm text-slate-300">{new Date(round.createdAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}</dd>
+                  <dt className="text-sm text-[#4a4a5a] sm:w-40">Created</dt>
+                  <dd className="text-sm text-[#8a8a9a]">{new Date(round.createdAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}</dd>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                  <dt className="text-sm text-slate-500 sm:w-40">Last Updated</dt>
-                  <dd className="text-sm text-slate-300">{new Date(round.updatedAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}</dd>
+                  <dt className="text-sm text-[#4a4a5a] sm:w-40">Last Updated</dt>
+                  <dd className="text-sm text-[#8a8a9a]">{new Date(round.updatedAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}</dd>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                  <dt className="text-sm text-slate-500 sm:w-40">Creator</dt>
-                  <dd className="text-sm text-slate-300 font-mono">{round.creatorAddress.slice(0, 6)}...{round.creatorAddress.slice(-4)}</dd>
+                  <dt className="text-sm text-[#4a4a5a] sm:w-40">Creator</dt>
+                  <dd className="text-sm text-[#8a8a9a] font-mono">{round.creatorAddress.slice(0, 6)}...{round.creatorAddress.slice(-4)}</dd>
                 </div>
                 {round.contractAddress && (
                   <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <dt className="text-sm text-slate-500 sm:w-40">Contract</dt>
+                    <dt className="text-sm text-[#4a4a5a] sm:w-40">Contract</dt>
                     <dd>
                       <a
                         href={getExplorerUrl(84532, round.contractAddress)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-violet-400 hover:text-violet-300 font-mono transition-colors"
+                        className="text-sm text-amber-400 hover:text-amber-400 font-mono transition-colors"
                       >
                         {round.contractAddress.slice(0, 10)}...{round.contractAddress.slice(-8)}
                         <svg className="inline w-3 h-3 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -274,7 +274,7 @@ export function RoundDetail() {
                 )}
                 {onChainStatus !== undefined && (
                   <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <dt className="text-sm text-slate-500 sm:w-40">On-Chain Status</dt>
+                    <dt className="text-sm text-[#4a4a5a] sm:w-40">On-Chain Status</dt>
                     <dd className="text-sm text-emerald-400 font-medium">
                       {['Created', 'Accepting', 'Evaluating', 'Distributing', 'Closed'][Number(onChainStatus)] || 'Unknown'}
                     </dd>
@@ -282,14 +282,14 @@ export function RoundDetail() {
                 )}
                 {onChainAppIds !== undefined && (
                   <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <dt className="text-sm text-slate-500 sm:w-40">On-Chain Applications</dt>
-                    <dd className="text-sm text-slate-300">{(onChainAppIds as bigint[])?.length ?? 0}</dd>
+                    <dt className="text-sm text-[#4a4a5a] sm:w-40">On-Chain Applications</dt>
+                    <dd className="text-sm text-[#8a8a9a]">{(onChainAppIds as bigint[])?.length ?? 0}</dd>
                   </div>
                 )}
                 {factoryCount !== undefined && (
                   <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <dt className="text-sm text-slate-500 sm:w-40">Factory Round Count</dt>
-                    <dd className="text-sm text-slate-300">{Number(factoryCount)}</dd>
+                    <dt className="text-sm text-[#4a4a5a] sm:w-40">Factory Round Count</dt>
+                    <dd className="text-sm text-[#8a8a9a]">{Number(factoryCount)}</dd>
                   </div>
                 )}
               </dl>

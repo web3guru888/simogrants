@@ -88,12 +88,12 @@ export function CreateRound() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen ">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Back Link */}
         <Link
           to="/rounds"
-          className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-violet-300 transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-sm text-[#6b6a6a] hover:text-amber-400 transition-colors mb-8"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -102,8 +102,8 @@ export function CreateRound() {
         </Link>
 
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Create Grant Round</h1>
-          <p className="text-slate-400">Set up a new grant round for AI-powered project evaluation.</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#e2e0dc] mb-2">Create Grant Round</h1>
+          <p className="text-[#6b6a6a]">Set up a new grant round for AI-powered project evaluation.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -123,7 +123,7 @@ export function CreateRound() {
 
           {/* Round Title */}
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-slate-300 mb-2">
+            <label htmlFor="title" className="block text-sm font-medium text-[#8a8a9a] mb-2">
               Round Title <span className="text-red-400">*</span>
             </label>
             <input
@@ -133,13 +133,13 @@ export function CreateRound() {
               value={form.title}
               onChange={e => updateField('title', e.target.value)}
               placeholder="Ethereum Infrastructure Round"
-              className="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-colors"
+              className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[#e2e0dc] placeholder-[#4a4a5a] focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
             />
           </div>
 
           {/* Description */}
           <div>
-            <label htmlFor="desc" className="block text-sm font-medium text-slate-300 mb-2">
+            <label htmlFor="desc" className="block text-sm font-medium text-[#8a8a9a] mb-2">
               Description <span className="text-red-400">*</span>
             </label>
             <textarea
@@ -149,14 +149,14 @@ export function CreateRound() {
               value={form.description}
               onChange={e => updateField('description', e.target.value)}
               placeholder="Describe the focus and goals of this grant round..."
-              className="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-colors resize-none"
+              className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[#e2e0dc] placeholder-[#4a4a5a] focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors resize-none"
             />
           </div>
 
           {/* Matching Pool & Currency */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="pool" className="block text-sm font-medium text-slate-300 mb-2">
+              <label htmlFor="pool" className="block text-sm font-medium text-[#8a8a9a] mb-2">
                 Matching Pool (USDC)
               </label>
               <input
@@ -166,18 +166,18 @@ export function CreateRound() {
                 step={100}
                 value={form.matchingPool}
                 onChange={e => updateField('matchingPool', parseFloat(e.target.value) || 0)}
-                className="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-slate-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-colors"
+                className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[#e2e0dc] focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
               />
             </div>
             <div>
-              <label htmlFor="chain" className="block text-sm font-medium text-slate-300 mb-2">
+              <label htmlFor="chain" className="block text-sm font-medium text-[#8a8a9a] mb-2">
                 Chain
               </label>
               <select
                 id="chain"
                 value={form.chain}
                 onChange={e => updateField('chain', e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-slate-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-colors"
+                className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[#e2e0dc] focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
               >
                 <option value="base">Base</option>
                 <option value="base-sepolia">Base Sepolia (Testnet)</option>
@@ -188,7 +188,7 @@ export function CreateRound() {
           {/* Deadline & Max Applications */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="deadline" className="block text-sm font-medium text-slate-300 mb-2">
+              <label htmlFor="deadline" className="block text-sm font-medium text-[#8a8a9a] mb-2">
                 Application Deadline <span className="text-red-400">*</span>
               </label>
               <input
@@ -197,11 +197,11 @@ export function CreateRound() {
                 required
                 value={form.applicationDeadline}
                 onChange={e => updateField('applicationDeadline', e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-slate-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-colors"
+                className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[#e2e0dc] focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
               />
             </div>
             <div>
-              <label htmlFor="maxApps" className="block text-sm font-medium text-slate-300 mb-2">
+              <label htmlFor="maxApps" className="block text-sm font-medium text-[#8a8a9a] mb-2">
                 Max Applications
               </label>
               <input
@@ -211,7 +211,7 @@ export function CreateRound() {
                 max={500}
                 value={form.maxApplications}
                 onChange={e => updateField('maxApplications', parseInt(e.target.value) || 50)}
-                className="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-slate-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-colors"
+                className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[#e2e0dc] focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
               />
             </div>
           </div>
@@ -221,7 +221,7 @@ export function CreateRound() {
             <button
               type="submit"
               disabled={submitting || txPending || isConfirming || !form.title.trim() || !form.description.trim() || !form.applicationDeadline}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-semibold px-8 py-3 rounded-lg hover:from-violet-500 hover:to-cyan-400 transition-all shadow-lg shadow-violet-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+              className="inline-flex items-center gap-2 bg-amber-500 text-[#0a0a12] font-semibold px-8 py-3 rounded-lg hover:bg-amber-400 transition-all shadow-lg shadow-amber-500/15 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
             >
               {txPending || isConfirming || submitting ? (
                 <>
@@ -237,7 +237,7 @@ export function CreateRound() {
             </button>
             <Link
               to="/rounds"
-              className="text-sm text-slate-400 hover:text-slate-200 transition-colors"
+              className="text-sm text-[#6b6a6a] hover:text-[#e2e0dc] transition-colors"
             >
               Cancel
             </Link>

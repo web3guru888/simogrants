@@ -121,12 +121,12 @@ export function ApplyToRound() {
   const canApply = round.status === 'active' || round.status === 'accepting';
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen ">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Back Link */}
         <Link
           to={`/rounds/${id}`}
-          className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-violet-300 transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-sm text-[#6b6a6a] hover:text-amber-400 transition-colors mb-8"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -135,8 +135,8 @@ export function ApplyToRound() {
         </Link>
 
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Apply to Round</h1>
-          <p className="text-slate-400">Submit your project for evaluation in <span className="text-violet-300">{round.title}</span></p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#e2e0dc] mb-2">Apply to Round</h1>
+          <p className="text-[#6b6a6a]">Submit your project for evaluation in <span className="text-amber-400">{round.title}</span></p>
         </div>
 
         {!canApply ? (
@@ -145,7 +145,7 @@ export function ApplyToRound() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
             </svg>
             <h3 className="text-lg font-semibold text-amber-300 mb-2">Applications Closed</h3>
-            <p className="text-slate-400">This round is no longer accepting applications.</p>
+            <p className="text-[#6b6a6a]">This round is no longer accepting applications.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -165,7 +165,7 @@ export function ApplyToRound() {
 
             {/* Project Name */}
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
+              <label htmlFor="name" className="block text-sm font-medium text-[#8a8a9a] mb-2">
                 Project Name <span className="text-red-400">*</span>
               </label>
               <input
@@ -175,13 +175,13 @@ export function ApplyToRound() {
                 value={form.name}
                 onChange={e => updateField('name', e.target.value)}
                 placeholder="My Awesome Project"
-                className="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-colors"
+                className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[#e2e0dc] placeholder-[#4a4a5a] focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
               />
             </div>
 
             {/* Description */}
             <div>
-              <label htmlFor="description" className="block text-sm font-medium text-slate-300 mb-2">
+              <label htmlFor="description" className="block text-sm font-medium text-[#8a8a9a] mb-2">
                 Description <span className="text-red-400">*</span>
               </label>
               <textarea
@@ -191,14 +191,14 @@ export function ApplyToRound() {
                 value={form.description}
                 onChange={e => updateField('description', e.target.value)}
                 placeholder="Describe your project, what problem it solves, and its impact..."
-                className="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-colors resize-none"
+                className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[#e2e0dc] placeholder-[#4a4a5a] focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors resize-none"
               />
             </div>
 
             {/* Website & GitHub */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="website" className="block text-sm font-medium text-slate-300 mb-2">
+                <label htmlFor="website" className="block text-sm font-medium text-[#8a8a9a] mb-2">
                   Website
                 </label>
                 <input
@@ -207,11 +207,11 @@ export function ApplyToRound() {
                   value={form.website}
                   onChange={e => updateField('website', e.target.value)}
                   placeholder="https://myproject.com"
-                  className="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-colors"
+                  className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[#e2e0dc] placeholder-[#4a4a5a] focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
                 />
               </div>
               <div>
-                <label htmlFor="github" className="block text-sm font-medium text-slate-300 mb-2">
+                <label htmlFor="github" className="block text-sm font-medium text-[#8a8a9a] mb-2">
                   GitHub URL
                 </label>
                 <input
@@ -220,7 +220,7 @@ export function ApplyToRound() {
                   value={form.githubUrl}
                   onChange={e => updateField('githubUrl', e.target.value)}
                   placeholder="https://github.com/org/repo"
-                  className="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-colors"
+                  className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[#e2e0dc] placeholder-[#4a4a5a] focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
                 />
               </div>
             </div>
@@ -228,7 +228,7 @@ export function ApplyToRound() {
             {/* Team Size & Category */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="teamSize" className="block text-sm font-medium text-slate-300 mb-2">
+                <label htmlFor="teamSize" className="block text-sm font-medium text-[#8a8a9a] mb-2">
                   Team Size <span className="text-red-400">*</span>
                 </label>
                 <input
@@ -239,18 +239,18 @@ export function ApplyToRound() {
                   max={100}
                   value={form.teamSize}
                   onChange={e => updateField('teamSize', parseInt(e.target.value) || 1)}
-                  className="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-slate-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-colors"
+                  className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[#e2e0dc] focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
                 />
               </div>
               <div>
-                <label htmlFor="category" className="block text-sm font-medium text-slate-300 mb-2">
+                <label htmlFor="category" className="block text-sm font-medium text-[#8a8a9a] mb-2">
                   Category <span className="text-red-400">*</span>
                 </label>
                 <select
                   id="category"
                   value={form.category}
                   onChange={e => updateField('category', e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-slate-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-colors"
+                  className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[#e2e0dc] focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
                 >
                   {CATEGORIES.map(cat => (
                     <option key={cat.value} value={cat.value}>{cat.label}</option>
@@ -264,7 +264,7 @@ export function ApplyToRound() {
               <button
                 type="submit"
                 disabled={submitting || txPending || isConfirming || !form.name.trim() || !form.description.trim()}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-semibold px-8 py-3 rounded-lg hover:from-violet-500 hover:to-cyan-400 transition-all shadow-lg shadow-violet-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+                className="inline-flex items-center gap-2 bg-amber-500 text-[#0a0a12] font-semibold px-8 py-3 rounded-lg hover:bg-amber-400 transition-all shadow-lg shadow-amber-500/15 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
               >
                 {txPending || isConfirming || submitting ? (
                   <>
@@ -280,7 +280,7 @@ export function ApplyToRound() {
               </button>
               <Link
                 to={`/rounds/${id}`}
-                className="text-sm text-slate-400 hover:text-slate-200 transition-colors"
+                className="text-sm text-[#6b6a6a] hover:text-[#e2e0dc] transition-colors"
               >
                 Cancel
               </Link>

@@ -47,13 +47,13 @@ export function RoundResults() {
   const maxAllocation = Math.max(...results.map(r => r.allocation), 1);
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen ">
       {/* Header */}
-      <div className="bg-gradient-to-b from-violet-950/30 to-slate-900 border-b border-slate-800">
+      <div className="border-b border-white/[0.06]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <Link
             to={`/rounds/${id}`}
-            className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-violet-300 transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-sm text-[#6b6a6a] hover:text-amber-400 transition-colors mb-6"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -62,40 +62,40 @@ export function RoundResults() {
           </Link>
 
           <div className="flex items-center gap-3 mb-2">
-            <h1 className="text-2xl sm:text-3xl font-bold text-white">Round Results</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#e2e0dc]">Round Results</h1>
             <StatusBadge status={round.status} />
           </div>
-          <p className="text-slate-400">{round.title}</p>
+          <p className="text-[#6b6a6a]">{round.title}</p>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Summary Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
-          <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-5">
-            <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Total Pool</div>
-            <div className="text-2xl font-bold text-cyan-400">
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+            <div className="text-xs text-[#4a4a5a] uppercase tracking-wider mb-1">Total Pool</div>
+            <div className="text-2xl font-bold text-amber-400">
               {summary.totalPool.toLocaleString()}
-              <span className="text-sm text-slate-400 ml-1">{round.currency}</span>
+              <span className="text-sm text-[#6b6a6a] ml-1">{round.currency}</span>
             </div>
           </div>
-          <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-5">
-            <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Total Allocated</div>
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+            <div className="text-xs text-[#4a4a5a] uppercase tracking-wider mb-1">Total Allocated</div>
             <div className="text-2xl font-bold text-emerald-400">
               {summary.totalAllocated.toLocaleString()}
-              <span className="text-sm text-slate-400 ml-1">{round.currency}</span>
+              <span className="text-sm text-[#6b6a6a] ml-1">{round.currency}</span>
             </div>
           </div>
-          <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-5">
-            <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Projects Funded</div>
-            <div className="text-2xl font-bold text-violet-400">{summary.projectsFunded}</div>
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+            <div className="text-xs text-[#4a4a5a] uppercase tracking-wider mb-1">Projects Funded</div>
+            <div className="text-2xl font-bold text-amber-400">{summary.projectsFunded}</div>
           </div>
-          <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-5">
-            <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Average Score</div>
-            <div className="text-2xl font-bold text-blue-400">{summary.averageScore.toFixed(1)}</div>
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+            <div className="text-xs text-[#4a4a5a] uppercase tracking-wider mb-1">Average Score</div>
+            <div className="text-2xl font-bold text-teal-400">{summary.averageScore.toFixed(1)}</div>
           </div>
-          <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-5">
-            <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">On-Chain</div>
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+            <div className="text-xs text-[#4a4a5a] uppercase tracking-wider mb-1">On-Chain</div>
             <div className="text-2xl font-bold text-emerald-400">
               {contractsReady ? (
                 <a
@@ -116,8 +116,8 @@ export function RoundResults() {
 
         {/* Allocation Visualization */}
         {results.length > 0 && (
-          <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 p-6 mb-8">
-            <h2 className="text-lg font-semibold text-white mb-6">Funding Allocation</h2>
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6 mb-8">
+            <h2 className="text-lg font-semibold text-[#e2e0dc] mb-6">Funding Allocation</h2>
             <div className="space-y-4">
               {results.map((entry) => (
                 <AllocationBar
@@ -132,54 +132,54 @@ export function RoundResults() {
         )}
 
         {/* Rankings Table */}
-        <div className="rounded-xl border border-slate-700/50 bg-slate-800/30 overflow-hidden">
-          <div className="p-6 border-b border-slate-700/50">
-            <h2 className="text-lg font-semibold text-white">Rankings</h2>
+        <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] overflow-hidden">
+          <div className="p-6 border-b border-white/[0.06]">
+            <h2 className="text-lg font-semibold text-[#e2e0dc]">Rankings</h2>
           </div>
 
           {/* Desktop Table */}
           <div className="hidden lg:block overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-slate-700/50">
-                  <th className="text-left text-xs font-semibold text-slate-400 uppercase tracking-wider px-6 py-3">Rank</th>
-                  <th className="text-left text-xs font-semibold text-slate-400 uppercase tracking-wider px-6 py-3">Project</th>
-                  <th className="text-left text-xs font-semibold text-slate-400 uppercase tracking-wider px-6 py-3 w-48">Score</th>
-                  <th className="text-left text-xs font-semibold text-slate-400 uppercase tracking-wider px-6 py-3">SQF Allocation</th>
-                  <th className="text-left text-xs font-semibold text-slate-400 uppercase tracking-wider px-6 py-3">QF Base</th>
-                  <th className="text-left text-xs font-semibold text-slate-400 uppercase tracking-wider px-6 py-3">Pheromone</th>
-                  <th className="text-left text-xs font-semibold text-slate-400 uppercase tracking-wider px-6 py-3">PageRank</th>
-                  <th className="text-left text-xs font-semibold text-slate-400 uppercase tracking-wider px-6 py-3">Attestation</th>
+                <tr className="border-b border-white/[0.06]">
+                  <th className="text-left text-xs font-semibold text-[#6b6a6a] uppercase tracking-wider px-6 py-3">Rank</th>
+                  <th className="text-left text-xs font-semibold text-[#6b6a6a] uppercase tracking-wider px-6 py-3">Project</th>
+                  <th className="text-left text-xs font-semibold text-[#6b6a6a] uppercase tracking-wider px-6 py-3 w-48">Score</th>
+                  <th className="text-left text-xs font-semibold text-[#6b6a6a] uppercase tracking-wider px-6 py-3">SQF Allocation</th>
+                  <th className="text-left text-xs font-semibold text-[#6b6a6a] uppercase tracking-wider px-6 py-3">QF Base</th>
+                  <th className="text-left text-xs font-semibold text-[#6b6a6a] uppercase tracking-wider px-6 py-3">Pheromone</th>
+                  <th className="text-left text-xs font-semibold text-[#6b6a6a] uppercase tracking-wider px-6 py-3">PageRank</th>
+                  <th className="text-left text-xs font-semibold text-[#6b6a6a] uppercase tracking-wider px-6 py-3">Attestation</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-700/30">
                 {results.map((entry) => (
-                  <tr key={entry.rank} className="hover:bg-slate-700/20 transition-colors">
+                  <tr key={entry.rank} className="hover:bg-white/[0.02] transition-colors">
                     <td className="px-6 py-4">
                       <span className={`inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-bold ${
                         entry.rank === 1 ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
-                        entry.rank === 2 ? 'bg-slate-400/20 text-slate-300 border border-slate-400/30' :
+                        entry.rank === 2 ? 'bg-slate-400/20 text-[#8a8a9a] border border-slate-400/30' :
                         entry.rank === 3 ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30' :
-                        'bg-slate-700/50 text-slate-400'
+                        'bg-white/[0.04] text-[#6b6a6a]'
                       }`}>
                         {entry.rank}
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <Link to={`/projects/${entry.project.id}`} className="text-sm font-semibold text-slate-100 hover:text-violet-300 transition-colors">
+                      <Link to={`/projects/${entry.project.id}`} className="text-sm font-semibold text-[#e2e0dc] hover:text-amber-400 transition-colors">
                         {entry.project.name}
                       </Link>
-                      <p className="text-xs text-slate-500 capitalize mt-0.5">{entry.project.category.replace(/-/g, ' ')}</p>
+                      <p className="text-xs text-[#4a4a5a] capitalize mt-0.5">{entry.project.category.replace(/-/g, ' ')}</p>
                     </td>
                     <td className="px-6 py-4">
                       <ScoreBar score={entry.score} size="sm" color={entry.rank === 1 ? 'amber' : 'violet'} />
                     </td>
                     <td className="px-6 py-4">
                       <span className="text-sm font-semibold text-emerald-400">
-                        {entry.allocation.toLocaleString()} <span className="text-xs text-slate-500">{round.currency}</span>
+                        {entry.allocation.toLocaleString()} <span className="text-xs text-[#4a4a5a]">{round.currency}</span>
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-sm text-slate-300">
+                    <td className="px-6 py-4 text-sm text-[#8a8a9a]">
                       {entry.sqfDetails?.qfBase?.toLocaleString() ?? '—'}
                     </td>
                     <td className="px-6 py-4">
@@ -229,13 +229,13 @@ export function RoundResults() {
                   <div className="flex items-center gap-3">
                     <span className={`inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-bold ${
                       entry.rank === 1 ? 'bg-amber-500/20 text-amber-400' :
-                      entry.rank === 2 ? 'bg-slate-400/20 text-slate-300' :
+                      entry.rank === 2 ? 'bg-slate-400/20 text-[#8a8a9a]' :
                       entry.rank === 3 ? 'bg-orange-500/20 text-orange-400' :
-                      'bg-slate-700/50 text-slate-400'
+                      'bg-white/[0.04] text-[#6b6a6a]'
                     }`}>
                       #{entry.rank}
                     </span>
-                    <Link to={`/projects/${entry.project.id}`} className="text-sm font-semibold text-slate-100 hover:text-violet-300">
+                    <Link to={`/projects/${entry.project.id}`} className="text-sm font-semibold text-[#e2e0dc] hover:text-amber-400">
                       {entry.project.name}
                     </Link>
                   </div>
@@ -244,7 +244,7 @@ export function RoundResults() {
                   </span>
                 </div>
                 <ScoreBar score={entry.score} size="sm" color="violet" />
-                <div className="flex gap-4 text-xs text-slate-500">
+                <div className="flex gap-4 text-xs text-[#4a4a5a]">
                   <span>QF: {entry.sqfDetails?.qfBase?.toLocaleString() ?? '—'}</span>
                   <span className={(entry.sqfDetails?.pheromoneMod ?? 1) >= 1 ? 'text-emerald-400' : 'text-red-400'}>
                     Phero: {entry.sqfDetails?.pheromoneMod?.toFixed(2) ?? '—'}x
