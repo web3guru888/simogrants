@@ -154,10 +154,10 @@ export function ProjectDetail() {
               </div>
             </div>
 
-            {project.overallScore && (
+            {project.overallScore != null && (
               <div className="text-center shrink-0">
-                <div className="text-4xl font-bold text-amber-400 bg-clip-text text-transparent">
-                  {project.overallScore.toFixed(1)}
+                <div className="text-4xl font-bold text-amber-400">
+                  {Number(project.overallScore).toFixed(1)}
                 </div>
                 <div className="text-xs text-[#4a4a5a] uppercase tracking-wider mt-1">Overall Score</div>
                 <ScoreBar score={project.overallScore} size="lg" color="violet" />

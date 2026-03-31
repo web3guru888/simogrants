@@ -161,36 +161,48 @@ export const api = {
   getProjects: () => apiFetch<{ projects: Project[]; total: number }>('/projects'),
   getProject: async (id: string): Promise<ProjectDetail> => {
     const raw = await apiFetch<any>(`/projects/${id}`);
-    // Transform API evaluation format to frontend format
+
+    // Transform evaluations — handle both real ASI1 format and seed data format
     const evaluations = (raw.evaluations || []).map((ev: any) => {
       const evalData = ev.evaluationData || {};
-      const stakeholderScores = evalData.stakeholderScores || {};
 
-      // Build stakeholderEvaluations from flat scores
+      // Real ASI1 format: stakeholder_evaluations with scores per dimension
+      // Seed format: stakeholderScores with flat agent scores
+      const rawStakeholders = evalData.stakeholderEvaluations || evalData.stakeholder_evaluations || evalData.stakeholderScores || {};
+
       const stakeholderEvaluations: Record<string, any> = {};
-      for (const [agent, score] of Object.entries(stakeholderScores)) {
-        stakeholderEvaluations[agent] = {
-          scores: { overall: score },
-          narrative: evalData.summary || '',
-          confidence: ev.dataCompleteness || 0.8,
-        };
+      for (const [agent, data] of Object.entries(rawStakeholders)) {
+        if (typeof data === 'object' && data !== null && (data as any).scores) {
+          // Real format: { scores: { dim: { score, justification } }, narrative, confidence }
+          stakeholderEvaluations[agent] = data;
+        } else {
+          // Flat format: agent -> score number
+          stakeholderEvaluations[agent] = {
+            scores: { overall: { score: typeof data === 'number' ? data : 0, justification: '' } },
+            narrative: evalData.summary || '',
+            confidence: ev.dataCompleteness || 0.8,
+          };
+        }
       }
 
-      // Build tensions from API format
-      const tensions = (evalData.tensions || []).map((t: any) => ({
-        dimension: t.type || t.dimension || 'unknown',
-        agents: { high: t.score || 0, low: 0 },
-        spread: t.score || 0,
-        high_agent: 'unknown',
-        low_agent: 'unknown',
-        narrative: `Tension type: ${t.type || 'unknown'} (score: ${t.score || 0})`,
+      // Aggregated scores
+      const aggregatedScores: Record<string, number> = evalData.aggregatedScores || evalData.aggregated_scores || {};
+      if (Object.keys(aggregatedScores).length === 0) {
+        for (const [agent, data] of Object.entries(rawStakeholders)) {
+          aggregatedScores[agent] = typeof data === 'number' ? data : (data as any)?.mean_score || 0;
+        }
+      }
+
+      // Tensions
+      const rawTensions = evalData.tensions || ev.tensions || [];
+      const tensions = rawTensions.map((t: any) => ({
+        dimension: t.dimension || t.type || 'unknown',
+        agents: t.agents || { high: t.score || 0, low: 0 },
+        spread: t.spread || t.score || 0,
+        high_agent: t.high_agent || t.highAgent || 'unknown',
+        low_agent: t.low_agent || t.lowAgent || 'unknown',
+        narrative: t.narrative || `Tension: ${t.dimension || t.type || 'unknown'} (spread: ${t.spread || t.score || 0})`,
       }));
-
-      // Build aggregatedScores from stakeholder averages
-      const aggregatedScores: Record<string, number> = {};
-      for (const [agent, score] of Object.entries(stakeholderScores)) {
-        aggregatedScores[agent] = score as number;
-      }
 
       return {
         id: ev.id,
@@ -209,7 +221,7 @@ export const api = {
       roundId: a.roundId,
       amount: a.amount || 0,
       currency: a.currency || 'USDC',
-      sqfDetails: a.sqfDetails || { qfBase: 0, pheromoneMod: 1, pagerankMod: 1 },
+      sqfDetails: a.sqfDetails || null,
     }));
 
     return {
