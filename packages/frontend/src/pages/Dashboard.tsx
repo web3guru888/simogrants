@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '@/lib/api';
 import type { UserInfo, Round, Project } from '@/lib/types';
@@ -11,8 +11,8 @@ import { useAuth } from '@/hooks/useAuth';
 export function Dashboard() {
   const { address, isConnected } = useAuth();
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
-  const [rounds, setRounds] = useState<Round[]>([]);
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [allRounds, setAllRounds] = useState<Round[]>([]);
+  const [allProjects, setAllProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -24,8 +24,8 @@ export function Dashboard() {
         api.getRounds(),
         api.getProjects(),
       ]);
-      setRounds(roundsData.rounds);
-      setProjects(projectsData.projects);
+      setAllRounds(roundsData.rounds);
+      setAllProjects(projectsData.projects);
 
       if (isConnected && api.getToken()) {
         try {
@@ -45,6 +45,32 @@ export function Dashboard() {
   useEffect(() => {
     fetchDashboard();
   }, []);
+
+  // Filter to user's own data
+  const myRounds = useMemo(() => {
+    if (!address) return [];
+    const addr = address.toLowerCase();
+    return allRounds.filter(r =>
+      (r as any).creatorAddress?.toLowerCase() === addr ||
+      (r as any).creator_address?.toLowerCase() === addr
+    );
+  }, [allRounds, address]);
+
+  const myProjects = useMemo(() => {
+    if (!address) return [];
+    const addr = address.toLowerCase();
+    return allProjects.filter(p =>
+      (p as any).createdBy?.toLowerCase() === addr ||
+      (p as any).created_by?.toLowerCase() === addr
+    );
+  }, [allProjects, address]);
+
+  // Avg score from user's projects only
+  const avgScore = useMemo(() => {
+    const scored = myProjects.filter(p => p.overallScore);
+    if (scored.length === 0) return null;
+    return (scored.reduce((sum, p) => sum + (p.overallScore || 0), 0) / scored.length).toFixed(1);
+  }, [myProjects]);
 
   const truncatedAddress = address ? `${address.slice(0, 6)}...${address.slice(-4)}` : '';
 
@@ -69,11 +95,11 @@ export function Dashboard() {
           </p>
           <div className="mt-8 grid grid-cols-2 gap-3">
             <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4">
-              <div className="text-2xl font-bold text-[#e2e0dc]">{rounds.length}</div>
+              <div className="text-2xl font-bold text-[#e2e0dc]">{allRounds.length}</div>
               <div className="text-xs text-[#4a4a5a] mt-1">Total Rounds</div>
             </div>
             <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4">
-              <div className="text-2xl font-bold text-[#e2e0dc]">{projects.length}</div>
+              <div className="text-2xl font-bold text-[#e2e0dc]">{allProjects.length}</div>
               <div className="text-xs text-[#4a4a5a] mt-1">Total Projects</div>
             </div>
           </div>
@@ -104,9 +130,9 @@ export function Dashboard() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
                 </svg>
               </div>
-              <span className="text-sm text-[#6b6a6a]">Rounds Created</span>
+              <span className="text-sm text-[#6b6a6a]">My Rounds</span>
             </div>
-            <div className="text-3xl font-bold text-[#e2e0dc]">{userInfo?.roundsCreated ?? 0}</div>
+            <div className="text-3xl font-bold text-[#e2e0dc]">{userInfo?.roundsCreated ?? myRounds.length}</div>
           </div>
 
           <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6">
@@ -116,9 +142,9 @@ export function Dashboard() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                 </svg>
               </div>
-              <span className="text-sm text-[#6b6a6a]">Applications Submitted</span>
+              <span className="text-sm text-[#6b6a6a]">My Projects</span>
             </div>
-            <div className="text-3xl font-bold text-[#e2e0dc]">{userInfo?.applicationsSubmitted ?? 0}</div>
+            <div className="text-3xl font-bold text-[#e2e0dc]">{userInfo?.applicationsSubmitted ?? myProjects.length}</div>
           </div>
 
           <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6">
@@ -128,13 +154,9 @@ export function Dashboard() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
               </div>
-              <span className="text-sm text-[#6b6a6a]">Avg. Project Score</span>
+              <span className="text-sm text-[#6b6a6a]">Avg. Score</span>
             </div>
-            <div className="text-3xl font-bold text-[#e2e0dc]">
-              {projects.filter(p => p.overallScore).length > 0
-                ? (projects.reduce((sum, p) => sum + (p.overallScore || 0), 0) / projects.filter(p => p.overallScore).length).toFixed(1)
-                : '—'}
-            </div>
+            <div className="text-3xl font-bold text-[#e2e0dc]">{avgScore ?? '—'}</div>
           </div>
         </div>
 
@@ -165,7 +187,7 @@ export function Dashboard() {
               View all &rarr;
             </Link>
           </div>
-          {rounds.length === 0 ? (
+          {myRounds.length === 0 ? (
             <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8 text-center">
               <p className="text-[#4a4a5a] mb-4">You haven't created any rounds yet.</p>
               <Link to="/create-round" className="text-sm text-amber-400 hover:text-amber-300 transition-colors">
@@ -174,31 +196,31 @@ export function Dashboard() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {rounds.slice(0, 3).map((round) => (
+              {myRounds.slice(0, 3).map((round) => (
                 <RoundCard key={round.id} round={round} />
               ))}
             </div>
           )}
         </section>
 
-        {/* My Applications */}
+        {/* My Projects */}
         <section>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="font-display text-xl font-bold text-[#e2e0dc]">My Applications</h2>
+            <h2 className="font-display text-xl font-bold text-[#e2e0dc]">My Projects</h2>
             <Link to="/rounds" className="text-sm text-amber-400 hover:text-amber-300 transition-colors">
               Find rounds &rarr;
             </Link>
           </div>
-          {projects.length === 0 ? (
+          {myProjects.length === 0 ? (
             <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8 text-center">
-              <p className="text-[#4a4a5a] mb-4">You haven't submitted any applications yet.</p>
+              <p className="text-[#4a4a5a] mb-4">You haven't submitted any projects yet.</p>
               <Link to="/rounds" className="text-sm text-amber-400 hover:text-amber-300 transition-colors">
                 Browse open rounds &rarr;
               </Link>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {projects.slice(0, 6).map((project) => (
+              {myProjects.slice(0, 6).map((project) => (
                 <ProjectCard key={project.id} project={project} showScore />
               ))}
             </div>
