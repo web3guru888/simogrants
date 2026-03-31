@@ -12,6 +12,7 @@ export interface Env {
   ENVIRONMENT: string;
   ASI1_API_KEY?: string;
   ASI1_MODEL?: string;
+  WEB3_STORAGE_TOKEN?: string;
 }
 
 // ─── DB Row Types (mirror D1 schema) ────────────────────────────────

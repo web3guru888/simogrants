@@ -4,7 +4,7 @@ import { useAccount } from 'wagmi';
 import type { Address } from 'viem';
 import { api } from '@/lib/api';
 import { getExplorerUrl } from '@/lib/explorer';
-import { useRoundOnChainStatus, useOnChainApplicationIds, useFactoryRoundCount } from '@/hooks/useContracts';
+import { useRoundOnChainStatus, useOnChainApplicationIds, useFactoryRoundCount, useStartEvaluation } from '@/hooks/useContracts';
 import type { RoundDetail as RoundDetailType, Application } from '@/lib/types';
 import { StatusBadge } from '@/components/StatusBadge';
 import { ScoreBar } from '@/components/ScoreBar';
@@ -44,6 +44,7 @@ export function RoundDetail() {
   const { data: onChainStatus } = useRoundOnChainStatus(validRoundAddress);
   const { data: onChainAppIds } = useOnChainApplicationIds(validRoundAddress);
   const { data: factoryCount } = useFactoryRoundCount();
+  const { startEvaluation: startEvalOnChain } = useStartEvaluation();
 
   if (loading) return <LoadingSkeleton type="page" />;
   if (error) return <ErrorMessage message={error} onRetry={fetchRound} />;
@@ -100,6 +101,11 @@ export function RoundDetail() {
                 <button
                   onClick={async () => {
                     try {
+                      // Transition on-chain state if contract exists
+                      if (validRoundAddress) {
+                        try { await startEvalOnChain(validRoundAddress); } catch {}
+                      }
+                      // Trigger ASI1 evaluation via backend
                       await api.triggerEvaluation(round.id);
                       fetchRound();
                     } catch (err) {

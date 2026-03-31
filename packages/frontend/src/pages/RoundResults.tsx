@@ -4,6 +4,7 @@ import { useChainId } from 'wagmi';
 import { api } from '@/lib/api';
 import { getAddresses, isContractsDeployed } from '@/lib/contractsConfig';
 import { getExplorerUrl } from '@/lib/explorer';
+import { useLatestAttestation, usePheromoneLevel } from '@/hooks/useContracts';
 import type { RoundResults as RoundResultsType } from '@/lib/types';
 import { ScoreBar } from '@/components/ScoreBar';
 import { AllocationBar } from '@/components/AllocationBar';

@@ -258,6 +258,39 @@ evaluationRoutes.post('/rounds/:roundId/evaluate', authMiddleware, async (c) => 
     }
   }
 
+  // Attestation phase: compute hashes + optional IPFS upload
+  let attestationData: { evaluationHash: string; ipfsCid: string | null } | null = null;
+  if (allocations && completed > 0) {
+    try {
+      const { computeAttestation, storeAttestation } = await import('../lib/attestation');
+      const { buildEvidenceBundle, uploadToIPFS } = await import('../lib/ipfs');
+
+      // Build evidence bundle
+      const evidence = buildEvidenceBundle(
+        roundId,
+        evaluationScores,
+        allocations.allocations as Record<string, { amount: number; qfBase: number; pheromoneMod: number; pagerankMod: number }>,
+        allocations.pheromoneState,
+        1,
+      );
+
+      // Upload to IPFS if token available
+      let ipfsCid: string | null = null;
+      const web3Token = c.env.WEB3_STORAGE_TOKEN;
+      if (web3Token) {
+        const ipfsResult = await uploadToIPFS(web3Token, evidence, `evidence-${roundId}.json`);
+        if (ipfsResult) ipfsCid = ipfsResult.cid;
+      }
+
+      // Compute attestation hashes
+      const attestation = await computeAttestation(roundId, evaluationScores, allocations.allocations, ipfsCid);
+      await storeAttestation(c.env.DB, runId, attestation);
+      attestationData = { evaluationHash: attestation.evaluationHash, ipfsCid };
+    } catch (err) {
+      console.error('Attestation failed:', err);
+    }
+  }
+
   // Complete pipeline
   const completedAt = new Date().toISOString();
   await c.env.DB.prepare(
@@ -273,6 +306,7 @@ evaluationRoutes.post('/rounds/:roundId/evaluate', authMiddleware, async (c) => 
               0
             )
           : 0,
+        attestation: attestationData,
       }),
       completedAt,
       runId
