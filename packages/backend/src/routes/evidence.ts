@@ -48,13 +48,15 @@ evidenceRoutes.post('/upload', authMiddleware, async (c) => {
   // Record in D1
   const now = new Date().toISOString();
   await c.env.DB.prepare(
-    `INSERT INTO evidence (project_id, round_id, r2_key, file_size, evidence_type, uploaded_at)
-     VALUES (?, ?, ?, ?, ?, ?)`
+    `INSERT INTO evidence (project_id, round_id, r2_key, file_name, content_type, file_size, evidence_type, uploaded_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
   )
     .bind(
       projectId,
       roundId || null,
       r2Key,
+      file.name || null,
+      file.type || null,
       arrayBuffer.byteLength,
       evidenceType,
       now

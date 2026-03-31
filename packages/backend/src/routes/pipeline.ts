@@ -160,7 +160,7 @@ pipelineRoutes.post('/run', authMiddleware, async (c) => {
               JSON.stringify(evaluationData),
               evaluationData.overall_score,
               evaluationData.data_completeness,
-              completed + 1,
+              0,
               evaluationData.evaluated_at
             )
             .run();
@@ -202,6 +202,24 @@ pipelineRoutes.post('/run', authMiddleware, async (c) => {
         evaluationScores[app.project_id as string] = evalRow.overall_score;
         completed++;
       }
+    }
+  }
+
+  // Compute Bradley-Terry rankings
+  if (Object.keys(evaluationScores).length >= 2) {
+    try {
+      const { computeBradleyTerryRanking } = await import('../lib/bradleyTerry');
+      const btRanks = computeBradleyTerryRanking(evaluationScores);
+      for (const [projectId, btStrength] of Object.entries(btRanks)) {
+        const appEntry = (applications as Array<Record<string, unknown>>).find(a => a.project_id === projectId);
+        if (appEntry) {
+          await c.env.DB.prepare(
+            'UPDATE evaluations SET bradley_terry_rank = ? WHERE application_id = ?'
+          ).bind(Math.round(btStrength * 1000) / 1000, appEntry.app_id).run();
+        }
+      }
+    } catch (err) {
+      console.error('Bradley-Terry ranking failed:', err);
     }
   }
 

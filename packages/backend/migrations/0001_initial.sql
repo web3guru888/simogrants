@@ -90,6 +90,8 @@ CREATE TABLE evidence (
   project_id TEXT NOT NULL REFERENCES projects(id),
   round_id TEXT REFERENCES rounds(id),
   r2_key TEXT NOT NULL,
+  file_name TEXT,
+  content_type TEXT,
   file_size INTEGER,
   evidence_type TEXT DEFAULT 'evaluation',
   uploaded_at TEXT NOT NULL
