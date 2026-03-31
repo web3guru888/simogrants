@@ -25,7 +25,8 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# lib/ excluded only for Python (src/lib from old codebase)
+src/lib/
 lib64/
 parts/
 sdist/
