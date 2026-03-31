@@ -252,7 +252,7 @@ test('Test 6: Apply to Round', async ({ page }) => {
   captureConsole(page);
   const start = Date.now();
 
-  await page.goto(`${BASE_URL}/rounds/round-002/apply`, { waitUntil: 'networkidle' });
+  await page.goto(`${BASE_URL}/rounds/round-gov-003/apply`, { waitUntil: 'networkidle' });
   const loadTime = Date.now() - start;
   console.log(`  Page load: ${loadTime}ms`);
 

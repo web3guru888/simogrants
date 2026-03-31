@@ -277,7 +277,7 @@ evaluationRoutes.post('/rounds/:roundId/evaluate', authMiddleware, async (c) => 
   }
 
   // Attestation phase: compute hashes + optional IPFS upload
-  let attestationData: { evaluationHash: string; ipfsCid: string | null } | null = null;
+  let attestationData: { evaluationHash: string; projectHashes: Record<string, string>; ipfsCid: string | null; timestamp: string } | null = null;
   if (allocations && completed > 0) {
     try {
       const { computeAttestation, storeAttestation } = await import('../lib/attestation');
@@ -303,7 +303,12 @@ evaluationRoutes.post('/rounds/:roundId/evaluate', authMiddleware, async (c) => 
       // Compute attestation hashes
       const attestation = await computeAttestation(roundId, evaluationScores, allocations.allocations, ipfsCid);
       await storeAttestation(c.env.DB, runId, attestation);
-      attestationData = { evaluationHash: attestation.evaluationHash, ipfsCid };
+      attestationData = {
+        evaluationHash: attestation.evaluationHash,
+        projectHashes: attestation.projectHashes,
+        ipfsCid,
+        timestamp: attestation.timestamp,
+      };
     } catch (err) {
       console.error('Attestation failed:', err);
     }
