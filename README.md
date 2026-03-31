@@ -289,21 +289,9 @@ E2E_BASE_URL=https://simogrants.com npx playwright test
 
 Console output: zero errors across all tests.
 
-### Python Tests (Legacy Pipeline)
-
-```bash
-pip install -e .
-pytest src/tests/ -v
-```
-
 ### Linting
 
 ```bash
-# Python
-ruff check src/
-ruff format src/
-
-# TypeScript
 cd packages/backend && npx tsc --noEmit
 ```
 
@@ -359,43 +347,36 @@ simogrants/
 │   │   ├── src/
 │   │   │   ├── routes/         # 7 route handlers (auth, rounds, projects, evaluations, pipeline, evidence, stats)
 │   │   │   ├── lib/            # Core engines
-│   │   │   │   ├── evaluator.ts    # Real ASI1 LLM evaluator (4 agents, parallel)
-│   │   │   │   ├── mockEvaluator.ts # Deterministic mock for dev
-│   │   │   │   ├── sqf.ts          # SQF allocation engine
-│   │   │   │   ├── sqfWithPheromone.ts # SQF with persistent pheromone state across rounds
-│   │   │   │   ├── qf.ts           # Quadratic funding calculation
-│   │   │   │   ├── pheromone.ts    # Pheromone state management (decay + deposit)
-│   │   │   │   └── pagerank.ts     # PageRank calculation
+│   │   │   │   ├── evaluator.ts        # Real ASI1 LLM evaluator (4 agents, parallel)
+│   │   │   │   ├── sqf.ts             # SQF allocation engine
+│   │   │   │   ├── sqfWithPheromone.ts # Persistent pheromone state across rounds
+│   │   │   │   ├── bradleyTerry.ts    # Pairwise ranking (MLE estimation)
+│   │   │   │   ├── antiGoodhart.ts    # Dimension rotation per epoch
+│   │   │   │   ├── attestation.ts     # Keccak256 evaluation hashes
+│   │   │   │   ├── ipfs.ts           # Web3.storage IPFS upload
+│   │   │   │   ├── pheromone.ts      # Pheromone decay + deposit
+│   │   │   │   ├── pagerank.ts       # PageRank dependency graph
+│   │   │   │   └── qf.ts            # Quadratic funding calculation
 │   │   │   ├── middleware/     # SIWE auth middleware
-│   │   │   ├── index.ts        # Hono app entry point
 │   │   │   └── types.ts        # TypeScript types (Env bindings, DB rows, API contracts)
-│   │   ├── migrations/         # D1 SQL (0001_initial.sql, 0002_seed_data.sql)
-│   │   ├── wrangler.toml       # Workers config (D1, KV, R2 bindings)
-│   │   └── .dev.vars           # Local secrets (gitignored)
+│   │   ├── migrations/         # D1 SQL schema + seed data
+│   │   └── wrangler.toml       # Workers config (D1, KV, R2 bindings)
 │   ├── frontend/               # React 19 SPA (Cloudflare Pages)
 │   │   ├── src/
 │   │   │   ├── pages/          # 8 pages (Landing, BrowseRounds, RoundDetail, RoundResults,
 │   │   │   │                   #   CreateRound, ApplyToRound, Dashboard, ProjectDetail)
-│   │   │   ├── components/     # 9 reusable components (Layout, ConnectButton, RoundCard,
-│   │   │   │                   #   ProjectCard, AllocationBar, ScoreBar, StatusBadge, etc.)
-│   │   │   ├── hooks/          # useAuth (SIWE), useContracts (wagmi contract hooks)
-│   │   │   ├── lib/            # API client, wagmi config (Base Sepolia only), contract ABIs
+│   │   │   ├── components/     # 9 reusable components (Layout, ConnectButton, RoundCard, etc.)
+│   │   │   ├── hooks/          # useAuth (SIWE), useContracts (11 wagmi hooks)
+│   │   │   ├── lib/            # API client, wagmi config, contract ABIs, explorer utils
 │   │   │   └── styles/         # Tailwind CSS + Syne/Outfit fonts
-│   │   └── vite.config.ts      # Vite + React + Tailwind, /api proxy to :8787
-│   └── contracts/              # Solidity 0.8.24 smart contracts (Base Sepolia)
+│   │   └── vite.config.ts      # Vite + React + Tailwind
+│   └── contracts/              # Solidity 0.8.24 (Base Sepolia)
 │       ├── contracts/          # GrantFactory, GrantRound, SQFMechanism, AttestationRegistry
-│       ├── test/               # 104 Hardhat + Chai tests
-│       └── scripts/            # Deployment scripts
-├── e2e-tests/                  # Playwright E2E test suite (12 tests)
-├── src/                        # Original Python pipeline (FastAPI, 7 collectors, 4 ASI1 evaluator agents)
-│   ├── collectors/             # GitHub, Etherscan, DefiLlama, Gitcoin, Snapshot, Octant, packages
-│   ├── evaluator/              # ASI1 evaluation engine, stakeholder prompts, Bradley-Terry aggregation
-│   ├── mechanism/              # QF, pheromone tracker, PageRank engine, anti-Goodhart rotation
-│   └── blockchain/             # Attestation, deployment, Filecoin upload helpers
-├── contracts/                  # Original Solidity contract (SIMOGrantsAttestation.sol)
-├── whitepaper/                 # 4-part technical whitepaper
+│       └── test/               # 104 Hardhat + Chai tests
+├── e2e-tests/                  # Playwright E2E suite (12 tests)
 ├── scripts/                    # deploy-all.sh, setup-d1.sh
-├── run_pipeline.py             # Full 6-step Python pipeline orchestrator
+├── whitepaper/                 # 4-part mechanism design docs
+├── archived/                   # Legacy Python backend, hackathon data, review docs
 ├── CLAUDE.md                   # Claude Code guidance
 └── README.md
 ```

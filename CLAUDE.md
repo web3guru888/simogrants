@@ -6,9 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 SIMOGRANTS is a stigmergic multi-agent evaluation system for Ethereum public goods funding. ASI1-powered AI agents evaluate projects through pheromone-coordinated signals, then allocate funds via Stigmergic Quadratic Funding (SQF). The platform runs on **Base Sepolia testnet only**.
 
-Two layers:
-- **TypeScript/Solidity (active)**: Cloudflare-native Web4 platform — React SPA, Hono Workers API, D1 database, 4 Solidity contracts on Base Sepolia, real ASI1 LLM evaluator
-- **Python (legacy reference)**: FastAPI monolith with 7 data collectors, 4 evaluator agents, Bradley-Terry aggregation
+The active codebase is in `packages/` (TypeScript/Solidity). Legacy Python code and hackathon artifacts are preserved in `archived/`.
 
 ## Build & Run Commands
 
@@ -38,13 +36,6 @@ npm run db:seed    # Seed test data
 npm run db:reset   # Reset to clean state
 ```
 
-### Python pipeline (legacy)
-```bash
-pip install -e .
-python run_pipeline.py           # Full 6-step pipeline
-uvicorn src.main:app --port 8000 # FastAPI server
-```
-
 ## Testing
 
 ### Smart contract tests (104 tests, Hardhat + Chai)
@@ -62,101 +53,75 @@ npx playwright test
 E2E_BASE_URL=https://simogrants.com npx playwright test
 ```
 
-### Python tests
+### TypeScript type checking
 ```bash
-pytest src/tests/ -v
-```
-
-### Linting
-```bash
-ruff check src/ && ruff format src/     # Python
-cd packages/backend && npx tsc --noEmit # TypeScript
+cd packages/backend && npx tsc --noEmit
 ```
 
 ## Architecture
 
 ### Monorepo workspaces (`packages/`)
 
-- **`packages/backend/`** — Cloudflare Workers API (Hono). Routes in `src/routes/` (auth, rounds, projects, evaluations, pipeline, evidence, stats). Core engines in `src/lib/` (evaluator.ts for real ASI1, mockEvaluator.ts for dev, sqf.ts, qf.ts, pheromone.ts, pagerank.ts). SIWE auth middleware. Config in `wrangler.toml`. Bindings: D1 (SQLite), KV (sessions), R2 (evidence), ASI1_API_KEY (secret).
-- **`packages/frontend/`** — React 19 SPA on Cloudflare Pages. Design system: Syne (display) + Outfit (body) fonts, amber/teal palette on #0a0a12 charcoal, noise textures, staggered animations. Uses wagmi/viem for Web3 (Base Sepolia only), SIWE for auth, contract hooks in `hooks/useContracts.ts`. API client in `lib/api.ts` auto-transforms snake_case/camelCase. Path alias `@/` → `./src/`. Mock API available via `VITE_USE_MOCK_API=true`.
-- **`packages/contracts/`** — Solidity 0.8.24 on Base Sepolia: `GrantFactory` (EIP-1167 proxies), `GrantRound` (lifecycle), `SQFMechanism` (on-chain SQF), `AttestationRegistry` (IPFS CID attestations). Tests in `test/`.
+- **`packages/backend/`** — Cloudflare Workers API (Hono). Routes in `src/routes/` (auth, rounds, projects, evaluations, pipeline, evidence, stats). Core engines in `src/lib/` (evaluator.ts, sqf.ts, sqfWithPheromone.ts, bradleyTerry.ts, antiGoodhart.ts, attestation.ts, ipfs.ts, pheromone.ts, pagerank.ts, qf.ts). Bindings: D1, KV, R2, ASI1_API_KEY, WEB3_STORAGE_TOKEN.
+- **`packages/frontend/`** — React 19 SPA on Cloudflare Pages. Design: Syne + Outfit fonts, amber/teal on #0a0a12. wagmi/viem (Base Sepolia only), SIWE auth, contract hooks in `hooks/useContracts.ts`. API client in `lib/api.ts` auto-transforms snake/camelCase. Path alias `@/` = `./src/`.
+- **`packages/contracts/`** — Solidity 0.8.24 on Base Sepolia: GrantFactory, GrantRound, SQFMechanism, AttestationRegistry. 104 tests.
 
 ### ASI1 Evaluator (`packages/backend/src/lib/evaluator.ts`)
 
-Real LLM evaluator calling ASI1 Mini (`asi1-mini`) at `https://api.asi1.ai/v1/chat/completions`. Runs 4 stakeholder agents in parallel via `Promise.allSettled`, each scoring 3 dimensions (12 total). Retry with exponential backoff + JSON repair. Falls back to `mockEvaluator.ts` when `ASI1_API_KEY` is not set.
+Calls ASI1 Mini (`asi1-mini`) at `https://api.asi1.ai/v1/chat/completions`. 4 stakeholder agents in parallel, 12 dimensions, retry with backoff + JSON repair. Falls back to mock when `ASI1_API_KEY` is not set.
 
-### Frontend-Backend Data Flow
+### SQF Pipeline
 
-- Frontend `api.ts` sends requests with `toSnakeCase()` transform on body
-- Backend Zod schemas accept **both** camelCase and snake_case field names (e.g., `applicationDeadline` and `application_deadline`)
-- Backend responses come back in snake_case, frontend `toCamelCase()` transforms on receive
-- Auth: SIWE flow → `POST /auth/nonce` (with `{address}`) → sign message → `POST /auth/verify` → Bearer token stored in localStorage
+1. ASI1 evaluates all projects in parallel
+2. Bradley-Terry ranking computes pairwise strength parameters
+3. SQF allocates: `QF_Base x Pheromone_Modifier x PageRank_Modifier`
+4. Pheromone state persisted to D1 (loads previous, decays 20%/epoch, deposits by accuracy)
+5. Attestation hashes computed (keccak256 per project + round-level hash)
+6. IPFS upload if WEB3_STORAGE_TOKEN configured
 
-### Smart Contracts (Base Sepolia only)
+### Key Data Flow
 
-Frontend connects via wagmi hooks in `hooks/useContracts.ts` — 5 write hooks (createRound, apply, startEvaluation, recordScores, computeSQF) and 6 read hooks (status, applications, pheromone, attestation, factory count). Contract addresses in `lib/contractsConfig.ts` for chain ID 84532.
+- Frontend `toSnakeCase()` on request body → Backend Zod accepts both casings → Backend responds snake_case → Frontend `toCamelCase()` on response
+- Auth: SIWE `POST /auth/nonce` → sign → `POST /auth/verify` → Bearer token in localStorage
+- ConnectButton auto-triggers signIn when wallet reconnects without token
 
 ### Deployment
 
 ```bash
-# Full deploy
-bash scripts/deploy-all.sh
-
-# Backend
-cd packages/backend && npx wrangler deploy
-npx wrangler secret put ASI1_API_KEY  # Set the ASI1 key
-
-# Frontend (deploy to production)
-cd packages/frontend && npm run build
-npx wrangler pages deploy dist --project-name=simogrants --branch=main
-
-# Contracts
-cd packages/contracts
-DEPLOYER_PRIVATE_KEY=0x... npx hardhat run scripts/deploy.js --network baseSepolia
+bash scripts/deploy-all.sh              # Full deploy
+cd packages/backend && npx wrangler deploy   # Backend only
+cd packages/frontend && npm run build && npx wrangler pages deploy dist --project-name=simogrants --branch=main  # Frontend only
 ```
-
-### Live Data
-
-The production database contains simulated but realistic data:
-- **Round 1 — Ethereum Core Infrastructure** ($500K, funded): 6 projects (Lodestar, Hardhat, Foundry, EthereumJS, Remix, Ethers.js) — all ASI1-evaluated with real scores and SQF allocations
-- **Round 2 — DeFi Security & Auditing** ($250K, funded): 5 projects (Slither, Echidna, OpenZeppelin, Certora, Immunefi) — all ASI1-evaluated
-- **Round 3 — Governance & Public Goods** ($350K, accepting): 5 projects (Snapshot, Gitcoin Passport, Protocol Guild, Tally, RetroPGF) — awaiting evaluation
-
-All evaluations are **real ASI1 Mini** responses, not mock data. See `ASI1_VERIFICATION_REPORT.md` for evidence.
 
 ### Database Operations
 
 ```bash
-# Reset and re-seed (remote)
-npx wrangler d1 execute simogrants-db --remote --command="DELETE FROM evidence; DELETE FROM allocations; DELETE FROM evaluations; DELETE FROM pipeline_runs; DELETE FROM applications; DELETE FROM projects; DELETE FROM rounds; DELETE FROM users;"
-
-# Query data
-npx wrangler d1 execute simogrants-db --remote --command="SELECT id, title, status, matching_pool FROM rounds"
-
-# Create simulation auth token
-npx wrangler kv key put "session:sim-token" '{"address":"0xsimo...","chainId":84532,"expiresAt":"2027-01-01T00:00:00Z"}' --namespace-id d795fd0e52154eabb348f65ebb8bad26 --remote
+npx wrangler d1 execute simogrants-db --remote --command="SELECT id, title, status FROM rounds"
+npx wrangler kv key put "session:sim-token" '{"address":"0x...","chainId":84532,"expiresAt":"2027-01-01T00:00:00Z"}' --namespace-id d795fd0e52154eabb348f65ebb8bad26 --remote
 ```
 
 ## Key Constraints
 
-- **Base Sepolia testnet only** — no mainnet support. Chain ID 84532. wagmi config only includes BASE_SEPOLIA.
-- **ASI1 API** — Real evaluator requires `ASI1_API_KEY` secret (set via `npx wrangler secret put` for prod, `.dev.vars` for local). Confirmed live via `ASI1_VERIFICATION_REPORT.md`.
-- **Dual-casing** — Backend Zod schemas must accept both camelCase and snake_case because frontend's `toSnakeCase` transform runs before sending. Always add both field name variants when adding new fields.
-- **Auth flow** — `ConnectButton` auto-triggers SIWE signIn when wallet connects without a stored token. `useAuth` restores sessions on mount via `checkSession()`.
-- **Dashboard filtering** — Dashboard filters rounds/projects client-side by connected wallet address (creatorAddress/createdBy). The API doesn't support server-side filtering by creator yet.
-- Secrets must stay in `.env` / `.dev.vars` — never commit
-- Hardhat: Solidity 0.8.24, optimizer 10,000 runs, EVM version `paris`
-- Python: ruff for linting (100-char line length), pytest with `asyncio_mode = "auto"`
-- Design system: font-display (Syne) for headings, amber-400/500 primary, teal-400 secondary, white/[opacity] surfaces on #0a0a12 base
+- **Base Sepolia only** — chain ID 84532, no mainnet
+- **ASI1_API_KEY** — secret for real evaluator (`.dev.vars` locally, `wrangler secret put` for prod)
+- **Dual-casing** — Backend Zod schemas must accept both camelCase and snake_case for all fields
+- **Dashboard** — filters client-side by wallet address (no server-side creator filter yet)
+- Design: `font-display` (Syne) for headings, amber-400/500 primary, teal-400 secondary
 
-## Documentation Index
+## Directory Structure
 
-| File | Purpose |
-|------|---------|
-| `CLAUDE.md` | Claude Code guidance (this file) |
-| `README.md` | Project overview, setup, API reference |
-| `TESTING_PLAN.md` | 17-section live testing plan, 150+ checkpoints |
-| `ASI1_VERIFICATION_REPORT.md` | Proof that evaluations use real ASI1 Mini |
-| `SIMULATION_PLAN.md` | Database simulation plan (3 rounds, 16 projects) |
-| `FRONTEND_REVIEW.md` | 19 frontend findings (mostly resolved) |
-| `DESIGN_REVIEW.md` | Design system review + recommendations (implemented) |
+```
+simogrants/
+  packages/
+    backend/         # Cloudflare Workers API (Hono + TypeScript)
+    frontend/        # React 19 SPA (Cloudflare Pages)
+    contracts/       # Solidity 0.8.24 (Base Sepolia)
+  e2e-tests/         # Playwright E2E suite (12 tests)
+  scripts/           # deploy-all.sh, setup-d1.sh
+  whitepaper/        # Mechanism design docs
+  archived/          # Legacy Python backend, hackathon data, review docs
+  CLAUDE.md          # This file
+  README.md          # Project overview + API reference
+```
+
+See `archived/README.md` for details on archived content.

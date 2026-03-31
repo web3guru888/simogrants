@@ -81,6 +81,21 @@ Thumbs.db
 .ipfs/
 cover_image/
 
-# Test results
+# Test results & output
 test-results/
 playwright-report/
+console-output.log
+e2e-tests/console-output.log
+e2e-tests/test-results.json
+
+# TypeScript build artifacts
+tsconfig.tsbuildinfo
+*.tsbuildinfo
+
+# Temp execution files
+.temp-*.js
+.temp-*.ts
+
+# Stale deployment metadata
+deploy_status.txt
+cover_image_url.txt
