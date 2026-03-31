@@ -339,12 +339,16 @@ Allocation = QF_Base x Pheromone_Modifier x PageRank_Modifier
 ```
 
 - **QF_Base**: Standard quadratic funding calculation
-- **Pheromone_Modifier**: Signal strength (0-10 scale, 20% decay per epoch, 0.5 deposit rate)
-- **PageRank_Modifier**: Dependency graph influence (damping factor 0.85)
+- **Pheromone_Modifier**: Persistent signal strength that accumulates across rounds (0-10 scale, 20% decay per epoch, 0.5 deposit rate based on score accuracy). Projects that consistently score well accumulate pheromone (modifier up to 1.5x); inactive projects decay (modifier down to 0.5x).
+- **PageRank_Modifier**: Dependency graph influence (damping factor 0.85). Infrastructure projects that others depend on get a 1.3x boost.
+
+**Pheromone persistence**: State is loaded from the most recent allocation in D1 before each evaluation, and the updated state (after decay + deposits) is saved back. This creates a cross-round memory — the system remembers which projects have been consistently impactful. Orchestrated by `sqfWithPheromone.ts`.
+
+**Live verification**: After evaluating Round 1 (6 projects), pheromone levels were 5.34-5.43. When Round 2 was evaluated, Round 1's levels decayed to 4.28-4.34 (20% decay) while Round 2's projects received fresh deposits at 5.31-5.42. The state now tracks 11 projects across 2 rounds.
 
 ### Tension Detection
 
-When ASI1 stakeholder agents disagree significantly (spread > 15 points), the system generates tension narratives. Example: a technically excellent project that the funder agent scores low because it's self-sustaining and doesn't need grants.
+When ASI1 stakeholder agents disagree significantly (spread > 15 points), the system generates tension narratives. Example: the funder agent scored Foundry's `funding_sustainability` at 25/100 because it recognized Foundry is backed by Paradigm (a VC firm), while the developer agent scored its `code_quality` at 92/100. This tension reveals that technically excellent projects may not need public goods funding.
 
 ## Project Structure
 
@@ -358,8 +362,9 @@ simogrants/
 │   │   │   │   ├── evaluator.ts    # Real ASI1 LLM evaluator (4 agents, parallel)
 │   │   │   │   ├── mockEvaluator.ts # Deterministic mock for dev
 │   │   │   │   ├── sqf.ts          # SQF allocation engine
+│   │   │   │   ├── sqfWithPheromone.ts # SQF with persistent pheromone state across rounds
 │   │   │   │   ├── qf.ts           # Quadratic funding calculation
-│   │   │   │   ├── pheromone.ts    # Pheromone state management
+│   │   │   │   ├── pheromone.ts    # Pheromone state management (decay + deposit)
 │   │   │   │   └── pagerank.ts     # PageRank calculation
 │   │   │   ├── middleware/     # SIWE auth middleware
 │   │   │   ├── index.ts        # Hono app entry point
@@ -435,7 +440,7 @@ Snapshot, Gitcoin Passport, Protocol Guild, Tally, RetroPGF — awaiting evaluat
 - **ASI1 AI Evaluation** — Real ASI1 Mini LLM integration with 4 stakeholder agents running in parallel
 - **Smart Contracts** — GrantFactory (EIP-1167 minimal proxies), GrantRound, SQFMechanism, AttestationRegistry on Base Sepolia — 104 tests
 - **On-Chain Integration** — Frontend calls GrantFactory.createRound(), GrantRound.submitApplication(), reads on-chain status
-- **SQF Mechanism** — Quadratic funding with pheromone and PageRank modifiers
+- **SQF Mechanism** — Quadratic funding with persistent pheromone trails (accumulate across rounds) and PageRank dependency modifiers
 - **Full E2E Testing** — 12 Playwright tests, all passing against live production
 - **Custom Domain** — Deployed and SSL-certified at simogrants.com
 - **Live Simulation** — 3 grant rounds with 16 real projects, ASI1-evaluated with verified scores
