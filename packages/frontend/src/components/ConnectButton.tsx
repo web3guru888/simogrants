@@ -9,13 +9,13 @@ export function ConnectButton() {
     const truncated = `${address.slice(0, 6)}...${address.slice(-4)}`;
     return (
       <div className="flex items-center gap-2">
-        <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700">
+        <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.08]">
           <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-sm font-mono text-slate-300">{truncated}</span>
+          <span className="text-sm font-mono text-[#8a8a9a]">{truncated}</span>
         </div>
         <button
           onClick={signOut}
-          className="px-3 py-1.5 text-sm rounded-lg border border-slate-600 text-slate-400 hover:text-slate-200 hover:border-slate-500 transition-colors"
+          className="px-3 py-1.5 text-sm rounded-lg border border-white/[0.08] text-[#6b6a6a] hover:text-[#e2e0dc] hover:border-white/[0.15] transition-colors"
         >
           Disconnect
         </button>
@@ -29,7 +29,6 @@ export function ConnectButton() {
         const injected = connectors.find(c => c.id === 'injected');
         if (injected) {
           connect({ connector: injected }, { onSuccess: () => {
-            // signIn will be called after connect from the auth flow
             setTimeout(() => signIn(), 500);
           }});
         } else if (connectors.length > 0) {
@@ -39,7 +38,7 @@ export function ConnectButton() {
         }
       }}
       disabled={isLoading}
-      className="px-4 py-2 text-sm font-semibold rounded-lg bg-gradient-to-r from-violet-600 to-blue-600 text-white hover:from-violet-500 hover:to-blue-500 transition-all shadow-lg shadow-violet-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
+      className="px-4 py-2 text-sm font-semibold rounded-lg bg-amber-500 text-[#0a0a12] hover:bg-amber-400 transition-all shadow-lg shadow-amber-500/15 disabled:opacity-50 disabled:cursor-not-allowed"
     >
       {isLoading ? (
         <span className="flex items-center gap-2">
